@@ -1,6 +1,6 @@
 package com.example.SpringSecurity.entity.users;
 
-import com.example.SpringSecurity.GrantAuthorityImpl;
+import com.example.SpringSecurity.security.GrantAuthorityImpl;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

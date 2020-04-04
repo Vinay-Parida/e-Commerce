@@ -1,5 +1,6 @@
-package com.example.SpringSecurity;
+package com.example.SpringSecurity.security;
 
+import com.example.SpringSecurity.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -18,7 +18,7 @@ public class User {
     @Embedded
     private Name name;
 
-    private String username;
+//    private String username;
 
     private String password;
 
@@ -118,13 +118,13 @@ public class User {
 //        this.addresses = addresses;
 //    }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
+//    public String getUsername() {
+//        return username;
+//    }
+//
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
 
     @Override
     public String toString() {
