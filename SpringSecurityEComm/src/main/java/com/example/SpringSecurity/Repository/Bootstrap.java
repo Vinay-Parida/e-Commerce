@@ -29,6 +29,8 @@ public class Bootstrap implements ApplicationRunner {
             user1.setRoles(Arrays.asList(new Role("ROLE_USER")));
             user1.setEmail("user1email");
 
+
+            
             userRepository.save(user1);
 
         }
