@@ -1,6 +1,9 @@
 package com.example.SpringSecurity.entity.users;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
@@ -12,6 +15,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotNull
+    @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_.]*@[a-zA-Z]+[.][a-zA-Z]+", message = "Invalid Email Format")
     @Column(unique = true)
     private String email;
 
@@ -20,6 +25,8 @@ public class User {
 
 //    private String username;
 
+    @NotNull
+    @Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})",message="Password must be 8 characters long")
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -29,6 +36,7 @@ public class User {
     @JoinTable(name = "UserRole",joinColumns=@JoinColumn( name = "UserId",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "RoleId",referencedColumnName = "id"))
     private List<Role> roles;
+
 
     private boolean is_deleted;
     private boolean is_active;
@@ -110,13 +118,13 @@ public class User {
         this.name = name;
     }
 
-//    public List<Address> getAddresses() {
-//        return addresses;
-//    }
-//
-//    public void setAddresses(List<Address> addresses) {
-//        this.addresses = addresses;
-//    }
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
 
 //    public String getUsername() {
 //        return username;

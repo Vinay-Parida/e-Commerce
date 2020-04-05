@@ -1,4 +1,4 @@
-package com.example.SpringSecurity;
+package com.example.SpringSecurity.dao;
 
 import com.example.SpringSecurity.entity.users.AppUser;
 import com.example.SpringSecurity.entity.users.Role;

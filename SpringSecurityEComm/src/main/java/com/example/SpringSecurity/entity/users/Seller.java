@@ -3,12 +3,14 @@ package com.example.SpringSecurity.entity.users;
 import com.example.SpringSecurity.entity.products.Product;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
 @DiscriminatorValue(value = "seller")
 public class Seller extends User {
 
+    @NotNull
     private double gst;
 
     private int company_contact;

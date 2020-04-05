@@ -23,14 +23,13 @@ public class Address {
 
     Address(){}
 
-    public Address(String city, String state, String country, String address, int zip_code, Label label, Customer customer, User user) {
+    public Address(String city, String state, String country, String address, int zip_code, Label label) {
         this.city = city;
         this.state = state;
         this.country = country;
         this.address = address;
         this.zip_code = zip_code;
         this.label = label;
-//        this.user = user;
     }
 
     public Long getId() {
@@ -89,11 +88,11 @@ public class Address {
         this.label = label;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
