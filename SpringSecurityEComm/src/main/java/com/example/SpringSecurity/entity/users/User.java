@@ -15,8 +15,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
-    @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_.]*@[a-zA-Z]+[.][a-zA-Z]+", message = "Invalid Email Format")
     @Column(unique = true)
     private String email;
 
@@ -25,8 +23,6 @@ public class User {
 
 //    private String username;
 
-    @NotNull
-    @Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})",message="Password must be 8 characters long")
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
