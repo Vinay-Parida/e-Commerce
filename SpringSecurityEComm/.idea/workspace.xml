@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="35ab1386-ecff-4398-a178-b472e1d9fce0" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ZWgYZoObXnEj8Z8LDzoKQcwhmC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="ECommerceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.SpringSecurity.ECommerceApplication" />
+      <module name="SpringSecurity.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.SpringSecurity.ECommerceApplication" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ECommerceApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="35ab1386-ecff-4398-a178-b472e1d9fce0" name="Default Changelist" comment="" />
+      <created>1584960313006</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584960313006</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="491" y="108" width="374" height="577" key="#com.intellij.ide.util.MemberChooser" timestamp="1585944216838">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="491" y="108" width="374" height="577" key="#com.intellij.ide.util.MemberChooser/0.27.1366.741@0.27.1366.741" timestamp="1585944216837" />
+    <state x="408" y="256" width="549" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1584986484280">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="408" y="256" width="549" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.27.1366.741@0.27.1366.741" timestamp="1584986484280" />
+    <state x="874" y="27" width="482" height="741" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1585926204553">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="874" y="27" width="482" height="741" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.27.1366.741@0.27.1366.741" timestamp="1585926204553" />
+    <state x="441" y="142" key="#xdebugger.evaluate" timestamp="1585905953322">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="441" y="142" key="#xdebugger.evaluate/0.27.1366.741@0.27.1366.741" timestamp="1585905953322" />
+    <state x="460" y="155" width="424" height="484" key="FileChooserDialogImpl" timestamp="1585946354490">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="460" y="155" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1585946354490" />
+    <state width="1320" height="2" key="GridCell.Tab.0.bottom" timestamp="1586116613318">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="2" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1586116613318" />
+    <state width="1320" height="2" key="GridCell.Tab.0.center" timestamp="1586116613318">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="2" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1586116613318" />
+    <state width="1320" height="2" key="GridCell.Tab.0.left" timestamp="1586116613318">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="2" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1586116613318" />
+    <state width="1320" height="2" key="GridCell.Tab.0.right" timestamp="1586116613318">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="2" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1586116613318" />
+    <state width="1320" height="285" key="GridCell.Tab.1.bottom" timestamp="1585906324737">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="285" key="GridCell.Tab.1.bottom/0.27.1366.741@0.27.1366.741" timestamp="1585906324737" />
+    <state width="1320" height="285" key="GridCell.Tab.1.center" timestamp="1585906324736">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="285" key="GridCell.Tab.1.center/0.27.1366.741@0.27.1366.741" timestamp="1585906324736" />
+    <state width="1320" height="285" key="GridCell.Tab.1.left" timestamp="1585906324736">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="285" key="GridCell.Tab.1.left/0.27.1366.741@0.27.1366.741" timestamp="1585906324736" />
+    <state width="1320" height="285" key="GridCell.Tab.1.right" timestamp="1585906324737">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="285" key="GridCell.Tab.1.right/0.27.1366.741@0.27.1366.741" timestamp="1585906324737" />
+    <state x="412" y="128" width="540" height="524" key="StructurePopup" timestamp="1585905762413">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="412" y="128" width="540" height="524" key="StructurePopup/0.27.1366.741@0.27.1366.741" timestamp="1585905762413" />
+    <state width="683" height="370" key="XDebugger.FullValuePopup" timestamp="1585905971543">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="683" height="370" key="XDebugger.FullValuePopup/0.27.1366.741@0.27.1366.741" timestamp="1585905971543" />
+    <state x="100" y="127" width="1166" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1586113313613">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="100" y="127" width="1166" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.27.1366.741@0.27.1366.741" timestamp="1586113313613" />
+    <state x="328" y="137" width="710" height="520" key="find.popup" timestamp="1586064506685">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="328" y="137" width="710" height="520" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1586064506685" />
+    <state x="428" y="27" width="500" height="741" key="refactoring.ChangeSignatureDialog" timestamp="1585942233874">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="428" y="27" width="500" height="741" key="refactoring.ChangeSignatureDialog/0.27.1366.741@0.27.1366.741" timestamp="1585942233874" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1585906064576">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1585906064576" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-config/5.2.2.RELEASE/e2812230e1f3b89e81e657c4ee160b07ba00c8cc/spring-security-config-5.2.2.RELEASE-sources.jar!/org/springframework/security/config/annotation/web/configuration/WebSecurityConfigurerAdapter.java</url>
+          <line>499</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
