@@ -54,6 +54,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("/register/seller").anonymous()
                 .antMatchers("/registrationConfirm").anonymous()
                 .antMatchers("/reactivateUser").anonymous()
+                .antMatchers("/forgetPassword").anonymous()
+                .antMatchers("/resetPassword").anonymous()
                 .antMatchers("/admin/home").hasAnyRole("ADMIN")
                 .antMatchers("/user/home").hasAnyRole("USER")
                 .antMatchers("/doLogout").hasAnyRole("ADMIN", "USER")

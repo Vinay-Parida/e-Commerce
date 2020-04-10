@@ -57,6 +57,7 @@ public class ActivationDao {
         return messageActivationUserSuccessful;
     }
 
+
     public String reactivationUser(String email, WebRequest webRequest){
 
         Locale locale = webRequest.getLocale();

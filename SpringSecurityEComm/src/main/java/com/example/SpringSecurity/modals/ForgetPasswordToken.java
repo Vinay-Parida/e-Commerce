@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Entity
-public class VerificationToken {
+public class ForgetPasswordToken {
 
     private static final int EXPIRATION = 30;
 
@@ -19,27 +19,26 @@ public class VerificationToken {
     private String token;
 
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false,name = "user_id")
+    @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date expiry_date;
+    private Date expiryDate;
 
-    public Date calculateExpiryDate(int expiryTimeInMinutes){
+    public Date calculateExpiryTime(int expiryTimeInMinutes){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Timestamp(calendar.getTime().getTime()));
         calendar.add(Calendar.MINUTE, expiryTimeInMinutes);
-
         return new Date(calendar.getTime().getTime());
     }
 
-    public   VerificationToken(){}
-
-    public VerificationToken(String token, User user, Date expiry_date) {
+    public ForgetPasswordToken(String token, User user, Date expiryDate) {
         this.token = token;
         this.user = user;
-        this.expiry_date = expiry_date;
+        this.expiryDate = expiryDate;
     }
+
+    public ForgetPasswordToken(){}
 
     public static int getEXPIRATION() {
         return EXPIRATION;
@@ -69,12 +68,11 @@ public class VerificationToken {
         this.user = user;
     }
 
-    public Date getExpiry_date() {
-        return expiry_date;
+    public Date getExpiryDate() {
+        return expiryDate;
     }
 
-    public void setExpiry_date(Date expiry_date) {
-        this.expiry_date = expiry_date;
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
     }
 }
-

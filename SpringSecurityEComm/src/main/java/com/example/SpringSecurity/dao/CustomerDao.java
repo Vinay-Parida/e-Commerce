@@ -1,14 +1,12 @@
 package com.example.SpringSecurity.dao;
 
 import com.example.SpringSecurity.Repository.CustomerRepository;
-
 import com.example.SpringSecurity.Repository.UserRepository;
 import com.example.SpringSecurity.Repository.VerificationTokenRepository;
 import com.example.SpringSecurity.dto.CustomerDto;
 import com.example.SpringSecurity.entity.users.Customer;
 import com.example.SpringSecurity.entity.users.Name;
 import com.example.SpringSecurity.entity.users.Role;
-import com.example.SpringSecurity.entity.users.User;
 import com.example.SpringSecurity.exceptions.EmailException;
 import com.example.SpringSecurity.modals.VerificationToken;
 import org.springframework.beans.factory.annotation.Autowired;
