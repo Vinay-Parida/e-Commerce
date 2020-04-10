@@ -75,7 +75,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Bean
     TokenStore tokenStore(){
-        return new InMemoryTokenStore();
+        return new JdbcTokenStore(dataSource);
     }
 
 }

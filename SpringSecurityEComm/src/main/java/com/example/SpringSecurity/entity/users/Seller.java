@@ -11,7 +11,7 @@ import java.util.List;
 public class Seller extends User {
 
     @NotNull
-    private double gst;
+    private String gst;
 
     private String  company_contact;
     private String company_name;
@@ -20,11 +20,11 @@ public class Seller extends User {
     private List<Product> product;
 
 
-    public double getGst() {
+    public String  getGst() {
         return gst;
     }
 
-    public void setGst(double gst) {
+    public void setGst(String  gst) {
         this.gst = gst;
     }
 

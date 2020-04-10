@@ -26,7 +26,7 @@ public class ECommerceApplication {
 
 	public ResourceBundleMessageSource resourceBundleMessageSource(){
 		ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
-		resourceBundleMessageSource.setBasename("message");
+		resourceBundleMessageSource.setBasename("messages");
 
 		return resourceBundleMessageSource;
 	}
