@@ -18,6 +18,7 @@ An e-Commerce application using Spring Boot, JPA etc
 
 ### Seller
 - A seller can edit his profile such as, company details, password etc.
+- A Seller will only have one address associated
 - A seller can list all the products he has added in his catalogue
 - A seller can add new product, make changes in his existing product or delete a product.
 - A seller can change the status of the order for his products as placed by any customer
@@ -29,3 +30,8 @@ An e-Commerce application using Spring Boot, JPA etc
 - An admin can list all the products which are created in the system
 - An admin can change the activation status of any product which is listed in the system
 - An admin can change the status of the order which is placed.
+
+### Product
+- A product can have product-level metadata along with variations-level metedata defined, where variation's metedata takes  priority over product's.
+- A product should have all its variation's primary images displayed when is listed.
+- Product price is by default in INR
