@@ -44,9 +44,11 @@ public class ActivationDao {
         }
 
         User user = verificationToken.getUser();
+
         Calendar calendar = Calendar.getInstance();
         if((verificationToken.getExpiry_date().getTime() - calendar.getTime().getTime()) <= 0){
             String messageTokenExpired = messageSource.getMessage("exception.token.expired", null, locale);
+            verificationTokenRepository.deleteToken(token);
             throw  new TokenInvalidException(messageTokenExpired + " " + verificationToken.getExpiry_date().getTime() + " "+ calendar.getTime().getTime());
         }
 

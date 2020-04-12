@@ -8,6 +8,7 @@ import com.example.SpringSecurity.entity.users.Name;
 import com.example.SpringSecurity.entity.users.Role;
 import com.example.SpringSecurity.entity.users.Seller;
 import com.example.SpringSecurity.exceptions.EmailException;
+import com.example.SpringSecurity.exceptions.GstException;
 import com.example.SpringSecurity.modals.VerificationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -46,10 +47,10 @@ public class SellerDao {
             String messageEmailAlreadyExists = messageSource.getMessage("exception.email.already.exists", null, locale);
             throw new EmailException(messageEmailAlreadyExists);
         }
-//        else if(sellerRepository.findByGst(sellerDto.getGst()) != null){
-//            String messageGstAlreadyExists = messageSource.getMessage("exception.gst.already.exists", null, locale);
-//            throw new GstException(messageGstAlreadyExists);
-//        }
+        else if(sellerRepository.findByGst(sellerDto.getGst()) != null){
+            String messageGstAlreadyExists = messageSource.getMessage("exception.gst.already.exists", null, locale);
+            throw new GstException(messageGstAlreadyExists);
+        }
         else {
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             Seller user1 = new Seller();
