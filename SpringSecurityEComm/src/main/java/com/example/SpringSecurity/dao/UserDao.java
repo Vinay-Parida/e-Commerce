@@ -27,7 +27,7 @@ public class UserDao {
         System.out.println(user);
 
         if(username!= null){
-            return new AppUser(user.getEmail(), user.getPassword(), grantAuthorities);
+            return new AppUser(user.getEmail(), user.getPassword(), user.isAccountNotLocked(), grantAuthorities);
         }
         else {
             throw new RuntimeException("User not found");

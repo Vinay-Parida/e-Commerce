@@ -1,9 +1,6 @@
 package com.example.SpringSecurity.entity.users;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,27 +33,27 @@ public class User {
 
 
     private boolean is_deleted;
-    private boolean is_active;
-    private boolean is_locked;
-    private boolean is_unabled;
+    private boolean is_active = false;
+    private boolean isAccountNotLocked = true;
+    private boolean is_enabled;
 
     //Getters and Setters
 
 
-    public boolean isIs_locked() {
-        return is_locked;
+    public boolean isAccountNotLocked() {
+        return isAccountNotLocked;
     }
 
-    public void setIs_locked(boolean is_locked) {
-        this.is_locked = is_locked;
+    public void setAccountNotLocked(boolean accountNotLocked) {
+        isAccountNotLocked = accountNotLocked;
     }
 
-    public boolean isIs_unabled() {
-        return is_unabled;
+    public boolean isIs_enabled() {
+        return is_enabled;
     }
 
-    public void setIs_unabled(boolean is_unabled) {
-        this.is_unabled = is_unabled;
+    public void setIs_enabled(boolean is_unabled) {
+        this.is_enabled = is_unabled;
     }
 
     public long getId() {

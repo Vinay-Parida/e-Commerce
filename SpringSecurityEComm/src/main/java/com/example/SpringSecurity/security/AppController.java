@@ -2,12 +2,12 @@ package com.example.SpringSecurity.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @RestController
 public class AppController {
@@ -17,13 +17,16 @@ public class AppController {
 
     @GetMapping("/doLogout")
     public String logout(HttpServletRequest request){
+        String name = "";
         String authHeader = request.getHeader("Authorization");
         if(authHeader!= null){
             String tokenValue = authHeader.replace("Bearer","").trim();
             OAuth2AccessToken accessToken = tokenStore.readAccessToken(tokenValue);
             tokenStore.removeAccessToken(accessToken);
+            Principal principal = request.getUserPrincipal();
+            name = principal.getName();
         }
-        return "Logged out successfully";
+        return name + " is Logged out successfully";
     }
 
     @GetMapping("/")

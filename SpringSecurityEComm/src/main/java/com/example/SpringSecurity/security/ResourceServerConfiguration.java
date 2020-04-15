@@ -1,5 +1,6 @@
 package com.example.SpringSecurity.security;
 
+import com.example.SpringSecurity.filters.CustomerFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +35,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
-        final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        final DaoAuthenticationProvider authenticationProvider = new CustomerFilter();
         authenticationProvider.setUserDetailsService(appUserDetailsService);
         authenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
         return authenticationProvider;
@@ -64,7 +65,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("/admin/deactivate/seller").hasAnyRole("ADMIN")
                 .antMatchers("/admin/home").hasAnyRole("ADMIN")
                 .antMatchers("/user/home").hasAnyRole("USER")
-                .antMatchers("/doLogout").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/doLogout").hasAnyRole("ADMIN", "CUSTOMER", "SELLER")
                 .anyRequest()
                 .authenticated()
                 .and()

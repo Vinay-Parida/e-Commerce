@@ -41,14 +41,14 @@ public class AdminDao {
     @Autowired
     private MessageSource messageSource;
 
-    public List<FindAllCustomerDto> getCustomersList(int size, int offset, String field){
+    public List<FindAllCustomerDto> getCustomersList(int size, int offset, String field) {
 
         PageRequest pageRequest = PageRequest.of(offset, size, Sort.Direction.ASC, field);
 
         List<FindAllCustomerDto> findAllCustomerDtos = new ArrayList<>();
         List<Object[]> customerDetails = userRepository.getCustomerDetails(pageRequest);
 
-        for (Object[] customer: customerDetails){
+        for (Object[] customer : customerDetails) {
             findAllCustomerDtos.add(new FindAllCustomerDto((BigInteger) customer[0],
                     ((String) customer[1] + " " + (String) customer[2] + " " + (String) customer[3]),
                     (String) customer[4], (Boolean) customer[5]));
@@ -57,41 +57,40 @@ public class AdminDao {
     }
 
 
-    public List<FindAllSellerDto> getSellersList(int size, int offset, String field){
+    public List<FindAllSellerDto> getSellersList(int size, int offset, String field) {
 
         PageRequest pageRequest = PageRequest.of(offset, size, Sort.Direction.ASC, field);
 
         List<FindAllSellerDto> findAllSellerDtos = new ArrayList<>();
         List<Object[]> sellerDetails = userRepository.getSellerDetails(pageRequest);
 
-        for (Object[] seller: sellerDetails){
-            findAllSellerDtos.add(new FindAllSellerDto( (BigInteger) seller[0],
+        for (Object[] seller : sellerDetails) {
+            findAllSellerDtos.add(new FindAllSellerDto((BigInteger) seller[0],
                     ((String) seller[1] + " " + (String) seller[2] + " " + (String) seller[3]),
-                    (String) seller[4],     (Boolean) seller[5],
-                    (String)seller[6], (String)seller[7]));
+                    (String) seller[4], (Boolean) seller[5],
+                    (String) seller[6], (String) seller[7]));
         }
         return findAllSellerDtos;
     }
 
     //Customer
 
-    public String activateCustomer(Long customerId, WebRequest webRequest){
+    public String activateCustomer(Long customerId, WebRequest webRequest) {
 
         Locale locale = webRequest.getLocale();
 
         Customer customer = customerRepository.findById(customerId);
 
-        if(customer == null){
+        if (customer == null) {
             String messageCustomerNotFound = messageSource.getMessage("exception.customer.not.found", null, locale);
             throw new UserNotFoundException(messageCustomerNotFound);
         }
 
         User user = userRepository.getUserById(customerId);
 
-        if(user.isIs_active() == true){
+        if (user.isIs_active() == true) {
             return messageSource.getMessage("customer.already.active", null, locale);
-        }
-        else {
+        } else {
             user.setIs_active(true);
 
             String receiverEmail = user.getEmail();
@@ -111,23 +110,22 @@ public class AdminDao {
     }
 
 
-    public String deactivateCustomer(Long customerId, WebRequest webRequest){
+    public String deactivateCustomer(Long customerId, WebRequest webRequest) {
 
         Locale locale = webRequest.getLocale();
 
         Customer customer = customerRepository.findById(customerId);
 
-        if(customer == null){
+        if (customer == null) {
             String messageCustomerNotFound = messageSource.getMessage("exception.customer.not.found", null, locale);
             throw new UserNotFoundException(messageCustomerNotFound);
         }
 
         User user = userRepository.getUserById(customerId);
 
-        if(user.isIs_active() == false){
+        if (user.isIs_active() == false) {
             return messageSource.getMessage("customer.already.deactivate", null, locale);
-        }
-        else {
+        } else {
             user.setIs_active(false);
 
             String receiverEmail = user.getEmail();
@@ -148,23 +146,22 @@ public class AdminDao {
 
     //Seller
 
-    public String activateSeller(Long id, WebRequest webRequest){
+    public String activateSeller(Long id, WebRequest webRequest) {
 
         Locale locale = webRequest.getLocale();
 
         Seller seller = sellerRepository.findById(id);
 
-        if(seller == null){
+        if (seller == null) {
             String messageSellerNotFound = messageSource.getMessage("exception.seller.not.found", null, locale);
             throw new UserNotFoundException(messageSellerNotFound);
         }
 
         User user = userRepository.getUserById(id);
 
-        if(user.isIs_active() == true){
+        if (user.isIs_active() == true) {
             return messageSource.getMessage("seller.already.active", null, locale);
-        }
-        else {
+        } else {
             user.setIs_active(true);
 
             String receiverEmail = user.getEmail();
@@ -184,23 +181,22 @@ public class AdminDao {
     }
 
 
-    public String deactivateSeller(Long id, WebRequest webRequest){
+    public String deactivateSeller(Long id, WebRequest webRequest) {
 
         Locale locale = webRequest.getLocale();
 
         Seller seller = sellerRepository.findById(id);
 
-        if(seller == null){
+        if (seller == null) {
             String messageSellerNotFound = messageSource.getMessage("exception.seller.not.found", null, locale);
             throw new UserNotFoundException(messageSellerNotFound);
         }
 
         User user = userRepository.getUserById(id);
 
-        if(user.isIs_active() == false){
+        if (user.isIs_active() == false) {
             return messageSource.getMessage("seller.already.deactivate", null, locale);
-        }
-        else {
+        } else {
             user.setIs_active(false);
 
             String receiverEmail = user.getEmail();

@@ -35,9 +35,12 @@ public class Bootstrap implements ApplicationRunner {
             user1.setEmail("user1email@domain.com");
             user1.addAddresses(new Address("Noida", "UP", "India", "H no 14", 201301, Label.HOME));
             user1.addAddresses(new Address("Egypt", "EG", "Egypt","Khonshu Temple", 234244, Label.OFFICE));
-
+            user1.setIs_active(true);
 //            Customer user2 = new Customer();
-//            user2.setName(new Name("Marc", "", "Spector"));
+//            Name name1 = new Name();
+//            name1.setFirst_name("arc");
+//            name1.setLast_name("dhb");
+//            user2.setName(name1);
 //            user2.setPassword(passwordEncoder.encode("moongod"));
 //            user2.setRoles(Arrays.asList(new Role("ROLE_CUSTOMER")));
 //            user2.setEmail("user2email@domain.com");
