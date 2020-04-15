@@ -1,9 +1,9 @@
 package com.example.SpringSecurity.dao;
 
-import com.example.SpringSecurity.Repository.SellerRepository;
-import com.example.SpringSecurity.Repository.UserRepository;
-import com.example.SpringSecurity.Repository.VerificationTokenRepository;
-import com.example.SpringSecurity.dto.SellerDto;
+import com.example.SpringSecurity.repository.SellerRepository;
+import com.example.SpringSecurity.repository.UserRepository;
+import com.example.SpringSecurity.repository.VerificationTokenRepository;
+import com.example.SpringSecurity.dto.SellerRegisterDto;
 import com.example.SpringSecurity.entity.users.Name;
 import com.example.SpringSecurity.entity.users.Role;
 import com.example.SpringSecurity.entity.users.Seller;
@@ -41,7 +41,7 @@ public class SellerDao {
     @Autowired
     private MessageSource messageSource;
 
-    public String registerSeller(SellerDto sellerDto, WebRequest webRequest){
+    public String registerSeller(SellerRegisterDto sellerDto, WebRequest webRequest){
         Locale locale = webRequest.getLocale();
         if(userRepository.findByEmail(sellerDto.getEmail()) != null){
             String messageEmailAlreadyExists = messageSource.getMessage("exception.email.already.exists", null, locale);

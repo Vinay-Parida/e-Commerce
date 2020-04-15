@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.Repository;
+package com.example.SpringSecurity.repository;
 
 import com.example.SpringSecurity.modals.ForgetPasswordToken;
 import org.springframework.data.jpa.repository.Modifying;

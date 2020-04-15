@@ -1,8 +1,8 @@
 package com.example.SpringSecurity.dao;
 
-import com.example.SpringSecurity.Repository.CustomerRepository;
-import com.example.SpringSecurity.Repository.SellerRepository;
-import com.example.SpringSecurity.Repository.UserRepository;
+import com.example.SpringSecurity.repository.CustomerRepository;
+import com.example.SpringSecurity.repository.SellerRepository;
+import com.example.SpringSecurity.repository.UserRepository;
 import com.example.SpringSecurity.dto.FindAllCustomerDto;
 import com.example.SpringSecurity.dto.FindAllSellerDto;
 import com.example.SpringSecurity.entity.users.Customer;

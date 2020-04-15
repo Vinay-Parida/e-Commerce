@@ -1,7 +1,7 @@
 package com.example.SpringSecurity.filters;
 
-import com.example.SpringSecurity.Repository.UserAttemptsRepository;
-import com.example.SpringSecurity.Repository.UserRepository;
+import com.example.SpringSecurity.repository.UserAttemptsRepository;
+import com.example.SpringSecurity.repository.UserRepository;
 import com.example.SpringSecurity.dao.UserAttemptsDao;
 import com.example.SpringSecurity.entity.users.User;
 import com.example.SpringSecurity.exceptions.UserNotFoundException;
@@ -30,7 +30,7 @@ public class CustomerFilter extends DaoAuthenticationProvider {
     @Autowired
     JavaMailSender javaMailSender;
 
-    //Internal server Error is showing instead of Bad client credentials if wrong password is entered
+    //HTDL: Internal server Error is showing instead of Bad client credentials if wrong password is entered.
 
     @Override
     public Authentication authenticate(Authentication authentication) {
@@ -55,7 +55,7 @@ public class CustomerFilter extends DaoAuthenticationProvider {
 //                    mailMessage.setText(messageText);
 //                    javaMailSender.send(mailMessage);
 
-                    throw new UserNotFoundException("Login without activating account");             //Make a custom exception
+                    throw new UserNotFoundException("Login without activating account");             //HTDL: Make a custom exception
                 }
                 else if (userAttemptsDao.checkLock(email) && userAttemptsDao.checkIsActive(email)) {
                     userAttemptsDao.updateAttemptsToNull(email);
@@ -75,7 +75,7 @@ public class CustomerFilter extends DaoAuthenticationProvider {
                     mailMessage.setText(messageText);
                     javaMailSender.send(mailMessage);
 
-                    throw new UserNotFoundException("User is locked");     //Make a custom exception
+                    throw new UserNotFoundException("User is locked");     //HTDL: Make a custom exception
                 }
             }
         } catch (Exception e) {
@@ -84,7 +84,7 @@ public class CustomerFilter extends DaoAuthenticationProvider {
             userAttemptsDao.updateAttempts(email);
 //            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
 //            e.printStackTrace();
-            throw new UserNotFoundException("User is Invalid");           //Make a custom exception
+            throw new UserNotFoundException("User is Invalid");           //HTLD: // Make a custom exception
         }
         return null;
     }

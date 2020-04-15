@@ -1,9 +1,9 @@
 package com.example.SpringSecurity.dao;
 
-import com.example.SpringSecurity.Repository.CustomerRepository;
-import com.example.SpringSecurity.Repository.UserRepository;
-import com.example.SpringSecurity.Repository.VerificationTokenRepository;
-import com.example.SpringSecurity.dto.CustomerDto;
+import com.example.SpringSecurity.repository.CustomerRepository;
+import com.example.SpringSecurity.repository.UserRepository;
+import com.example.SpringSecurity.repository.VerificationTokenRepository;
+import com.example.SpringSecurity.dto.CustomerRegisterDto;
 import com.example.SpringSecurity.entity.users.Customer;
 import com.example.SpringSecurity.entity.users.Name;
 import com.example.SpringSecurity.entity.users.Role;
@@ -42,7 +42,7 @@ public class CustomerDao {
     @Autowired
     private MessageSource messageSource;
 
-    public String registerCustomer(CustomerDto customerDto, WebRequest webRequest){
+    public String registerCustomer(CustomerRegisterDto customerDto, WebRequest webRequest){
         Locale locale = webRequest.getLocale();
         if(userRepository.findByEmail(customerDto.getEmail()) != null){
             String messageEmailAlreadyExists = messageSource.getMessage("exception.email.already.exists", null, locale);
@@ -81,9 +81,9 @@ public class CustomerDao {
 
             String messageSuccessful = messageSource.getMessage("customer.registration.successful", null, locale);
             return messageSuccessful;
-
-
         }
     }
+
+
 
 }

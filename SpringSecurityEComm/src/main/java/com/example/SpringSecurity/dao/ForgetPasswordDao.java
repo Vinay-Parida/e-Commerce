@@ -1,7 +1,7 @@
 package com.example.SpringSecurity.dao;
 
-import com.example.SpringSecurity.Repository.ForgetPasswordTokenRepository;
-import com.example.SpringSecurity.Repository.UserRepository;
+import com.example.SpringSecurity.repository.ForgetPasswordTokenRepository;
+import com.example.SpringSecurity.repository.UserRepository;
 import com.example.SpringSecurity.entity.users.User;
 import com.example.SpringSecurity.exceptions.EmailException;
 import com.example.SpringSecurity.exceptions.PasswordException;

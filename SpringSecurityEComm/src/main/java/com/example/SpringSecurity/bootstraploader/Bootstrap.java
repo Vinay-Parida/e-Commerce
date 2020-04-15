@@ -1,6 +1,6 @@
-package com.example.SpringSecurity.bootstrapLoader;
+package com.example.SpringSecurity.bootstraploader;
 
-import com.example.SpringSecurity.Repository.UserRepository;
+import com.example.SpringSecurity.repository.UserRepository;
 import com.example.SpringSecurity.entity.users.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;

@@ -2,8 +2,8 @@ package com.example.SpringSecurity.controller;
 
 import com.example.SpringSecurity.dao.CustomerDao;
 import com.example.SpringSecurity.dao.SellerDao;
-import com.example.SpringSecurity.dto.CustomerDto;
-import com.example.SpringSecurity.dto.SellerDto;
+import com.example.SpringSecurity.dto.CustomerRegisterDto;
+import com.example.SpringSecurity.dto.SellerRegisterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,12 +24,12 @@ public class RegistrationController {
     SellerDao sellerDao;
 
     @PostMapping("/customer")
-    public String customerRegister(@Valid @RequestBody CustomerDto customerDto, WebRequest webRequest){
+    public String customerRegister(@Valid @RequestBody CustomerRegisterDto customerDto, WebRequest webRequest){
         return customerDao.registerCustomer(customerDto, webRequest);
     }
 
     @PostMapping("/seller")
-    public String sellerRegister(@Valid @RequestBody SellerDto sellerDto, WebRequest webRequest){
+    public String sellerRegister(@Valid @RequestBody SellerRegisterDto sellerDto, WebRequest webRequest){
         return sellerDao.registerSeller(sellerDto, webRequest);
     }
 }

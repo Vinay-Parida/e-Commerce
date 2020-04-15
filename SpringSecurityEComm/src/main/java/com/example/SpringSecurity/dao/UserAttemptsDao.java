@@ -1,7 +1,7 @@
 package com.example.SpringSecurity.dao;
 
-import com.example.SpringSecurity.Repository.UserAttemptsRepository;
-import com.example.SpringSecurity.Repository.UserRepository;
+import com.example.SpringSecurity.repository.UserAttemptsRepository;
+import com.example.SpringSecurity.repository.UserRepository;
 import com.example.SpringSecurity.entity.users.User;
 import com.example.SpringSecurity.modals.UserAttempts;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public class UserAttemptsDao {
 
     public void updateAttemptsToNull(String email){
         UserAttempts userAttempts = userAttemptsRepository.findByEmail(email);
-        userAttemptsRepository.updateAttempts(attemptCounts, email);
+        userAttemptsRepository.updateAttempts(0, email);
     }
 
     private Integer getAttempt(String email){

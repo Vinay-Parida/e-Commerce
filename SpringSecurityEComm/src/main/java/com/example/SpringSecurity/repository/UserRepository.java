@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.Repository;
+package com.example.SpringSecurity.repository;
 
 import com.example.SpringSecurity.entity.users.User;
 import org.springframework.data.domain.PageRequest;

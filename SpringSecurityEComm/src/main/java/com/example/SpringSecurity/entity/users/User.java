@@ -32,27 +32,37 @@ public class User {
     private List<Role> roles;
 
 
-    private boolean is_deleted;
-    private boolean is_active = false;
-    private boolean isAccountNotLocked = true;
-    private boolean is_enabled;
+    private Boolean is_deleted;
+    private Boolean is_active = false;
+    private Boolean isAccountNotLocked = true;
+    private Boolean is_enabled;
+
+    @Lob
+    private String image;
 
     //Getters and Setters
 
+    public String getImage() {
+        return image;
+    }
 
-    public boolean isAccountNotLocked() {
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Boolean isAccountNotLocked() {
         return isAccountNotLocked;
     }
 
-    public void setAccountNotLocked(boolean accountNotLocked) {
+    public void setAccountNotLocked(Boolean accountNotLocked) {
         isAccountNotLocked = accountNotLocked;
     }
 
-    public boolean isIs_enabled() {
+    public Boolean isIs_enabled() {
         return is_enabled;
     }
 
-    public void setIs_enabled(boolean is_unabled) {
+    public void setIs_enabled(Boolean is_unabled) {
         this.is_enabled = is_unabled;
     }
 
@@ -88,19 +98,19 @@ public class User {
         this.roles = roles;
     }
 
-    public boolean isIs_deleted() {
+    public Boolean isIs_deleted() {
         return is_deleted;
     }
 
-    public void setIs_deleted(boolean is_deleted) {
+    public void setIs_deleted(Boolean is_deleted) {
         this.is_deleted = is_deleted;
     }
 
-    public boolean isIs_active() {
+    public Boolean isIs_active() {
         return is_active;
     }
 
-    public void setIs_active(boolean is_active) {
+    public void setIs_active(Boolean is_active) {
         this.is_active = is_active;
     }
 

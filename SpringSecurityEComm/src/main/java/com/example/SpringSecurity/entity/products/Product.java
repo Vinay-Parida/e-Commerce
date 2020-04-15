@@ -27,9 +27,9 @@ public class Product {
 
     //Category ID??????? needs to be mapped but later
 
-    private boolean is_cancellable;
-    private boolean is_returnable;
-    private boolean is_active;
+    private Boolean is_cancellable;
+    private Boolean is_returnable;
+    private Boolean is_active;
 
     private String brand;
 
