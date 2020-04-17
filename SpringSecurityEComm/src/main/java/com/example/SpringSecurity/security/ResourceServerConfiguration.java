@@ -62,18 +62,32 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
                 .antMatchers("/uploadImage").anonymous()
 
-                .antMatchers("/admin/customers").hasAnyRole("ADMIN")
-                .antMatchers("/admin/sellers").hasAnyRole("ADMIN")
-
-                .antMatchers("/admin/activate/customer").hasAnyRole("ADMIN")
-                .antMatchers("/admin/deactivate/customer").hasAnyRole("ADMIN")
-
-                .antMatchers("/admin/activate/seller").hasAnyRole("ADMIN")
-                .antMatchers("/admin/deactivate/seller").hasAnyRole("ADMIN")
+                .antMatchers("/admin/**").hasAnyRole("ADMIN")
+//                .antMatchers("/admin/customers").hasAnyRole("ADMIN")
+//                .antMatchers("/admin/sellers").hasAnyRole("ADMIN")
+//                .antMatchers("/admin/activate/customer").hasAnyRole("ADMIN")
+//                .antMatchers("/admin/deactivate/customer").hasAnyRole("ADMIN")
+//                .antMatchers("/admin/activate/seller").hasAnyRole("ADMIN")
+//                .antMatchers("/admin/deactivate/seller").hasAnyRole("ADMIN")
 
                 .antMatchers("/uploadImage").hasAnyRole("CUSTOMER", "SELLER")
 
-                .antMatchers("/admin/home").hasAnyRole("ADMIN")
+//                .antMatchers("/customer/**").hasAnyRole("CUSTOMER")
+                .antMatchers("/customer/profile").hasAnyRole("CUSTOMER")
+                .antMatchers("/customer/addAddress").hasAnyRole("CUSTOMER")
+                .antMatchers("/customer/address").hasAnyRole("CUSTOMER")
+                .antMatchers("/customer/updateProfile").hasAnyRole("CUSTOMER")
+                .antMatchers("/customer/updatePassword").hasAnyRole("CUSTOMER")
+                .antMatchers("/customer/deleteAddress").hasAnyRole("CUSTOMER")
+                .antMatchers("/customer/updateAddress").hasAnyRole("CUSTOMER")
+
+//                .antMatchers("/seller/**").hasAnyRole("SELLER")
+                .antMatchers("/seller/profile").hasAnyRole("SELLER")
+                .antMatchers("/seller/updatePassword").hasAnyRole("SELLER")
+                .antMatchers("/seller/updateAddress").hasAnyRole("SELLER")
+                .antMatchers("seller/updateProfile").hasAnyRole("SELLER")
+
+//                .antMatchers("/admin/home").hasAnyRole("ADMIN")
                 .antMatchers("/user/home").hasAnyRole("USER")
                 .antMatchers("/doLogout").hasAnyRole("ADMIN", "CUSTOMER", "SELLER")
                 .anyRequest()

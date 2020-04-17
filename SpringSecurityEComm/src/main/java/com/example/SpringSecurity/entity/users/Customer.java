@@ -13,6 +13,9 @@ public class Customer extends User {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<ProductReview> productReviews;
 
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Address> addresses;
+
     public String getContact() {
         return contact;
     }

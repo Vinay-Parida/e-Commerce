@@ -68,7 +68,7 @@ public class AdminDao {
             findAllSellerDtos.add(new FindAllSellerDto((BigInteger) seller[0],
                     ((String) seller[1] + " " + (String) seller[2] + " " + (String) seller[3]),
                     (String) seller[4], (Boolean) seller[5],
-                    (String) seller[6], (String) seller[7]));
+                    (String) seller[6], (String) seller[7],(String) seller[8], (String) seller[9], (String) seller[10], (String) seller[11],(String) seller[12]));
         }
         return findAllSellerDtos;
     }

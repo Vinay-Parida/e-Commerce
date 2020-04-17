@@ -1,5 +1,7 @@
 package com.example.SpringSecurity.dto;
 
+import com.example.SpringSecurity.entity.users.Label;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -17,6 +19,13 @@ public class SellerRegisterDto {
 
     @NotNull
     private String company_name;
+
+    private String address_line;
+    private String city;
+    private String state;
+    private String country;
+    private String zip_code;
+    private Label label;
 
     @Pattern(regexp="(^$|[0-9]{10})",message = "Contact can be only 10 digits")
     private String company_contact;
@@ -102,5 +111,53 @@ public class SellerRegisterDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAddress_line() {
+        return address_line;
+    }
+
+    public void setAddress_line(String address_line) {
+        this.address_line = address_line;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getZip_code() {
+        return zip_code;
+    }
+
+    public void setZip_code(String zip_code) {
+        this.zip_code = zip_code;
+    }
+
+    public Label getLabel() {
+        return label;
+    }
+
+    public void setLabel(Label label) {
+        this.label = label;
     }
 }

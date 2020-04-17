@@ -11,26 +11,30 @@ public class Address {
     private String city;
     private String state;
     private String country;
-    private String address;
-    private int zip_code;
+    private String address_line;
+    private String zip_code;
     private Label label;
 
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+//    @OneToOne(targetEntity = Seller.class, fetch = FetchType.EAGER)
+//    @JoinColumn(nullable = false, name = "seller_id")
+//    private Seller seller;
 
-    Address(){}
-
-    public Address(String city, String state, String country, String address, int zip_code, Label label) {
-        this.city = city;
-        this.state = state;
-        this.country = country;
-        this.address = address;
-        this.zip_code = zip_code;
-        this.label = label;
-    }
+//
+//    Address(){}
+//
+//    public Address(String city, String state, String country, String address_line, int zip_code, Label label) {
+//        this.city = city;
+//        this.state = state;
+//        this.country = country;
+//        this.address_line = address_line;
+//        this.zip_code = zip_code;
+//        this.label = label;
+//    }
 
     public Long getId() {
         return id;
@@ -64,19 +68,19 @@ public class Address {
         this.country = country;
     }
 
-    public String getAddress() {
-        return address;
+    public String getAddress_line() {
+        return address_line;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddress_line(String address_line) {
+        this.address_line = address_line;
     }
 
-    public int getZip_code() {
+    public String getZip_code() {
         return zip_code;
     }
 
-    public void setZip_code(int zip_code) {
+    public void setZip_code(String zip_code) {
         this.zip_code = zip_code;
     }
 

@@ -36,9 +36,11 @@ public class CustomerFilter extends DaoAuthenticationProvider {
     public Authentication authenticate(Authentication authentication) {
 
         try {
+
             Authentication auth = super.authenticate(authentication);
 
             String email = authentication.getName();
+            System.out.println(email + "==========");
             User user = userRepository.findByEmail(email);
 
             if (user != null) {
@@ -84,7 +86,7 @@ public class CustomerFilter extends DaoAuthenticationProvider {
             userAttemptsDao.updateAttempts(email);
 //            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
 //            e.printStackTrace();
-            throw new UserNotFoundException("User is Invalid");           //HTLD: // Make a custom exception
+            throw e;           //HTLD: // Make a custom exception
         }
         return null;
     }

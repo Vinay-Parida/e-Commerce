@@ -42,7 +42,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/bootcamp-repo-ecomm-project/bootcamp-ecomm-project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -95,18 +95,18 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="416" y="155" width="524" height="491" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.27.1366.741@0.27.1366.741" timestamp="1586727315301" />
-    <state x="491" y="108" width="374" height="577" key="#com.intellij.ide.util.MemberChooser" timestamp="1586982842995">
+    <state x="491" y="108" width="374" height="577" key="#com.intellij.ide.util.MemberChooser" timestamp="1587107971105">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="491" y="108" width="374" height="577" key="#com.intellij.ide.util.MemberChooser/0.27.1366.741@0.27.1366.741" timestamp="1586982842995" />
+    <state x="491" y="108" width="374" height="577" key="#com.intellij.ide.util.MemberChooser/0.27.1366.741@0.27.1366.741" timestamp="1587107971105" />
     <state x="524" y="289" width="308" height="223" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1586282137764">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="524" y="289" width="308" height="223" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.27.1366.741@0.27.1366.741" timestamp="1586282137764" />
-    <state x="408" y="256" width="549" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1584986484280">
+    <state x="408" y="256" width="549" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1587066058704">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="408" y="256" width="549" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.27.1366.741@0.27.1366.741" timestamp="1584986484280" />
+    <state x="408" y="256" width="549" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.27.1366.741@0.27.1366.741" timestamp="1587066058704" />
     <state x="851" y="27" width="515" height="741" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1586951086156">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -115,46 +115,50 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="416" y="146" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.27.1366.741@0.27.1366.741" timestamp="1586554833207" />
-    <state x="441" y="142" key="#xdebugger.evaluate" timestamp="1585905953322">
+    <state x="441" y="142" key="#xdebugger.evaluate" timestamp="1587127573793">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="441" y="142" key="#xdebugger.evaluate/0.27.1366.741@0.27.1366.741" timestamp="1585905953322" />
+    <state x="441" y="142" key="#xdebugger.evaluate/0.27.1366.741@0.27.1366.741" timestamp="1587127573793" />
+    <state width="461" height="478" key="DebuggerActiveHint" timestamp="1587127349807">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="461" height="478" key="DebuggerActiveHint/0.27.1366.741@0.27.1366.741" timestamp="1587127349807" />
     <state x="460" y="155" width="424" height="484" key="FileChooserDialogImpl" timestamp="1586938909441">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="460" y="155" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1586938909441" />
-    <state width="1320" height="2" key="GridCell.Tab.0.bottom" timestamp="1586985163984">
+    <state width="1320" height="99" key="GridCell.Tab.0.bottom" timestamp="1587141790027">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="2" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1586985163984" />
-    <state width="1320" height="2" key="GridCell.Tab.0.center" timestamp="1586985163980">
+    <state width="1320" height="99" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1587141790027" />
+    <state width="1320" height="99" key="GridCell.Tab.0.center" timestamp="1587141790027">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="2" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1586985163980" />
-    <state width="1320" height="2" key="GridCell.Tab.0.left" timestamp="1586985163980">
+    <state width="1320" height="99" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1587141790027" />
+    <state width="1320" height="99" key="GridCell.Tab.0.left" timestamp="1587141790026">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="2" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1586985163980" />
-    <state width="1320" height="2" key="GridCell.Tab.0.right" timestamp="1586985163981">
+    <state width="1320" height="99" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1587141790026" />
+    <state width="1320" height="99" key="GridCell.Tab.0.right" timestamp="1587141790027">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="2" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1586985163981" />
-    <state width="1320" height="264" key="GridCell.Tab.1.bottom" timestamp="1586938751127">
+    <state width="1320" height="99" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1587141790027" />
+    <state width="1320" height="164" key="GridCell.Tab.1.bottom" timestamp="1587140549013">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="264" key="GridCell.Tab.1.bottom/0.27.1366.741@0.27.1366.741" timestamp="1586938751127" />
-    <state width="1320" height="264" key="GridCell.Tab.1.center" timestamp="1586938751126">
+    <state width="1320" height="164" key="GridCell.Tab.1.bottom/0.27.1366.741@0.27.1366.741" timestamp="1587140549013" />
+    <state width="1320" height="164" key="GridCell.Tab.1.center" timestamp="1587140549013">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="264" key="GridCell.Tab.1.center/0.27.1366.741@0.27.1366.741" timestamp="1586938751126" />
-    <state width="1320" height="264" key="GridCell.Tab.1.left" timestamp="1586938751126">
+    <state width="1320" height="164" key="GridCell.Tab.1.center/0.27.1366.741@0.27.1366.741" timestamp="1587140549013" />
+    <state width="1320" height="164" key="GridCell.Tab.1.left" timestamp="1587140549012">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="264" key="GridCell.Tab.1.left/0.27.1366.741@0.27.1366.741" timestamp="1586938751126" />
-    <state width="1320" height="264" key="GridCell.Tab.1.right" timestamp="1586938751126">
+    <state width="1320" height="164" key="GridCell.Tab.1.left/0.27.1366.741@0.27.1366.741" timestamp="1587140549012" />
+    <state width="1320" height="164" key="GridCell.Tab.1.right" timestamp="1587140549013">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="264" key="GridCell.Tab.1.right/0.27.1366.741@0.27.1366.741" timestamp="1586938751126" />
+    <state width="1320" height="164" key="GridCell.Tab.1.right/0.27.1366.741@0.27.1366.741" timestamp="1587140549013" />
     <state x="166" y="27" width="1024" height="741" key="SettingsEditor" timestamp="1586830985575">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -163,22 +167,22 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="412" y="128" width="540" height="524" key="StructurePopup/0.27.1366.741@0.27.1366.741" timestamp="1585905762413" />
-    <state width="683" height="370" key="XDebugger.FullValuePopup" timestamp="1585905971543">
+    <state width="683" height="370" key="XDebugger.FullValuePopup" timestamp="1587127312035">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="683" height="370" key="XDebugger.FullValuePopup/0.27.1366.741@0.27.1366.741" timestamp="1585905971543" />
-    <state x="100" y="127" width="1166" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1586980189849">
+    <state width="683" height="370" key="XDebugger.FullValuePopup/0.27.1366.741@0.27.1366.741" timestamp="1587127312035" />
+    <state x="100" y="127" width="1166" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1587019225511">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="100" y="127" width="1166" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.27.1366.741@0.27.1366.741" timestamp="1586980189849" />
+    <state x="100" y="127" width="1166" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.27.1366.741@0.27.1366.741" timestamp="1587019225511" />
     <state x="178" y="109" width="999" height="583" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1586700058465">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="178" y="109" width="999" height="583" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.27.1366.741@0.27.1366.741" timestamp="1586700058465" />
-    <state x="328" y="137" width="710" height="618" key="find.popup" timestamp="1586976647283">
+    <state x="328" y="137" width="710" height="618" key="find.popup" timestamp="1587126054599">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="328" y="137" width="710" height="618" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1586976647283" />
+    <state x="328" y="137" width="710" height="618" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1587126054599" />
     <state x="428" y="27" width="500" height="741" key="refactoring.ChangeSignatureDialog" timestamp="1585942233874">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -201,14 +205,49 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/SpringSecurity/dao/UserAttemptsDao.java</url>
-          <line>52</line>
-          <option name="timeStamp" value="16" />
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security.oauth/spring-security-oauth2/2.3.8.RELEASE/8477933ae26ce444c685d7fcf12d10e26c48599c/spring-security-oauth2-2.3.8.RELEASE-sources.jar!/org/springframework/security/oauth2/provider/password/ResourceOwnerPasswordTokenGranter.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="73" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/SpringSecurity/dao/UserAttemptsDao.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="17" />
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-core/5.2.2.RELEASE/9b92fd9e4de96b97d7dc9ec7747758dfcac5a297/spring-security-core-5.2.2.RELEASE-sources.jar!/org/springframework/security/authentication/ProviderManager.java</url>
+          <line>164</line>
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-core/5.2.2.RELEASE/9b92fd9e4de96b97d7dc9ec7747758dfcac5a297/spring-security-core-5.2.2.RELEASE-sources.jar!/org/springframework/security/authentication/dao/AbstractUserDetailsAuthenticationProvider.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-core/5.2.2.RELEASE/9b92fd9e4de96b97d7dc9ec7747758dfcac5a297/spring-security-core-5.2.2.RELEASE-sources.jar!/org/springframework/security/authentication/dao/DaoAuthenticationProvider.java</url>
+          <line>105</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/SpringSecurity/dao/UserDao.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/SpringSecurity/dao/UserDao.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-core/5.2.2.RELEASE/9b92fd9e4de96b97d7dc9ec7747758dfcac5a297/spring-security-core-5.2.2.RELEASE-sources.jar!/org/springframework/security/authentication/dao/DaoAuthenticationProvider.java</url>
+          <line>108</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-core/5.2.2.RELEASE/9b92fd9e4de96b97d7dc9ec7747758dfcac5a297/spring-security-core-5.2.2.RELEASE-sources.jar!/org/springframework/security/authentication/dao/AbstractUserDetailsAuthenticationProvider.java</url>
+          <line>164</line>
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/SpringSecurity/dao/SellerDao.java</url>
+          <line>179</line>
+          <option name="timeStamp" value="85" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
