@@ -2,6 +2,7 @@ package com.example.SpringSecurity.controller;
 
 import com.example.SpringSecurity.dao.AdminDao;
 import com.example.SpringSecurity.dao.CategoryDao;
+import com.example.SpringSecurity.dao.ProductDao;
 import com.example.SpringSecurity.dto.CategoryMetadataFieldValueDto;
 import com.example.SpringSecurity.dto.FindAllCustomerDto;
 import com.example.SpringSecurity.dto.FindAllSellerDto;
@@ -22,6 +23,9 @@ public class AdminController {
 
     @Autowired
     private CategoryDao categoryDao;
+
+    @Autowired
+    private ProductDao productDao;
 
     @GetMapping("/customers")
     public List<FindAllCustomerDto> getCustomersList(@RequestParam(defaultValue = "10") Integer pageSize,
@@ -107,6 +111,14 @@ public class AdminController {
         return categoryDao.updateMetadataField(categoryMetadataFieldValueDto);
     }
 
+    @PutMapping("/activateProduct")
+    public String activateProduct(@RequestParam("id") Long id, WebRequest webRequest){
+        return productDao.activateProduct(id, webRequest);
+    }
 
+    @PutMapping("/deactivateProduct")
+    public String deactivateProduct(@RequestParam("id") Long id, WebRequest webRequest){
+        return productDao.deactivateProduct(id, webRequest);
+    }
 
 }

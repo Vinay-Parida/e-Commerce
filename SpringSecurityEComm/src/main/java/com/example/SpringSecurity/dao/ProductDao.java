@@ -164,6 +164,41 @@ public class ProductDao {
 //    }
 
 
+    public String activateProduct(Long productId, WebRequest webRequest){
+        Product product = productRepository.findById(productId).get();
+        product.setActive(true);
+        productRepository.save(product);
+
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        String sellerEmail = product.getSeller().getEmail();
+        String subject = "Product Activation";
+        String message = "Your product " + product.getName() + ": " + product.getBrand() + " is activated by admin";
+
+        simpleMailMessage.setTo(sellerEmail);
+        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setText(message);
+        javaMailSender.send(simpleMailMessage);
+
+        return "Product activated successfully";
+    }
+
+    public String deactivateProduct(Long productId, WebRequest webRequest){
+        Product product = productRepository.findById(productId).get();
+        product.setActive(false);
+        productRepository.save(product);
+
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        String sellerEmail = product.getSeller().getEmail();
+        String subject = "Product Deactivation";
+        String message = "Your product " + product.getName() + ": " + product.getBrand() + " is deactivated by admin";
+
+        simpleMailMessage.setTo(sellerEmail);
+        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setText(message);
+        javaMailSender.send(simpleMailMessage);
+
+        return "Product deactivated successfully";
+    }
 
 
 }

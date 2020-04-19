@@ -78,6 +78,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("/admin/updateCategory").hasAnyRole("ADMIN")
                 .antMatchers("/admin/addCategoryMetadataField").hasAnyRole("ADMIN")
                 .antMatchers("/admin/updateCategoryMetadataField").hasAnyRole("ADMIN")
+                .antMatchers("/admin/activateProduct").hasAnyRole("ADMIN")
+                .antMatchers("/admin/deactivateProduct").hasAnyRole("ADMIN")
 
 
                 .antMatchers("/uploadImage").hasAnyRole("CUSTOMER", "SELLER")
