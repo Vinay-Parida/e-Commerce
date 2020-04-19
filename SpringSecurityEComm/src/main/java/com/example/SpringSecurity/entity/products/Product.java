@@ -25,11 +25,13 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductReview> productReviews;
 
-    //Category ID??????? needs to be mapped but later
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-    private Boolean is_cancellable;
-    private Boolean is_returnable;
-    private Boolean is_active;
+    private Boolean isCancellable;
+    private Boolean isReturnable;
+    private Boolean isActive;
 
     private String brand;
 

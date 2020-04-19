@@ -41,7 +41,7 @@ public class AdminDao {
     @Autowired
     private MessageSource messageSource;
 
-    public List<FindAllCustomerDto> getCustomersList(int size, int offset, String field) {
+    public List<FindAllCustomerDto> getCustomersList(Integer size, Integer offset, String field) {
 
         PageRequest pageRequest = PageRequest.of(offset, size, Sort.Direction.ASC, field);
 
@@ -57,7 +57,7 @@ public class AdminDao {
     }
 
 
-    public List<FindAllSellerDto> getSellersList(int size, int offset, String field) {
+    public List<FindAllSellerDto> getSellersList(Integer size, Integer offset, String field) {
 
         PageRequest pageRequest = PageRequest.of(offset, size, Sort.Direction.ASC, field);
 

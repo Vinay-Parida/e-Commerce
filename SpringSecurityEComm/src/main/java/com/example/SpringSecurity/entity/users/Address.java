@@ -13,6 +13,7 @@ public class Address {
     private String country;
     private String address_line;
     private String zip_code;
+    @Enumerated(EnumType.STRING)
     private Label label;
 
 

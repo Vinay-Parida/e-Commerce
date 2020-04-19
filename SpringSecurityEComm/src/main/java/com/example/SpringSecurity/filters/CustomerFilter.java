@@ -30,8 +30,6 @@ public class CustomerFilter extends DaoAuthenticationProvider {
     @Autowired
     JavaMailSender javaMailSender;
 
-    //HTDL: Internal server Error is showing instead of Bad client credentials if wrong password is entered.
-
     @Override
     public Authentication authenticate(Authentication authentication) {
 
@@ -86,7 +84,7 @@ public class CustomerFilter extends DaoAuthenticationProvider {
             userAttemptsDao.updateAttempts(email);
 //            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
 //            e.printStackTrace();
-            throw e;           //HTLD: // Make a custom exception
+            throw e;
         }
         return null;
     }

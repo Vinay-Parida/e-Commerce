@@ -1,7 +1,9 @@
 package com.example.SpringSecurity.controller;
 
+import com.example.SpringSecurity.dao.CategoryDao;
 import com.example.SpringSecurity.dao.CustomerDao;
 import com.example.SpringSecurity.dto.AddressDto;
+import com.example.SpringSecurity.dto.CategoryDto;
 import com.example.SpringSecurity.dto.CustomerProfileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerDao customerDao;
+
+    @Autowired
+    private CategoryDao categoryDao;
 
     @GetMapping("/profile")
     public CustomerProfileDto viewProfile(HttpServletRequest httpServletRequest){
@@ -51,6 +56,11 @@ public class CustomerController {
     @PutMapping("/updateAddress")
     public String updateAddress(@RequestParam("addressId") Long id, @RequestBody HashMap<String, Object> map, HttpServletRequest httpServletRequest) throws Exception {
         return customerDao.updateAddress(map, id, httpServletRequest);
+    }
+
+    @GetMapping("/getAllCategories")
+    public List<CategoryDto> getAllCategory(@RequestParam("CategoryId")Long id){
+        return categoryDao.getAllCategoriesCustomer(id);
     }
 
 }

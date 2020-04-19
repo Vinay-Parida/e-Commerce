@@ -7,10 +7,6 @@ import java.util.Date;
 
 //@Entity
 public class Order {
-    /*ORDER
-ID
-CUSTOMER_USER_ID   foreign
-`*/
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,12 +26,6 @@ CUSTOMER_USER_ID   foreign
     private String customer_address_address_line;
     private Integer customer_address_zip_code;
     private String customer_address_label;
-
-
-
-
-
-
 
 
 }
