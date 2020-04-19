@@ -98,6 +98,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("/seller/updateAddress").hasAnyRole("SELLER")
                 .antMatchers("seller/updateProfile").hasAnyRole("SELLER")
                 .antMatchers("/seller/getAllCategories").hasAnyRole("SELLER")
+                .antMatchers("/seller/addProduct").hasAnyRole("SELLER")
 
 //                .antMatchers("/admin/home").hasAnyRole("ADMIN")
 

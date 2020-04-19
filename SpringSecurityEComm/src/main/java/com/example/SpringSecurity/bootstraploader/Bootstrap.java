@@ -32,7 +32,7 @@ public class Bootstrap implements ApplicationRunner {
             user1.setName(name);
             user1.setPassword(passwordEncoder.encode("pass"));
             user1.setRoles(Arrays.asList(new Role("ROLE_ADMIN")));
-            user1.setEmail("user1email@domain.com");
+            user1.setEmail("vinayparid");
 
 //            Address address = new Address();
 //            address.setCity("Noida");

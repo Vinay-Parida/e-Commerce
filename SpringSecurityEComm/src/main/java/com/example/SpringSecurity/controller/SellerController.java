@@ -2,12 +2,15 @@ package com.example.SpringSecurity.controller;
 
 import com.example.SpringSecurity.dao.CategoryDao;
 import com.example.SpringSecurity.dao.CustomerDao;
+import com.example.SpringSecurity.dao.ProductDao;
 import com.example.SpringSecurity.dao.SellerDao;
+import com.example.SpringSecurity.dto.AddProductDto;
 import com.example.SpringSecurity.dto.CategoryForSellerDto;
 import com.example.SpringSecurity.dto.SellerProfileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -26,6 +29,9 @@ public class SellerController {
 
     @Autowired
     CategoryDao categoryDao;
+
+    @Autowired
+    ProductDao productDao;
 
     @GetMapping("/profile")
     public SellerProfileDto getSellerProfile(HttpServletRequest httpServletRequest){
@@ -50,6 +56,11 @@ public class SellerController {
     @GetMapping("/getAllCategories")
     public List<CategoryForSellerDto> getAllCategories(){
         return categoryDao.getCategoryForSeller();
+    }
+
+    @PostMapping("/addProduct")
+    public String addProduct(@RequestBody AddProductDto addProductDto, HttpServletRequest httpServletRequest, WebRequest webRequest){
+        return productDao.addProduct(addProductDto, httpServletRequest, webRequest);
     }
 
 }

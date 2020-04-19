@@ -32,13 +32,103 @@ public class Product {
     private Boolean isCancellable;
     private Boolean isReturnable;
     private Boolean isActive;
+    private Boolean isDeleted;
 
     private String brand;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public Seller getSeller() {
+        return seller;
+    }
 
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<ProductVariation> getProductVariations() {
+        return productVariations;
+    }
+
+    public void setProductVariations(Set<ProductVariation> productVariations) {
+        this.productVariations = productVariations;
+    }
+
+    public List<ProductReview> getProductReviews() {
+        return productReviews;
+    }
+
+    public void setProductReviews(List<ProductReview> productReviews) {
+        this.productReviews = productReviews;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Boolean getCancellable() {
+        return isCancellable;
+    }
+
+    public void setCancellable(Boolean cancellable) {
+        isCancellable = cancellable;
+    }
+
+    public Boolean getReturnable() {
+        return isReturnable;
+    }
+
+    public void setReturnable(Boolean returnable) {
+        isReturnable = returnable;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
 }
