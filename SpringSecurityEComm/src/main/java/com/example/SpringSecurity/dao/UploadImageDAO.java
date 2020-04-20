@@ -1,6 +1,7 @@
 package com.example.SpringSecurity.dao;
 
 import com.example.SpringSecurity.entity.users.User;
+import com.example.SpringSecurity.exceptions.ProductException;
 import com.example.SpringSecurity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ import java.nio.file.Paths;
 import java.security.Principal;
 
 @Component
-public class UploadImageDao {
+public class UploadImageDAO {
 
     @Autowired
     UserRepository userRepository;
@@ -27,7 +28,7 @@ public class UploadImageDao {
         try {
             byte[] bytes = image.getBytes();
             User user = getUser(httpServletRequest);
-            String fileName = renameFile(image.getOriginalFilename(), user);
+            String fileName = renameFile(image.getOriginalFilename(), user.getId());
 
             Path path = Paths.get("/home/vinay/images/" + fileName);
             Files.write(path, bytes);
@@ -46,11 +47,13 @@ public class UploadImageDao {
         userRepository.save(user);
     }
 
-    private String renameFile(String fileName, User user) {
+    private String renameFile(String fileName, Long id) {
         Integer index = fileName.lastIndexOf(".");
         fileName = fileName.substring(index);
-        Long id = user.getId();
-        return id + fileName;
+        if (fileName.equalsIgnoreCase(".jpg") || fileName.equalsIgnoreCase(".jpeg")|| fileName.equalsIgnoreCase(".png") || fileName.equalsIgnoreCase(".bmp"))
+            return id + fileName;
+        else
+            throw new ProductException("Image format is not valid");
     }
 
     private User getUser(HttpServletRequest httpServletRequest) {
@@ -59,5 +62,17 @@ public class UploadImageDao {
         User user = userRepository.findByEmail(email);
         return user;
     }
+
+//
+//    public String uploadProductVariationPrimaryImage(MultipartFile image, Long id) throws IOException {
+//        if (image.isEmpty())
+//            return "No file Selected";
+//
+//        byte[] bytes = image.getBytes();
+//        String fileName = renameFile(image.getOriginalFilename(), id);
+//        Path path = Paths.get("/home/vinay/images/productVariation" + fileName);
+//
+//
+//    }
 
 }

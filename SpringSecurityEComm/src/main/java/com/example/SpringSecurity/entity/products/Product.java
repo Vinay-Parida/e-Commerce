@@ -32,7 +32,7 @@ public class Product {
     private Boolean isCancellable;
     private Boolean isReturnable;
     private Boolean isActive = false;
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 
     private String brand;
 

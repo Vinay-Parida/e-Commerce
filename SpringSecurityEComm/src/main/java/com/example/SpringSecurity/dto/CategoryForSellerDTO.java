@@ -2,11 +2,11 @@ package com.example.SpringSecurity.dto;
 
 import java.util.List;
 
-public class CategoryForSellerDto {
+public class CategoryForSellerDTO {
 
     private Long categoryId;
     private String categoryName;
-    private List<CategoryMetadataDto> categoryMetadataDtoList;
+    private List<CategoryMetadataDTO> categoryMetadataDtoList;
     private List<String> parentCategories;
 
     public Long getCategoryId() {
@@ -25,11 +25,11 @@ public class CategoryForSellerDto {
         this.categoryName = categoryName;
     }
 
-    public List<CategoryMetadataDto> getCategoryMetadataDtoList() {
+    public List<CategoryMetadataDTO> getCategoryMetadataDtoList() {
         return categoryMetadataDtoList;
     }
 
-    public void setCategoryMetadataDtoList(List<CategoryMetadataDto> categoryMetadataDtoList) {
+    public void setCategoryMetadataDtoList(List<CategoryMetadataDTO> categoryMetadataDtoList) {
         this.categoryMetadataDtoList = categoryMetadataDtoList;
     }
 

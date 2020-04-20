@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 
 @Component
-public class ForgetPasswordDao {
+public class ForgetPasswordDAO {
 
     @Autowired
     private ForgetPasswordTokenRepository forgetPasswordTokenRepository;
@@ -55,7 +55,7 @@ public class ForgetPasswordDao {
             if (user == null) {
                 String messageEmailDoesNotExists = messageSource.getMessage("exception.email.does.not.exists", null, locale);
                 throw new EmailException(messageEmailDoesNotExists);
-            } else if (user.isIs_active() == false) {
+            } else if (user.isActive() == false) {
                 String messageUserNotActivated = messageSource.getMessage("exception.user.not.active", null, locale);
                 throw new EmailException(messageUserNotActivated);
             } else {

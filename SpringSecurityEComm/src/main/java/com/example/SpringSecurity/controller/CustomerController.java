@@ -1,10 +1,10 @@
 package com.example.SpringSecurity.controller;
 
-import com.example.SpringSecurity.dao.CategoryDao;
-import com.example.SpringSecurity.dao.CustomerDao;
-import com.example.SpringSecurity.dto.AddressDto;
-import com.example.SpringSecurity.dto.CategoryDto;
-import com.example.SpringSecurity.dto.CustomerProfileDto;
+import com.example.SpringSecurity.dao.CategoryDAO;
+import com.example.SpringSecurity.dao.CustomerDAO;
+import com.example.SpringSecurity.dto.AddressDTO;
+import com.example.SpringSecurity.dto.CategoryDTO;
+import com.example.SpringSecurity.dto.CustomerProfileDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,23 +18,23 @@ import java.util.List;
 public class CustomerController {
 
     @Autowired
-    private CustomerDao customerDao;
+    private CustomerDAO customerDao;
 
     @Autowired
-    private CategoryDao categoryDao;
+    private CategoryDAO categoryDao;
 
     @GetMapping("/profile")
-    public CustomerProfileDto viewProfile(HttpServletRequest httpServletRequest){
+    public CustomerProfileDTO viewProfile(HttpServletRequest httpServletRequest){
         return customerDao.getProfile(httpServletRequest);
     }
 
     @PostMapping("/addAddress")
-    public String addAddress(@RequestBody AddressDto addressDto, HttpServletRequest httpServletRequest){
+    public String addAddress(@RequestBody AddressDTO addressDto, HttpServletRequest httpServletRequest){
         return customerDao.addAddress(addressDto, httpServletRequest);
     }
 
     @GetMapping("/address")
-    public List<AddressDto> getAddressList(HttpServletRequest httpServletRequest){
+    public List<AddressDTO> getAddressList(HttpServletRequest httpServletRequest){
         return customerDao.getAddressList(httpServletRequest);
     }
 
@@ -59,7 +59,7 @@ public class CustomerController {
     }
 
     @GetMapping("/getAllCategories")
-    public List<CategoryDto> getAllCategory(@RequestParam("CategoryId")Long id){
+    public List<CategoryDTO> getAllCategory(@RequestParam("CategoryId")Long id){
         return categoryDao.getAllCategoriesCustomer(id);
     }
 

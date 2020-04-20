@@ -1,6 +1,6 @@
 package com.example.SpringSecurity.security;
 
-import com.example.SpringSecurity.dao.UserDao;
+import com.example.SpringSecurity.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,7 +15,7 @@ public class AppUserDetailsService implements UserDetailsService {
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    UserDao userDao;
+    UserDAO userDao;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

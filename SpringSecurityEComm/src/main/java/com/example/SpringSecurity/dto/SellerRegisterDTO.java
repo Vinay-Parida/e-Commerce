@@ -5,7 +5,7 @@ import com.example.SpringSecurity.entity.users.Label;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-public class SellerRegisterDto {
+public class SellerRegisterDTO {
 
     @NotNull
     @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_.]*@[a-zA-Z]+[.][a-zA-Z]+", message = "Invalid Email Format")
@@ -38,7 +38,7 @@ public class SellerRegisterDto {
     @Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})",message="Password must be 8 characters long")
     private String password;
 
-    public SellerRegisterDto(@NotNull @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_.]*@[a-zA-Z]+[.][a-zA-Z]+", message = "Invalid Email Format") String email, @NotNull String first_name, String middle_name, @NotNull String last_name, @NotNull String company_name, @Pattern(regexp = "(^$|[0-9]{10})", message = "Contact can be only 10 digits") String company_contact, @NotNull @Pattern(regexp = "(\\d{2}[A-Z]{5}\\d{4}[A-Z]{1}[A-Z\\d]{1}[Z]{1}[A-Z\\d]{1})") String gst, @NotNull @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})", message = "Password must be 8 characters long") String password) {
+    public SellerRegisterDTO(@NotNull @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_.]*@[a-zA-Z]+[.][a-zA-Z]+", message = "Invalid Email Format") String email, @NotNull String first_name, String middle_name, @NotNull String last_name, @NotNull String company_name, @Pattern(regexp = "(^$|[0-9]{10})", message = "Contact can be only 10 digits") String company_contact, @NotNull @Pattern(regexp = "(\\d{2}[A-Z]{5}\\d{4}[A-Z]{1}[A-Z\\d]{1}[Z]{1}[A-Z\\d]{1})") String gst, @NotNull @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})", message = "Password must be 8 characters long") String password) {
         this.email = email;
         this.first_name = first_name;
         this.middle_name = middle_name;

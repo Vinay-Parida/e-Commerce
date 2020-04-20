@@ -16,9 +16,9 @@ public class Order {
     @JoinColumn(name = "user_customer_id")
     private Customer customer;
 
-    private double amount_paid;
-    private Date date_created;
-    private final String payment_method = "Cash";
+    private double amountPaid;
+    private Date dateCreated;
+    private final String paymentMethod = "Cash";
 
     private String customer_address_city;
     private String customer_address_state;

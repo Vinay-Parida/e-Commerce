@@ -7,7 +7,7 @@ public class Cart {
     //PRODUCT_VARIATION_ID  foreign
 
     private int quantity;
-    private Boolean is_wishlist_item;
+    private Boolean isWishlistItem;
 
     public Cart() {
     }

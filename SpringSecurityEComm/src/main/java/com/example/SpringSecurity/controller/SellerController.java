@@ -1,12 +1,12 @@
 package com.example.SpringSecurity.controller;
 
-import com.example.SpringSecurity.dao.CategoryDao;
-import com.example.SpringSecurity.dao.CustomerDao;
-import com.example.SpringSecurity.dao.ProductDao;
-import com.example.SpringSecurity.dao.SellerDao;
-import com.example.SpringSecurity.dto.AddProductDto;
-import com.example.SpringSecurity.dto.CategoryForSellerDto;
-import com.example.SpringSecurity.dto.SellerProfileDto;
+import com.example.SpringSecurity.dao.CategoryDAO;
+import com.example.SpringSecurity.dao.CustomerDAO;
+import com.example.SpringSecurity.dao.ProductDAO;
+import com.example.SpringSecurity.dao.SellerDAO;
+import com.example.SpringSecurity.dto.AddProductDTO;
+import com.example.SpringSecurity.dto.CategoryForSellerDTO;
+import com.example.SpringSecurity.dto.SellerProfileDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
@@ -22,19 +22,19 @@ import java.util.List;
 public class SellerController {
 
     @Autowired
-    SellerDao sellerDao;
+    SellerDAO sellerDao;
 
     @Autowired
-    CustomerDao customerDao;
+    CustomerDAO customerDao;
 
     @Autowired
-    CategoryDao categoryDao;
+    CategoryDAO categoryDao;
 
     @Autowired
-    ProductDao productDao;
+    ProductDAO productDao;
 
     @GetMapping("/profile")
-    public SellerProfileDto getSellerProfile(HttpServletRequest httpServletRequest){
+    public SellerProfileDTO getSellerProfile(HttpServletRequest httpServletRequest){
         return sellerDao.getSellerProfile(httpServletRequest);
     }
 
@@ -54,12 +54,12 @@ public class SellerController {
     }
 
     @GetMapping("/getAllCategories")
-    public List<CategoryForSellerDto> getAllCategories(){
+    public List<CategoryForSellerDTO> getAllCategories(){
         return categoryDao.getCategoryForSeller();
     }
 
     @PostMapping("/addProduct")
-    public String addProduct(@RequestBody AddProductDto addProductDto, HttpServletRequest httpServletRequest, WebRequest webRequest){
+    public String addProduct(@RequestBody AddProductDTO addProductDto, HttpServletRequest httpServletRequest, WebRequest webRequest){
         return productDao.addProduct(addProductDto, httpServletRequest, webRequest);
     }
 

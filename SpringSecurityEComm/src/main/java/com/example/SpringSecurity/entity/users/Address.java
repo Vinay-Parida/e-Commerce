@@ -11,8 +11,8 @@ public class Address {
     private String city;
     private String state;
     private String country;
-    private String address_line;
-    private String zip_code;
+    private String addressLine;
+    private String zipCode;
     @Enumerated(EnumType.STRING)
     private Label label;
 
@@ -28,12 +28,12 @@ public class Address {
 //
 //    Address(){}
 //
-//    public Address(String city, String state, String country, String address_line, int zip_code, Label label) {
+//    public Address(String city, String state, String country, String addressLine, int zipCode, Label label) {
 //        this.city = city;
 //        this.state = state;
 //        this.country = country;
-//        this.address_line = address_line;
-//        this.zip_code = zip_code;
+//        this.addressLine = addressLine;
+//        this.zipCode = zipCode;
 //        this.label = label;
 //    }
 
@@ -69,20 +69,20 @@ public class Address {
         this.country = country;
     }
 
-    public String getAddress_line() {
-        return address_line;
+    public String getAddressLine() {
+        return addressLine;
     }
 
-    public void setAddress_line(String address_line) {
-        this.address_line = address_line;
+    public void setAddressLine(String addressLine) {
+        this.addressLine = addressLine;
     }
 
-    public String getZip_code() {
-        return zip_code;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setZip_code(String zip_code) {
-        this.zip_code = zip_code;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public Label getLabel() {

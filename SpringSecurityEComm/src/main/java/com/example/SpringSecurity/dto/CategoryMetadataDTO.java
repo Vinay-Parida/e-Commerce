@@ -1,10 +1,10 @@
 package com.example.SpringSecurity.dto;
 
-public class CategoryMetadataDto {
+public class CategoryMetadataDTO {
     private String metadataField;
     private String metadataFieldValue;
 
-    public CategoryMetadataDto(String metadataField, String metadataFieldValues) {
+    public CategoryMetadataDTO(String metadataField, String metadataFieldValues) {
         this.metadataField = metadataField;
         this.metadataFieldValue = metadataFieldValues;
     }

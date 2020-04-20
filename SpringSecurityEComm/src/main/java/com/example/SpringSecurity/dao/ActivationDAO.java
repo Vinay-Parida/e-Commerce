@@ -19,7 +19,7 @@ import java.util.Locale;
 import java.util.UUID;
 
 @Component
-public class ActivationDao {
+public class ActivationDAO {
 
     @Autowired
     private UserRepository userRepository;
@@ -52,7 +52,7 @@ public class ActivationDao {
             throw  new TokenInvalidException(messageTokenExpired + " " + verificationToken.getExpiry_date().getTime() + " "+ calendar.getTime().getTime());
         }
 
-        user.setIs_active(true);
+        user.setIsActive(true);
         userRepository.save(user);
         verificationTokenRepository.deleteToken(token);
         String messageActivationUserSuccessful = messageSource.getMessage("activation.user.successful", null, locale);
@@ -70,7 +70,7 @@ public class ActivationDao {
             String messageEmailDoesNotExists = messageSource.getMessage("exception.email.does.not.exists", null, locale);
             throw new EmailException(messageEmailDoesNotExists);
         }
-        else if(user.isIs_active() == true){
+        else if(user.isActive() == true){
             String messageAccountAlreadyActive = messageSource.getMessage("exception.account.already.active", null, locale);
             throw new EmailException(messageAccountAlreadyActive);
         }

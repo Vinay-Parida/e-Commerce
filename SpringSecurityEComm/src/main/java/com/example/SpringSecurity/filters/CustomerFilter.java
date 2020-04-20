@@ -2,7 +2,7 @@ package com.example.SpringSecurity.filters;
 
 import com.example.SpringSecurity.repository.UserAttemptsRepository;
 import com.example.SpringSecurity.repository.UserRepository;
-import com.example.SpringSecurity.dao.UserAttemptsDao;
+import com.example.SpringSecurity.dao.UserAttemptsDAO;
 import com.example.SpringSecurity.entity.users.User;
 import com.example.SpringSecurity.exceptions.UserNotFoundException;
 import com.example.SpringSecurity.modals.UserAttempts;
@@ -19,7 +19,7 @@ public class CustomerFilter extends DaoAuthenticationProvider {
     UserRepository userRepository;
 
     @Autowired
-    UserAttemptsDao userAttemptsDao;
+    UserAttemptsDAO userAttemptsDao;
 
     @Autowired
     UserAttemptsRepository userAttemptsRepository;

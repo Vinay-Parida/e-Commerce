@@ -1,6 +1,6 @@
 package com.example.SpringSecurity.controller;
 
-import com.example.SpringSecurity.dao.ForgetPasswordDao;
+import com.example.SpringSecurity.dao.ForgetPasswordDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.context.request.WebRequest;
 public class ForgotPasswordController {
 
     @Autowired
-    ForgetPasswordDao forgetPasswordDao;
+    ForgetPasswordDAO forgetPasswordDao;
 
     @PostMapping(value = "/forgetPassword")
     public String forgetPassword(@Param("email") String email, WebRequest webRequest){

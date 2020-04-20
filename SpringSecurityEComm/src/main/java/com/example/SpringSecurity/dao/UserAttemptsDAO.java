@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Component
-public class UserAttemptsDao {
+public class UserAttemptsDAO {
 
     @Autowired
     private UserAttemptsRepository userAttemptsRepository;
@@ -70,7 +70,7 @@ public class UserAttemptsDao {
 
     public Boolean checkIsActive(String email){
         User user = userRepository.findByEmail(email);
-        return user.isIs_active();
+        return user.isActive();
     }
 
 }

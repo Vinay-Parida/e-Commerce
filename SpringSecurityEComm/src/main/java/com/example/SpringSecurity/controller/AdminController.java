@@ -1,12 +1,12 @@
 package com.example.SpringSecurity.controller;
 
-import com.example.SpringSecurity.dao.AdminDao;
-import com.example.SpringSecurity.dao.CategoryDao;
-import com.example.SpringSecurity.dao.ProductDao;
-import com.example.SpringSecurity.dto.CategoryMetadataFieldValueDto;
-import com.example.SpringSecurity.dto.FindAllCustomerDto;
-import com.example.SpringSecurity.dto.FindAllSellerDto;
-import com.example.SpringSecurity.dto.SingleCategoryDto;
+import com.example.SpringSecurity.dao.AdminDAO;
+import com.example.SpringSecurity.dao.CategoryDAO;
+import com.example.SpringSecurity.dao.ProductDAO;
+import com.example.SpringSecurity.dto.CategoryMetadataFieldValueDTO;
+import com.example.SpringSecurity.dto.FindAllCustomerDTO;
+import com.example.SpringSecurity.dto.FindAllSellerDTO;
+import com.example.SpringSecurity.dto.SingleCategoryDTO;
 import com.example.SpringSecurity.entity.products.CategoryMetadataField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,16 +19,16 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    private AdminDao adminDao;
+    private AdminDAO adminDao;
 
     @Autowired
-    private CategoryDao categoryDao;
+    private CategoryDAO categoryDao;
 
     @Autowired
-    private ProductDao productDao;
+    private ProductDAO productDao;
 
     @GetMapping("/customers")
-    public List<FindAllCustomerDto> getCustomersList(@RequestParam(defaultValue = "10") Integer pageSize,
+    public List<FindAllCustomerDTO> getCustomersList(@RequestParam(defaultValue = "10") Integer pageSize,
                                                      @RequestParam(defaultValue = "0") Integer pageOffset,
                                                      @RequestParam(defaultValue = "id") String sortByField){
         return adminDao.getCustomersList(pageSize, pageOffset,sortByField);
@@ -36,7 +36,7 @@ public class AdminController {
 
 
     @GetMapping("/sellers")
-    public List<FindAllSellerDto> getSellersList(@RequestParam(defaultValue = "10") Integer pageSize,
+    public List<FindAllSellerDTO> getSellersList(@RequestParam(defaultValue = "10") Integer pageSize,
                                                  @RequestParam(defaultValue = "0") Integer pageOffset,
                                                  @RequestParam(defaultValue = "id") String sortByField){
         return adminDao.getSellersList(pageSize, pageOffset, sortByField);
@@ -84,12 +84,12 @@ public class AdminController {
     }
 
     @GetMapping("/category")
-    public SingleCategoryDto getSingleCategory(@RequestParam("CategoryId")Long id){
+    public SingleCategoryDTO getSingleCategory(@RequestParam("CategoryId")Long id){
         return categoryDao.getSingleCategory(id);
     }
 
     @GetMapping("/allCategory")
-    public List<SingleCategoryDto> getAllCategory(@RequestParam(defaultValue = "10") Integer size,
+    public List<SingleCategoryDTO> getAllCategory(@RequestParam(defaultValue = "10") Integer size,
                                                   @RequestParam(defaultValue = "0") Integer offset,
                                                   @RequestParam(defaultValue = "id") String field,
                                                   @RequestParam(defaultValue = "asc") String order){
@@ -102,12 +102,12 @@ public class AdminController {
     }
 
     @PostMapping("/addCategoryMetadataField")
-    public String addCategoryMetadataField(@RequestBody CategoryMetadataFieldValueDto categoryMetadataFieldValueDto){
+    public String addCategoryMetadataField(@RequestBody CategoryMetadataFieldValueDTO categoryMetadataFieldValueDto){
         return categoryDao.addMetadataFieldValue(categoryMetadataFieldValueDto);
     }
 
     @PutMapping("/updateCategoryMetadataField")
-    public String updateMetadataField(@RequestBody CategoryMetadataFieldValueDto categoryMetadataFieldValueDto){
+    public String updateMetadataField(@RequestBody CategoryMetadataFieldValueDTO categoryMetadataFieldValueDto){
         return categoryDao.updateMetadataField(categoryMetadataFieldValueDto);
     }
 
@@ -120,5 +120,7 @@ public class AdminController {
     public String deactivateProduct(@RequestParam("id") Long id, WebRequest webRequest){
         return productDao.deactivateProduct(id, webRequest);
     }
+
+
 
 }

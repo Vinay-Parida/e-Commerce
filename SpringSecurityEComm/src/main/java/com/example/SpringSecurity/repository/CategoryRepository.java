@@ -25,4 +25,7 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
 
     @Query(value = "select * from category where parent_id is null",nativeQuery = true)
     List<Category> getRootParent();
+
+    @Query(value = "select f.name from category_metadata_field f inner join category_metadata_field_value  v  on f.id=v.category_metadata_field_id where category_id=:Id", nativeQuery = true)
+    List<Object> getMetadataFieldsNameByCategoryId(@Param("Id") Long id);
 }

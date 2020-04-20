@@ -3,8 +3,8 @@ package com.example.SpringSecurity.dao;
 import com.example.SpringSecurity.repository.CustomerRepository;
 import com.example.SpringSecurity.repository.SellerRepository;
 import com.example.SpringSecurity.repository.UserRepository;
-import com.example.SpringSecurity.dto.FindAllCustomerDto;
-import com.example.SpringSecurity.dto.FindAllSellerDto;
+import com.example.SpringSecurity.dto.FindAllCustomerDTO;
+import com.example.SpringSecurity.dto.FindAllSellerDTO;
 import com.example.SpringSecurity.entity.users.Customer;
 import com.example.SpringSecurity.entity.users.Seller;
 import com.example.SpringSecurity.entity.users.User;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Component
-public class AdminDao {
+public class AdminDAO {
 
     @Autowired
     private UserRepository userRepository;
@@ -41,15 +41,15 @@ public class AdminDao {
     @Autowired
     private MessageSource messageSource;
 
-    public List<FindAllCustomerDto> getCustomersList(Integer size, Integer offset, String field) {
+    public List<FindAllCustomerDTO> getCustomersList(Integer size, Integer offset, String field) {
 
         PageRequest pageRequest = PageRequest.of(offset, size, Sort.Direction.ASC, field);
 
-        List<FindAllCustomerDto> findAllCustomerDtos = new ArrayList<>();
+        List<FindAllCustomerDTO> findAllCustomerDtos = new ArrayList<>();
         List<Object[]> customerDetails = userRepository.getCustomerDetails(pageRequest);
 
         for (Object[] customer : customerDetails) {
-            findAllCustomerDtos.add(new FindAllCustomerDto((BigInteger) customer[0],
+            findAllCustomerDtos.add(new FindAllCustomerDTO((BigInteger) customer[0],
                     ((String) customer[1] + " " + (String) customer[2] + " " + (String) customer[3]),
                     (String) customer[4], (Boolean) customer[5]));
         }
@@ -57,15 +57,15 @@ public class AdminDao {
     }
 
 
-    public List<FindAllSellerDto> getSellersList(Integer size, Integer offset, String field) {
+    public List<FindAllSellerDTO> getSellersList(Integer size, Integer offset, String field) {
 
         PageRequest pageRequest = PageRequest.of(offset, size, Sort.Direction.ASC, field);
 
-        List<FindAllSellerDto> findAllSellerDtos = new ArrayList<>();
+        List<FindAllSellerDTO> findAllSellerDtos = new ArrayList<>();
         List<Object[]> sellerDetails = userRepository.getSellerDetails(pageRequest);
 
         for (Object[] seller : sellerDetails) {
-            findAllSellerDtos.add(new FindAllSellerDto((BigInteger) seller[0],
+            findAllSellerDtos.add(new FindAllSellerDTO((BigInteger) seller[0],
                     ((String) seller[1] + " " + (String) seller[2] + " " + (String) seller[3]),
                     (String) seller[4], (Boolean) seller[5],
                     (String) seller[6], (String) seller[7],(String) seller[8], (String) seller[9], (String) seller[10], (String) seller[11],(String) seller[12]));
@@ -88,10 +88,10 @@ public class AdminDao {
 
         User user = userRepository.getUserById(customerId);
 
-        if (user.isIs_active() == true) {
+        if (user.isActive() == true) {
             return messageSource.getMessage("customer.already.active", null, locale);
         } else {
-            user.setIs_active(true);
+            user.setIsActive(true);
 
             String receiverEmail = user.getEmail();
             String messageSubject = messageSource.getMessage("customer.activated", null, locale);
@@ -123,10 +123,10 @@ public class AdminDao {
 
         User user = userRepository.getUserById(customerId);
 
-        if (user.isIs_active() == false) {
+        if (user.isActive() == false) {
             return messageSource.getMessage("customer.already.deactivate", null, locale);
         } else {
-            user.setIs_active(false);
+            user.setIsActive(false);
 
             String receiverEmail = user.getEmail();
             String messageSubject = messageSource.getMessage("customer.deactivated", null, locale);
@@ -159,10 +159,10 @@ public class AdminDao {
 
         User user = userRepository.getUserById(id);
 
-        if (user.isIs_active() == true) {
+        if (user.isActive() == true) {
             return messageSource.getMessage("seller.already.active", null, locale);
         } else {
-            user.setIs_active(true);
+            user.setIsActive(true);
 
             String receiverEmail = user.getEmail();
             String messageSubject = messageSource.getMessage("seller.activated", null, locale);
@@ -194,10 +194,10 @@ public class AdminDao {
 
         User user = userRepository.getUserById(id);
 
-        if (user.isIs_active() == false) {
+        if (user.isActive() == false) {
             return messageSource.getMessage("seller.already.deactivate", null, locale);
         } else {
-            user.setIs_active(false);
+            user.setIsActive(false);
 
             String receiverEmail = user.getEmail();
             String messageSubject = messageSource.getMessage("seller.deactivated", null, locale);

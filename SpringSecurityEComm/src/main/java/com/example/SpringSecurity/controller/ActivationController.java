@@ -1,6 +1,6 @@
 package com.example.SpringSecurity.controller;
 
-import com.example.SpringSecurity.dao.ActivationDao;
+import com.example.SpringSecurity.dao.ActivationDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +12,7 @@ import org.springframework.web.context.request.WebRequest;
 public class ActivationController {
 
     @Autowired
-    private ActivationDao activationDao;
+    private ActivationDAO activationDao;
 
     @GetMapping("/registrationConfirm")
     public String confirmRegistration(WebRequest webRequest, @RequestParam("token") String token){

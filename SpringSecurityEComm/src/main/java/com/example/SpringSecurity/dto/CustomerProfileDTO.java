@@ -2,7 +2,7 @@ package com.example.SpringSecurity.dto;
 
 import java.math.BigInteger;
 
-public class CustomerProfileDto {
+public class CustomerProfileDTO {
 
     private BigInteger id;
     private String first_name;
@@ -11,7 +11,7 @@ public class CustomerProfileDto {
     private String contact;
     private String image;
 
-    public CustomerProfileDto(BigInteger id, String first_name, String last_name, Boolean is_Active, String contact, String image) {
+    public CustomerProfileDTO(BigInteger id, String first_name, String last_name, Boolean is_Active, String contact, String image) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;

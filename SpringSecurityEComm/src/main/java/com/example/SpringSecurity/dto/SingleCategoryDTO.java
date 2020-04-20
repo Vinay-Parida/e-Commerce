@@ -2,7 +2,7 @@ package com.example.SpringSecurity.dto;
 
 import java.util.List;
 
-public class SingleCategoryDto {
+public class SingleCategoryDTO {
     private Long id;
     private List<String> categoriesList;
     private String childCategory;

@@ -2,7 +2,7 @@ package com.example.SpringSecurity.dto;
 
 import com.example.SpringSecurity.entity.users.Label;
 
-public class AddressDto {
+public class AddressDTO {
     private String city;
     private String state;
     private String country;
@@ -10,7 +10,7 @@ public class AddressDto {
     private Label label;
     private String zip_code;
 
-    public AddressDto(String city, String state, String country, String address_line, Label label, String zip_code) {
+    public AddressDTO(String city, String state, String country, String address_line, Label label, String zip_code) {
         this.city = city;
         this.state = state;
         this.country = country;

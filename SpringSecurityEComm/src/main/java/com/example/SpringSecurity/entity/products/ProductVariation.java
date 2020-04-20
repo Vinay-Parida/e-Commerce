@@ -14,10 +14,14 @@ public class ProductVariation {
 
     private Integer quantityAvailable;
     private Double price;
-    private String metadata;
-    private String primaryImageName;
 
-    private Boolean is_Active;
+//    @Convert(converter = HashMapConverter.class)
+    private String  metadata;
+
+    private String primaryImageName;
+    private String secondaryImage;
+
+    private Boolean isActive = true;
 
     public Long getId() {
         return id;
@@ -59,6 +63,26 @@ public class ProductVariation {
         this.metadata = metadata;
     }
 
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public String getSecondaryImage() {
+        return secondaryImage;
+    }
+
+    public void setSecondaryImage(String secondaryImage) {
+        this.secondaryImage = secondaryImage;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
     public String getPrimaryImageName() {
         return primaryImageName;
     }
@@ -67,11 +91,7 @@ public class ProductVariation {
         this.primaryImageName = primaryImageName;
     }
 
-    public Boolean Is_Active() {
-        return is_Active;
-    }
-
-    public void setIs_Active(Boolean is_Active) {
-        this.is_Active = is_Active;
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 }

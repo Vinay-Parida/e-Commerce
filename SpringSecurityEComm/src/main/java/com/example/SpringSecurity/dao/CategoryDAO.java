@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-public class CategoryDao {
+public class CategoryDAO {
 
     @Autowired
     private CategoryMetadataFieldRepository categoryMetadataFieldRepository;
@@ -103,14 +103,14 @@ public class CategoryDao {
 
 
 
-    public SingleCategoryDto getSingleCategory(Long categoryId){
+    public SingleCategoryDTO getSingleCategory(Long categoryId){
         Category category = categoryRepository.findByid(categoryId);
 
         List<String> emptyList = new ArrayList<>();
         List<String> categoriesListWithParent = getCategoriesParent(categoryId, emptyList);
         List<Category> childCategory = categoryRepository.findByParentId(category.getId());
 
-        SingleCategoryDto singleCategoryDto = new SingleCategoryDto();
+        SingleCategoryDTO singleCategoryDto = new SingleCategoryDTO();
         singleCategoryDto.setId(categoryId);
         singleCategoryDto.setCategoriesList(categoriesListWithParent);
         if (!childCategory.isEmpty()){
@@ -135,7 +135,7 @@ public class CategoryDao {
     }
 
 
-    public List<SingleCategoryDto> getAllCategory(Integer size, Integer offset, String field, String order){
+    public List<SingleCategoryDTO> getAllCategory(Integer size, Integer offset, String field, String order){
         Pageable pageable;
 
         if (order.equalsIgnoreCase("ASC"))
@@ -143,7 +143,7 @@ public class CategoryDao {
         else
             pageable = PageRequest.of(offset, size, Sort.Direction.DESC, field);
 
-        List<SingleCategoryDto> singleCategoryDtoList = new ArrayList<>();
+        List<SingleCategoryDTO> singleCategoryDtoList = new ArrayList<>();
         List<Category> allCategory = categoryRepository.findAll(pageable);
 
         allCategory.forEach(category -> {
@@ -174,7 +174,7 @@ public class CategoryDao {
 
 
 
-    public String addMetadataFieldValue(CategoryMetadataFieldValueDto categoryMetadataFieldValueDto){
+    public String addMetadataFieldValue(CategoryMetadataFieldValueDTO categoryMetadataFieldValueDto){
         Optional<Category> category = categoryRepository.findById(categoryMetadataFieldValueDto.getCategoryId());
         Optional<CategoryMetadataField> categoryMetadataField = categoryMetadataFieldRepository.findById(categoryMetadataFieldValueDto.getFieldId());
 
@@ -206,7 +206,7 @@ public class CategoryDao {
 
 
 
-    public String updateMetadataField(CategoryMetadataFieldValueDto categoryMetadataFieldValueDto){
+    public String updateMetadataField(CategoryMetadataFieldValueDTO categoryMetadataFieldValueDto){
         CategoryMetadataFieldValue categoryMetadataFieldValue = categoryMetadataFieldValueRepository
                                                                     .findByCategoryAndMetadataField(categoryMetadataFieldValueDto.getCategoryId(),
                                                                                                     categoryMetadataFieldValueDto.getFieldId());
@@ -250,12 +250,12 @@ public class CategoryDao {
     }
 
 
-    public List<CategoryForSellerDto> getCategoryForSeller(){
+    public List<CategoryForSellerDTO> getCategoryForSeller(){
 
-        List<CategoryForSellerDto> categorySellerDtos=new ArrayList<>();
+        List<CategoryForSellerDTO> categorySellerDtos=new ArrayList<>();
         List<Category> leafCategories=categoryRepository.getLeafCategory();
         leafCategories.forEach(category -> {
-            CategoryForSellerDto categorySellerDto=new CategoryForSellerDto();
+            CategoryForSellerDTO categorySellerDto=new CategoryForSellerDTO();
             categorySellerDto.setCategoryId(category.getId());
             categorySellerDto.setCategoryName(category.getName());
             categorySellerDto.setCategoryMetadataDtoList(getCategoryMetadata(category.getId()));
@@ -269,39 +269,40 @@ public class CategoryDao {
         return categorySellerDtos;
     }
 
-    private List<CategoryMetadataDto> getCategoryMetadata(Long id) {
-        List<CategoryMetadataDto> categoryMetadataDtoList=new ArrayList<>();
+    private List<CategoryMetadataDTO> getCategoryMetadata(Long id) {
+        List<CategoryMetadataDTO> categoryMetadataDtoList=new ArrayList<>();
         List<Object[]> metadataList=categoryRepository.getMetadataByCategoryId(id);
         for (Object[] metadata:metadataList) {
-            CategoryMetadataDto categoryMetadataDto=new CategoryMetadataDto((String) metadata[0],(String) metadata[1]);
+            CategoryMetadataDTO categoryMetadataDto=new CategoryMetadataDTO((String) metadata[0],(String) metadata[1]);
             categoryMetadataDtoList.add(categoryMetadataDto);
         }
         return categoryMetadataDtoList;
     }
 
 
-    public List<CategoryDto> getAllCategoriesCustomer(Long id){
-        List<CategoryDto> allCategories=new ArrayList<>();
+    public List<CategoryDTO> getAllCategoriesCustomer(Long id){
+        List<CategoryDTO> allCategories=new ArrayList<>();
         if(id!=null){
             if (!categoryRepository.findById(id).isPresent())
                 throw new CategoryException("Category with this id does not exist!");
             List<Category> childCategory=categoryRepository.findByParentId(id);
-            CategoryDto categoryDto=new CategoryDto(childCategory.get(0).getId(),childCategory.get(0).getName());
+            CategoryDTO categoryDto=new CategoryDTO(childCategory.get(0).getId(),childCategory.get(0).getName());
             allCategories.add(categoryDto);
             return allCategories;
-
         }
         else{
             List<Category> rootParents=categoryRepository.getRootParent();
             rootParents.forEach(category -> {
-                CategoryDto categoryDto=new CategoryDto(category.getId(),category.getName());
+                CategoryDTO categoryDto=new CategoryDTO(category.getId(),category.getName());
                 allCategories.add(categoryDto);
             });
         }
         return allCategories;
     }
 
-
+//    public CategoryFilterDto filterCategory(Long id){
+//        return null;
+//    }
 
 
 }

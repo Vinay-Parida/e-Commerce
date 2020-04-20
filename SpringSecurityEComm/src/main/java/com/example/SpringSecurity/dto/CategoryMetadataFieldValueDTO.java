@@ -2,12 +2,12 @@ package com.example.SpringSecurity.dto;
 
 import java.util.Set;
 
-public class CategoryMetadataFieldValueDto {
+public class CategoryMetadataFieldValueDTO {
     private Long categoryId;
     private Long fieldId;
     private Set<String> fieldValues;
 
-    public CategoryMetadataFieldValueDto(Long categoryId, Long fieldId, Set<String> fieldValues) {
+    public CategoryMetadataFieldValueDTO(Long categoryId, Long fieldId, Set<String> fieldValues) {
         this.categoryId = categoryId;
         this.fieldId = fieldId;
         this.fieldValues = fieldValues;

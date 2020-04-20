@@ -1,8 +1,8 @@
 package com.example.SpringSecurity.dao;
 
-import com.example.SpringSecurity.dto.AddressDto;
-import com.example.SpringSecurity.dto.CustomerProfileDto;
-import com.example.SpringSecurity.dto.CustomerRegisterDto;
+import com.example.SpringSecurity.dto.AddressDTO;
+import com.example.SpringSecurity.dto.CustomerProfileDTO;
+import com.example.SpringSecurity.dto.CustomerRegisterDTO;
 import com.example.SpringSecurity.entity.users.*;
 import com.example.SpringSecurity.exceptions.EmailException;
 import com.example.SpringSecurity.exceptions.UserNotFoundException;
@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 
 @EnableAutoConfiguration
 @Component
-public class CustomerDao {
+public class CustomerDAO {
 
     @Autowired
     CustomerRepository customerRepository;
@@ -50,7 +50,7 @@ public class CustomerDao {
     @Autowired
     private MessageSource messageSource;
 
-    public String registerCustomer(CustomerRegisterDto customerDto, WebRequest webRequest) {
+    public String registerCustomer(CustomerRegisterDTO customerDto, WebRequest webRequest) {
         Locale locale = webRequest.getLocale();
         if (userRepository.findByEmail(customerDto.getEmail()) != null) {
             String messageEmailAlreadyExists = messageSource.getMessage("exception.email.already.exists", null, locale);
@@ -60,11 +60,11 @@ public class CustomerDao {
             Customer user1 = new Customer();
             user1.setEmail(customerDto.getEmail());
             Name name = new Name();
-            name.setFirst_name(customerDto.getFirst_name());
-            name.setMiddle_name(customerDto.getMiddle_name());
-            name.setLast_name(customerDto.getLast_name());
+            name.setFirstName(customerDto.getFirst_name());
+            name.setMiddleName(customerDto.getMiddle_name());
+            name.setLastName(customerDto.getLast_name());
             user1.setName(name);
-            user1.setIs_active(false);
+            user1.setIsActive(false);
             user1.setPassword(passwordEncoder.encode(customerDto.getPassword()));
             user1.setRoles(Arrays.asList(new Role("ROLE_CUSTOMER")));
             user1.setContact(customerDto.getContact());
@@ -91,32 +91,32 @@ public class CustomerDao {
         }
     }
 
-    public CustomerProfileDto getProfile(HttpServletRequest httpServletRequest) {
+    public CustomerProfileDTO getProfile(HttpServletRequest httpServletRequest) {
         Principal principal = httpServletRequest.getUserPrincipal();
         String email = principal.getName();
 
-        CustomerProfileDto customerProfileDto = null;
+        CustomerProfileDTO customerProfileDto = null;
 
         List<Object[]> customerDetails = customerRepository.getCustomerDetails(email);
         for (Object[] customer : customerDetails) {
-            customerProfileDto = new CustomerProfileDto((BigInteger) customer[0], (String) customer[1], (String) customer[2], (Boolean) customer[3], (String) customer[4], (String) customer[5]);
+            customerProfileDto = new CustomerProfileDTO((BigInteger) customer[0], (String) customer[1], (String) customer[2], (Boolean) customer[3], (String) customer[4], (String) customer[5]);
         }
         return customerProfileDto;
     }
 
 
-    public String addAddress(AddressDto addressDto, HttpServletRequest httpServletRequest) {
+    public String addAddress(AddressDTO addressDto, HttpServletRequest httpServletRequest) {
         String email = httpServletRequest.getUserPrincipal().getName();
         Long id = userRepository.findByEmail(email).getId();
 
         Customer customer = customerRepository.findById(id);
 
         Address address = new Address();
-        address.setAddress_line(addressDto.getAddress_line());
+        address.setAddressLine(addressDto.getAddress_line());
         address.setCity(addressDto.getCity());
         address.setState(addressDto.getState());
         address.setCountry(addressDto.getCountry());
-        address.setZip_code(addressDto.getZip_code());
+        address.setZipCode(addressDto.getZip_code());
         address.setLabel(addressDto.getLabel());
 
         address.setUser(customer);
@@ -125,8 +125,8 @@ public class CustomerDao {
         return "Address Saved Successfully";
     }
 
-    public List<AddressDto> getAddressList(HttpServletRequest httpServletRequest) {
-        List<AddressDto> addressDtoList = new ArrayList<>();
+    public List<AddressDTO> getAddressList(HttpServletRequest httpServletRequest) {
+        List<AddressDTO> addressDtoList = new ArrayList<>();
 
         String email = httpServletRequest.getUserPrincipal().getName();
 
@@ -134,7 +134,7 @@ public class CustomerDao {
         List<Address> addresses = addressRepository.getAddress(id);
 
         addresses.forEach(address -> {
-            AddressDto addressDto = new AddressDto(address.getCity(), address.getState(), address.getCountry(), address.getAddress_line(), address.getLabel(), address.getZip_code());
+            AddressDTO addressDto = new AddressDTO(address.getCity(), address.getState(), address.getCountry(), address.getAddressLine(), address.getLabel(), address.getZipCode());
             addressDtoList.add(addressDto);
         });
         return addressDtoList;
@@ -154,13 +154,13 @@ public class CustomerDao {
 
 
         if (checkNotNull(first_name)){
-            name.setFirst_name(first_name);
+            name.setFirstName(first_name);
         }
         if (checkNotNull(middle_name)){
-            name.setMiddle_name(middle_name);
+            name.setMiddleName(middle_name);
         }
         if (checkNotNull(last_name)){
-            name.setLast_name(last_name);
+            name.setLastName(last_name);
         }
         if (checkNotNull(contact)){
             if (!isContactValid(contact)) {
@@ -241,7 +241,7 @@ public class CustomerDao {
                 String zip_code = (String) addressDetails.get("zip_code");
 
                 if (checkNotNull(address_line)) {
-                    address.setAddress_line(address_line);
+                    address.setAddressLine(address_line);
                 }
                 if (checkNotNull(city)) {
                     address.setCity(city);
@@ -253,7 +253,7 @@ public class CustomerDao {
                     address.setCountry(country);
                 }
                 if (zip_code != null) {
-                    address.setZip_code(zip_code);
+                    address.setZipCode(zip_code);
                 }
 
                 addressRepository.save(address);

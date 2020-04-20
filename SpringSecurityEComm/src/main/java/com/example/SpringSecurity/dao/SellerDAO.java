@@ -1,13 +1,13 @@
 package com.example.SpringSecurity.dao;
 
-import com.example.SpringSecurity.dto.SellerProfileDto;
+import com.example.SpringSecurity.dto.SellerProfileDTO;
 import com.example.SpringSecurity.entity.users.*;
 import com.example.SpringSecurity.exceptions.UserNotFoundException;
 import com.example.SpringSecurity.repository.AddressRepository;
 import com.example.SpringSecurity.repository.SellerRepository;
 import com.example.SpringSecurity.repository.UserRepository;
 import com.example.SpringSecurity.repository.VerificationTokenRepository;
-import com.example.SpringSecurity.dto.SellerRegisterDto;
+import com.example.SpringSecurity.dto.SellerRegisterDTO;
 import com.example.SpringSecurity.exceptions.EmailException;
 import com.example.SpringSecurity.exceptions.GstException;
 import com.example.SpringSecurity.modals.VerificationToken;
@@ -27,7 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Component
-public class SellerDao {
+public class SellerDAO {
 
     @Autowired
     SellerRepository sellerRepository;
@@ -47,7 +47,7 @@ public class SellerDao {
     @Autowired
     private AddressRepository addressRepository;
 
-    public String registerSeller(SellerRegisterDto sellerDto, WebRequest webRequest){
+    public String registerSeller(SellerRegisterDTO sellerDto, WebRequest webRequest){
         Locale locale = webRequest.getLocale();
         if(userRepository.findByEmail(sellerDto.getEmail()) != null){
             String messageEmailAlreadyExists = messageSource.getMessage("exception.email.already.exists", null, locale);
@@ -62,25 +62,25 @@ public class SellerDao {
             Seller user1 = new Seller();
             user1.setEmail(sellerDto.getEmail());
             Name name = new Name();
-            name.setFirst_name(sellerDto.getFirst_name());
-            name.setMiddle_name(sellerDto.getMiddle_name());
-            name.setLast_name(sellerDto.getLast_name());
+            name.setFirstName(sellerDto.getFirst_name());
+            name.setMiddleName(sellerDto.getMiddle_name());
+            name.setLastName(sellerDto.getLast_name());
             user1.setName(name);
 
             Address address = new Address();
-            address.setAddress_line(sellerDto.getAddress_line());
+            address.setAddressLine(sellerDto.getAddress_line());
             address.setCity(sellerDto.getCity());
             address.setState(sellerDto.getState());
             address.setCountry(sellerDto.getCountry());
-            address.setZip_code(sellerDto.getZip_code());
+            address.setZipCode(sellerDto.getZip_code());
             address.setLabel(sellerDto.getLabel());
             user1.addAddresses(address);
 
-            user1.setIs_active(false);
+            user1.setIsActive(false);
             user1.setPassword(passwordEncoder.encode(sellerDto.getPassword()));
             user1.setRoles(Arrays.asList(new Role("ROLE_SELLER")));
-            user1.setCompany_contact(sellerDto.getCompany_contact());
-            user1.setCompany_name(sellerDto.getCompany_name());
+            user1.setCompanyContact(sellerDto.getCompany_contact());
+            user1.setCompanyName(sellerDto.getCompany_name());
             user1.setGst(sellerDto.getGst());
 
             sellerRepository.save(user1);
@@ -90,14 +90,13 @@ public class SellerDao {
             verificationTokenRepository.save(verificationToken);
 
             String receiverEmail = user1.getEmail();
-            String subject = "Registration Confirmation for Seller";
-            String confirmationUrl = webRequest.getContextPath() + "/registrationConfirm?token=" + token;
-            String message = "Registration Successful \n Click the link to activate the user ";
+            String subject = "Registration for Seller";
+            String message = "Registration Successful \n Wait for admin to approve your account ";
 
             SimpleMailMessage email = new SimpleMailMessage();
             email.setTo(receiverEmail);
             email.setSubject(subject);
-            email.setText(message + "http://localhost:8080" + confirmationUrl);
+            email.setText(message);
             javaMailSender.send(email);
 
             String messageSuccessful = messageSource.getMessage("seller.registration.successful", null, locale);
@@ -105,15 +104,15 @@ public class SellerDao {
         }
     }
 
-    public SellerProfileDto getSellerProfile(HttpServletRequest httpServletRequest){
+    public SellerProfileDTO getSellerProfile(HttpServletRequest httpServletRequest){
         String email = httpServletRequest.getUserPrincipal().getName();
         Long id = userRepository.findByEmail(email).getId();
 
-        SellerProfileDto sellerProfileDto = null;
+        SellerProfileDTO sellerProfileDto = null;
 
         List<Object[]> sellerDetails = sellerRepository.getSellerProfile(id);
         for (Object[] seller: sellerDetails) {
-            sellerProfileDto = new SellerProfileDto((BigInteger) seller[0],(String) seller[1],(String) seller[2],(Boolean) seller[3],
+            sellerProfileDto = new SellerProfileDTO((BigInteger) seller[0],(String) seller[1],(String) seller[2],(Boolean) seller[3],
                     (String) seller[4],(String) seller[5],(String) seller[6],(String) seller[7],
                     (String) seller[8],(String) seller[9],(String) seller[10],(String) seller[11],(String) seller[12]);
         }
@@ -134,7 +133,7 @@ public class SellerDao {
             String zip_code = (String) addressDetails.get("zip_code");
 
             if (checkNotNull(address_line)) {
-                address.setAddress_line(address_line);
+                address.setAddressLine(address_line);
             }
             if (checkNotNull(city)) {
                 address.setCity(city);
@@ -146,7 +145,7 @@ public class SellerDao {
                 address.setCountry(country);
             }
             if (zip_code != null) {
-                address.setZip_code(zip_code);
+                address.setZipCode(zip_code);
             }
 
             addressRepository.save(address);
@@ -175,20 +174,20 @@ public class SellerDao {
         String company_contact = (String) customerDetails.get("company_contact");
 
         if (checkNotNull(first_name)){
-            name.setFirst_name(first_name);
+            name.setFirstName(first_name);
         }
         if (checkNotNull(middle_name)){
-            name.setMiddle_name(middle_name);
+            name.setMiddleName(middle_name);
         }
         if (checkNotNull(last_name)){
-            name.setLast_name(last_name);
+            name.setLastName(last_name);
         }
         if (checkNotNull(company_contact)){
             if (!isContactValid(company_contact)) {
                 return "Not a Valid Phone number";
             }
             else {
-                seller.setCompany_contact(company_contact);
+                seller.setCompanyContact(company_contact);
             }
         }
         else {

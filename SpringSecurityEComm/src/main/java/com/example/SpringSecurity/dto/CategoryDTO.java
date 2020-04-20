@@ -1,6 +1,6 @@
 package com.example.SpringSecurity.dto;
 
-public class CategoryDto {
+public class CategoryDTO {
     private Long categoryId;
     private String categoryName;
 
@@ -20,7 +20,7 @@ public class CategoryDto {
         this.categoryName = categoryName;
     }
 
-    public CategoryDto(Long categoryId, String categoryName) {
+    public CategoryDTO(Long categoryId, String categoryName) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
     }

@@ -1,6 +1,6 @@
 package com.example.SpringSecurity.dto;
 
-public class AddProductDto {
+public class AddProductDTO {
     private String name;
     private String brand;
     private Long categoryId;
@@ -8,7 +8,7 @@ public class AddProductDto {
     private Boolean isCancellable=false;
     private Boolean isReturnable=false;
 
-    public AddProductDto(String name, String brand, Long categoryId, String description, Boolean isCancellable, Boolean isReturnable) {
+    public AddProductDTO(String name, String brand, Long categoryId, String description, Boolean isCancellable, Boolean isReturnable) {
         this.name = name;
         this.brand = brand;
         this.categoryId = categoryId;

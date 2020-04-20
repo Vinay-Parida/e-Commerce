@@ -27,8 +27,8 @@ public class Bootstrap implements ApplicationRunner {
 
             User user1 = new User();
             Name name = new Name();
-            name.setFirst_name("Vinay");
-            name.setLast_name("Parida");
+            name.setFirstName("Vinay");
+            name.setLastName("Parida");
             user1.setName(name);
             user1.setPassword(passwordEncoder.encode("pass"));
             user1.setRoles(Arrays.asList(new Role("ROLE_ADMIN")));
@@ -36,21 +36,21 @@ public class Bootstrap implements ApplicationRunner {
 
 //            Address address = new Address();
 //            address.setCity("Noida");
-//            address.setAddress_line("H no. 14");
+//            address.setAddressLine("H no. 14");
 //            address.setState("UP");
 //            address.setCountry("India");
-//            address.setZip_code(201301);
+//            address.setZipCode(201301);
 //            address.setLabel(Label.HOME);
 //
 //            user1.addAddresses(address);
 //            user1.addAddresses(new Address("Noida", "UP", "India", "H no 14", 201301, Label.HOME));
 //            user1.addAddresses(new Address("Egypt", "EG", "Egypt","Khonshu Temple", 234244, Label.OFFICE));
-            user1.setIs_active(true);
+            user1.setIsActive(true);
 
 //            Customer user2 = new Customer();
 //            Name name1 = new Name();
-//            name1.setFirst_name("arc");
-//            name1.setLast_name("dhb");
+//            name1.setFirstName("arc");
+//            name1.setLastName("dhb");
 //            user2.setName(name1);
 //            user2.setPassword(passwordEncoder.encode("moongod"));
 //            user2.setRoles(Arrays.asList(new Role("ROLE_CUSTOMER")));
@@ -64,8 +64,8 @@ public class Bootstrap implements ApplicationRunner {
 //            user3.setRoles(Arrays.asList(new Role("ROLE_SELLER")));
 //            user3.setEmail("user3email@domain.com");
 //            user3.setAddresses(Arrays.asList(new Address("Noida", "UP", "India", "H no 14", 201301, Label.HOME)));
-//            user3.setCompany_contact("9824981");
-//            user3.setCompany_name("TTN");
+//            user3.setCompanyContact("9824981");
+//            user3.setCompanyName("TTN");
 
             userRepository.save(user1);
 //            userRepository.save(user2);

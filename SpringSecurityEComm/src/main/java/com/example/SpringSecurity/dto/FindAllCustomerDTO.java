@@ -2,13 +2,13 @@ package com.example.SpringSecurity.dto;
 
 import java.math.BigInteger;
 
-public class FindAllCustomerDto {
+public class FindAllCustomerDTO {
     private BigInteger id;
     private String fullName;
     private String email;
     private Boolean isActive;
 
-    public FindAllCustomerDto(BigInteger id, String fullName, String email, Boolean isActive) {
+    public FindAllCustomerDTO(BigInteger id, String fullName, String email, Boolean isActive) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;

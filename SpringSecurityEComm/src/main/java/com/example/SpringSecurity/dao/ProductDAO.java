@@ -1,6 +1,6 @@
 package com.example.SpringSecurity.dao;
 
-import com.example.SpringSecurity.dto.AddProductDto;
+import com.example.SpringSecurity.dto.AddProductDTO;
 import com.example.SpringSecurity.entity.products.Category;
 import com.example.SpringSecurity.entity.products.Product;
 import com.example.SpringSecurity.entity.users.Seller;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Component
-public class ProductDao {
+public class ProductDAO {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
@@ -43,19 +43,21 @@ public class ProductDao {
     private CategoryMetadataFieldRepository categoryMetadataFieldRepository;
 
     @Autowired
-    private UploadImageDao uploadImageDao;
+    private UploadImageDAO uploadImageDao;
 
-    public String addProduct(AddProductDto addProductDto, HttpServletRequest httpServletRequest, WebRequest webRequest) {
+    public String addProduct(AddProductDTO addProductDto, HttpServletRequest httpServletRequest, WebRequest webRequest) {
         String email = httpServletRequest.getUserPrincipal().getName();
         Long userId = userRepository.findByEmail(email).getId();
         Seller seller = sellerRepository.findById(userId);
         Category category = categoryRepository.findById(addProductDto.getCategoryId()).get();
         Product product = new Product();
-        product.setSeller(seller);
-        product.setBrand(addProductDto.getBrand());
+
         Boolean productUnique = isProductUnique(addProductDto.getName(), addProductDto.getCategoryId(), seller.getId(), addProductDto.getBrand());
-        if (productUnique)
+        if (productUnique) {
             product.setName(addProductDto.getName());
+            product.setSeller(seller);
+            product.setBrand(addProductDto.getBrand());
+        }
         else
             throw new ProductException("Product with this name is already exist.");
 
@@ -66,7 +68,8 @@ public class ProductDao {
 
         if (addProductDto.getDescription() != null)
             product.setDescription(addProductDto.getDescription());
-        if (addProductDto.getCancellable() != null) product.setSeller(seller);
+        if (addProductDto.getCancellable() != null)
+            product.setSeller(seller);
         product.setBrand(addProductDto.getBrand());
         product.setCancellable(addProductDto.getCancellable());
         if (addProductDto.getReturnable() != null)
@@ -93,7 +96,7 @@ public class ProductDao {
 
     private String getMailBody(Product product) {
         String mailBody =
-                "Seller Name = " + product.getSeller().getCompany_name() + "\r\n" +
+                "Seller Name = " + product.getSeller().getCompanyName() + "\r\n" +
                         "Product Name = " + product.getName() + "\r\n" +
                         "Description = " + product.getDescription() + "\r\n" +
                         "IsCancellable = " + product.getCancellable() + "\r\n" +
@@ -113,55 +116,95 @@ public class ProductDao {
     }
 
 
-//    public String addProductVariation(MultipartFile primaryImage, List<MultipartFile> secondaryImages, AddProductVariationDto addProductVariationDto, HttpServletRequest httpServletRequest, WebRequest webRequest) throws IOException {
+
+
+//    public String addProductVariation(AddProductVariationDto addProductVariationDto, MultipartFile primaryImage, List<MultipartFile> secondaryImage, HttpServletRequest httpServletRequest, WebRequest webRequest){
 //        String sellerEmail = httpServletRequest.getUserPrincipal().getName();
 //        String result = validateMetadata(addProductVariationDto, sellerEmail);
-//        if (result.equalsIgnoreCase("Success")) {
+//
+//        if (result.equalsIgnoreCase("Success")){
 //            ProductVariation productVariation = new ProductVariation();
 //            productVariation.setProduct(productRepository.findById(addProductVariationDto.getProductId()).get());
 //            productVariation.setPrice(addProductVariationDto.getPrice());
 //            productVariation.setQuantityAvailable(addProductVariationDto.getQuantityAvailable());
 //
-//
-//            String primaryImagePath = uploadImageDao.
-//
+//            String primaryImagePath = uploadImageDao.uploadImage()
 //        }
+//
 //    }
 //
-//    private String validateMetadata(AddProductVariationDto addProductVariationDto, String sellerEmail) {
-//        String message;
-//        System.out.println("Before product-------");
+//
+//
+//
+//    private String validateMetadata(AddProductVariationDto addProductVariationDto, String sellerEmail){
+//
 //        Product product = productRepository.findById(addProductVariationDto.getProductId()).get();
-//        System.out.println("After product-------");
-//        if (product == null) {
-//            message = "Product Id is invalid";
-//            return message;
-//        }
+//
+//        if (product == null)
+//            throw new ProductException("Product Id is invalid");
 //
 //        Integer quantity = addProductVariationDto.getQuantityAvailable();
-//        if (quantity != null) {
-//            if (quantity < 0) {
-//                message = "Product quantity must not be negative";
-//                return message;
+//        if (quantity!=null){
+//            if (quantity<0){
+//                throw new ProductException("Quantity can't be negative");
 //            }
+//        }else {
+//            throw new ProductException("Quantity can't be null");
 //        }
+//
 //        Double price = addProductVariationDto.getPrice();
-//        if (price < 0) {
-//            message = "Product price must not be negative";
-//            return message;
+//        if (price<0)
+//            throw new ProductException("Product cannot be negative");
+//
+//        if (!product.getSeller().getEmail().equalsIgnoreCase(sellerEmail))
+//            throw new ProductException("The seller doesn't have any product");
+//
+//        if (product.getDeleted()){
+//            throw new ProductException("Product is deleted");
 //        }
-//        if (product.getDeleted()) {
-//            message = "Product is deleted";
-//            return message;
+//        if (!product.getActive()){
+//            throw new ProductException("Product is inactive");
 //        }
-//        if (!product.getActive()) {
-//            message = "Product is inactive";
-//            return message;
-//        }
+//
 //        Category category = product.getCategory();
 //        Map<String, String> metadataMap = addProductVariationDto.getMetadata();
 //
+//        List<String> mapFields = new ArrayList<>(metadataMap.keySet());
+//        List<Object> metadataFields = categoryRepository.getMetadataFieldsNameByCategoryId(category.getId());
+//
+//        List<String> actualFields = new ArrayList<>();
+//        metadataFields.forEach(fields -> {
+//            actualFields.add((String) fields);
+//        });
+//        if (mapFields.size() < actualFields.size()){
+//            return "All category of metadata is not provided";
+//        }
+//        mapFields.removeAll(actualFields);
+//        if (!mapFields.isEmpty())
+//            return "Fields are not associated with categories";
+//
+//        List<String> receivedField = new ArrayList<>();
+//        for (String field: receivedField) {
+//            CategoryMetadataField categoryMetadataField = categoryMetadataFieldRepository.findByName(field);
+//            List<Object> objectList = categoryMetadataFieldValueRepository.getMetadataFieldValuesByCategoryAndFieldId(category.getId(), categoryMetadataField.getId());
+//            String values = objectList.get(0).toString();
+//            Set<String> valueSet = SetStringConverter.convertToSet(values);
+//
+//            String receivedValues = metadataMap.get(field);
+//            Set<String> receivedValueSet = SetStringConverter.convertToSet(receivedValues);
+//
+//            if (!Sets.difference(valueSet,receivedValueSet).isEmpty())
+//                return "Field value is invalid for " + field;
+//        }
+//
+//        return "Success";
 //    }
+//
+//
+//
+//
+
+
 
 
     public String activateProduct(Long productId, WebRequest webRequest){
@@ -199,6 +242,8 @@ public class ProductDao {
 
         return "Product deactivated successfully";
     }
+
+
 
 
 }

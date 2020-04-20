@@ -2,7 +2,7 @@ package com.example.SpringSecurity.dto;
 
 import java.util.Map;
 
-public class AddProductVariationDto {
+public class AddProductVariationDTO {
 
     private Long productId;
     private Map<String,String> metadata;

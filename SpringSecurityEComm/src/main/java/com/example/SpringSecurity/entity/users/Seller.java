@@ -13,8 +13,8 @@ public class Seller extends User {
     @NotNull
     private String gst;
 
-    private String  company_contact;
-    private String company_name;
+    private String companyContact;
+    private String companyName;
 
     @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
     private List<Product> product;
@@ -28,19 +28,19 @@ public class Seller extends User {
         this.gst = gst;
     }
 
-    public String getCompany_contact() {
-        return company_contact;
+    public String getCompanyContact() {
+        return companyContact;
     }
 
-    public void setCompany_contact(String company_contact) {
-        this.company_contact = company_contact;
+    public void setCompanyContact(String companyContact) {
+        this.companyContact = companyContact;
     }
 
-    public String getCompany_name() {
-        return company_name;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setCompany_name(String comapany_name) {
-        this.company_name = comapany_name;
+    public void setCompanyName(String comapany_name) {
+        this.companyName = comapany_name;
     }
 }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserDao {
+public class UserDAO {
 
     @Autowired
     UserRepository userRepository;

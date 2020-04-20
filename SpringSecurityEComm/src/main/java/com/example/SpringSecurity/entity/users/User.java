@@ -32,10 +32,10 @@ public class User {
     private List<Role> roles;
 
 
-    private Boolean is_deleted;
-    private Boolean is_active = false;
+    private Boolean isDeleted;
+    private Boolean isActive = false;
     private Boolean isAccountNotLocked = true;
-    private Boolean is_enabled;
+    private Boolean isEnabled;
 
     @Lob
     private String image;
@@ -58,12 +58,12 @@ public class User {
         isAccountNotLocked = accountNotLocked;
     }
 
-    public Boolean isIs_enabled() {
-        return is_enabled;
+    public Boolean isEnabled() {
+        return isEnabled;
     }
 
-    public void setIs_enabled(Boolean is_unabled) {
-        this.is_enabled = is_unabled;
+    public void setIsEnabled(Boolean is_unabled) {
+        this.isEnabled = is_unabled;
     }
 
     public long getId() {
@@ -99,19 +99,19 @@ public class User {
     }
 
     public Boolean isIs_deleted() {
-        return is_deleted;
+        return isDeleted;
     }
 
-    public void setIs_deleted(Boolean is_deleted) {
-        this.is_deleted = is_deleted;
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
-    public Boolean isIs_active() {
-        return is_active;
+    public Boolean isActive() {
+        return isActive;
     }
 
-    public void setIs_active(Boolean is_active) {
-        this.is_active = is_active;
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     public Name getName() {
@@ -147,18 +147,5 @@ public class User {
 //        this.username = username;
 //    }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", name=" + name +
-                ", password='" + password + '\'' +
-//                ", addresses=" + addresses +
-                ", grantAuthorities=" + roles +
-                ", is_deleted=" + is_deleted +
-                ", is_active=" + is_active +
-                '}';
-    }
 }
 

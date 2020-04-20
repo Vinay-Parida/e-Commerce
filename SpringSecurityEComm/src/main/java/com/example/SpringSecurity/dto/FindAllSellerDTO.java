@@ -2,7 +2,7 @@ package com.example.SpringSecurity.dto;
 
 import java.math.BigInteger;
 
-public class FindAllSellerDto {
+public class FindAllSellerDTO {
     private BigInteger id;
     private String fullName;
     private String email;
@@ -16,7 +16,7 @@ public class FindAllSellerDto {
     private String companyContact;
     private Boolean isActive;
 
-    public  FindAllSellerDto(BigInteger id, String fullName, String email, Boolean isActive, String companyName, String address_line, String city, String state, String country,  String companyContact, String zip_code) {
+    public FindAllSellerDTO(BigInteger id, String fullName, String email, Boolean isActive, String companyName, String address_line, String city, String state, String country, String companyContact, String zip_code) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
