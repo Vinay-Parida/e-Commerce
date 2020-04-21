@@ -1,19 +1,19 @@
 package com.example.SpringSecurity.dao;
 
 import com.example.SpringSecurity.dto.*;
-import com.example.SpringSecurity.entity.products.Category;
-import com.example.SpringSecurity.entity.products.CategoryMetadataField;
-import com.example.SpringSecurity.entity.products.CategoryMetadataFieldValue;
-import com.example.SpringSecurity.entity.products.CategoryMetadataFieldValueId;
+import com.example.SpringSecurity.entity.products.*;
 import com.example.SpringSecurity.exceptions.CategoryException;
+import com.example.SpringSecurity.exceptions.EmailException;
 import com.example.SpringSecurity.repository.CategoryMetadataFieldRepository;
 import com.example.SpringSecurity.repository.CategoryMetadataFieldValueRepository;
 import com.example.SpringSecurity.repository.CategoryRepository;
+import com.example.SpringSecurity.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.*;
 
@@ -28,6 +28,9 @@ public class CategoryDAO {
 
     @Autowired
     private CategoryMetadataFieldValueRepository categoryMetadataFieldValueRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     public String addMetadataField(String fieldName){
         if (fieldName ==null || fieldName =="") {
@@ -280,29 +283,55 @@ public class CategoryDAO {
     }
 
 
-    public List<CategoryDTO> getAllCategoriesCustomer(Long id){
-        List<CategoryDTO> allCategories=new ArrayList<>();
-        if(id!=null){
-            if (!categoryRepository.findById(id).isPresent())
-                throw new CategoryException("Category with this id does not exist!");
-            List<Category> childCategory=categoryRepository.findByParentId(id);
-            CategoryDTO categoryDto=new CategoryDTO(childCategory.get(0).getId(),childCategory.get(0).getName());
-            allCategories.add(categoryDto);
-            return allCategories;
+    public List<CategoryDTO> getAllCategoryForCustomer(Long categoryId){
+        List<CategoryDTO> customerCategoryDtos=new ArrayList<>();
+        if(categoryId==null){
+            List<Category> rootParent = categoryRepository.getRootParent();
+            for (Category category: rootParent) {
+                CategoryDTO customerCategoryDto=new CategoryDTO();
+                customerCategoryDto.setCategoryId(category.getId());
+                customerCategoryDto.setCategoryName(category.getName());
+                customerCategoryDtos.add(customerCategoryDto);
+            }
+        }else{
+            List<Category> categoryList = categoryRepository.findByParentId(categoryId);
+            for (Category category: categoryList) {
+                CategoryDTO customerCategoryDto=new CategoryDTO();
+                customerCategoryDto.setCategoryId(category.getId());
+                customerCategoryDto.setCategoryName(category.getName());
+                customerCategoryDtos.add(customerCategoryDto);
+            }
         }
-        else{
-            List<Category> rootParents=categoryRepository.getRootParent();
-            rootParents.forEach(category -> {
-                CategoryDTO categoryDto=new CategoryDTO(category.getId(),category.getName());
-                allCategories.add(categoryDto);
-            });
-        }
-        return allCategories;
+        return customerCategoryDtos;
     }
 
-//    public CategoryFilterDto filterCategory(Long id){
-//        return null;
-//    }
+
+    public CategoryFilterDTO getFilterData(Long categoryId, WebRequest webRequest){
+
+        Category category = categoryRepository.findByid(categoryId);
+        if(category==null){
+            throw new EmailException("Email doesn't exist");
+        }
+        List<Product> productList = productRepository.getProduct(categoryId);
+        Set<String> brandList=new HashSet<>();
+        for (Product product:productList) {
+            brandList.add(product.getBrand());
+        }
+        CategoryFilterDTO categoryFilteringDto=new CategoryFilterDTO();
+        List<CategoryMetadataDTO> categoryMetadataDTOS=new ArrayList<>();
+        categoryFilteringDto.setCategoryName(category.getName());
+        List<Object[]> nameAndValues = categoryRepository.getMetadataByCategoryId(categoryId);
+        for (Object[] objects:nameAndValues) {
+            CategoryMetadataDTO categoryMetadataDTO=new CategoryMetadataDTO();
+            categoryMetadataDTO.setMetadataField((String)objects[0]);
+            categoryMetadataDTO.setMetadataFieldValue((String)objects[1]);
+            categoryMetadataDTOS.add(categoryMetadataDTO);
+        }
+        categoryFilteringDto.setCategoryName(category.getName());
+        categoryFilteringDto.setBrandList(brandList);
+        categoryFilteringDto.setMetadataFieldNameAndValues(categoryMetadataDTOS);
+        return categoryFilteringDto;
+    }
 
 
 }

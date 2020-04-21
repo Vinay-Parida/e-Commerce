@@ -1,9 +1,11 @@
 package com.example.SpringSecurity.entity.users;
 
+import com.example.SpringSecurity.auditing.AuditingInfo;
+
 import javax.persistence.*;
 
 @Entity
-public class Address {
+public class Address extends AuditingInfo<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,5 @@
 package com.example.SpringSecurity.entity.products;
+import com.example.SpringSecurity.auditing.AuditingInfo;
 import com.example.SpringSecurity.entity.users.Seller;
 
 import javax.persistence.*;
@@ -6,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Product {
+public class Product extends AuditingInfo<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

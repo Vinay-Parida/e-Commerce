@@ -38,7 +38,6 @@ public class CustomerFilter extends DaoAuthenticationProvider {
             Authentication auth = super.authenticate(authentication);
 
             String email = authentication.getName();
-            System.out.println(email + "==========");
             User user = userRepository.findByEmail(email);
 
             if (user != null) {
@@ -82,7 +81,6 @@ public class CustomerFilter extends DaoAuthenticationProvider {
             String email = authentication.getName();
             userAttemptsDao.getUserAttempts(email);
             userAttemptsDao.updateAttempts(email);
-//            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
 //            e.printStackTrace();
             throw e;
         }

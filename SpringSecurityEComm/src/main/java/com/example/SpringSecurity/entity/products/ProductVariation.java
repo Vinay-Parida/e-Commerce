@@ -1,5 +1,6 @@
 package com.example.SpringSecurity.entity.products;
 import javax.persistence.*;
+import java.util.Map;
 
 @Entity
 public class ProductVariation {
@@ -15,8 +16,8 @@ public class ProductVariation {
     private Integer quantityAvailable;
     private Double price;
 
-//    @Convert(converter = HashMapConverter.class)
-    private String  metadata;
+    @Convert(converter = HashMapConverter.class)
+    private Map<String,String> metadata;
 
     private String primaryImageName;
     private String secondaryImage;
@@ -55,11 +56,11 @@ public class ProductVariation {
         this.price = price;
     }
 
-    public String getMetadata() {
+    public Map<String, String> getMetadata() {
         return metadata;
     }
 
-    public void setMetadata(String metadata) {
+    public void setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
     }
 
@@ -93,5 +94,19 @@ public class ProductVariation {
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductVariation{" +
+                "id=" + id +
+                ", product=" + product +
+                ", quantityAvailable=" + quantityAvailable +
+                ", price=" + price +
+                ", metadata=" + metadata +
+                ", primaryImageName='" + primaryImageName + '\'' +
+                ", secondaryImage='" + secondaryImage + '\'' +
+                ", isActive=" + isActive +
+                '}';
     }
 }

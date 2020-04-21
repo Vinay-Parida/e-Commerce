@@ -4,9 +4,11 @@ import com.example.SpringSecurity.dao.CategoryDAO;
 import com.example.SpringSecurity.dao.CustomerDAO;
 import com.example.SpringSecurity.dto.AddressDTO;
 import com.example.SpringSecurity.dto.CategoryDTO;
+import com.example.SpringSecurity.dto.CategoryFilterDTO;
 import com.example.SpringSecurity.dto.CustomerProfileDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -60,7 +62,12 @@ public class CustomerController {
 
     @GetMapping("/getAllCategories")
     public List<CategoryDTO> getAllCategory(@RequestParam("CategoryId")Long id){
-        return categoryDao.getAllCategoriesCustomer(id);
+        return categoryDao.getAllCategoryForCustomer(id);
+    }
+
+    @GetMapping(value = "/filterCategory")
+    public CategoryFilterDTO filterCategory(@RequestParam("CategoryId") Long categoryId, WebRequest webRequest){
+        return categoryDao.getFilterData(categoryId,webRequest);
     }
 
 }

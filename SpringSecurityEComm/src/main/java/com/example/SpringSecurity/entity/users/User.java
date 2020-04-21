@@ -1,5 +1,7 @@
 package com.example.SpringSecurity.entity.users;
 
+import com.example.SpringSecurity.auditing.AuditingInfo;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "user_type")
-public class User {
+public class User extends AuditingInfo<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

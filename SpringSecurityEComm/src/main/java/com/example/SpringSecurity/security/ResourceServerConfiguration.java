@@ -92,6 +92,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("/customer/deleteAddress").hasAnyRole("CUSTOMER")
                 .antMatchers("/customer/updateAddress").hasAnyRole("CUSTOMER")
                 .antMatchers("/customer/getAllCategories").hasAnyRole("CUSTOMER")
+                .antMatchers("/customer/filterCategory").hasAnyRole("CUSTOMER")
 
 //                .antMatchers("/seller/**").hasAnyRole("SELLER")
                 .antMatchers("/seller/profile").hasAnyRole("SELLER")
@@ -100,6 +101,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("seller/updateProfile").hasAnyRole("SELLER")
                 .antMatchers("/seller/getAllCategories").hasAnyRole("SELLER")
                 .antMatchers("/seller/addProduct").hasAnyRole("SELLER")
+                .antMatchers("/seller/addProductVariation").hasAnyRole("SELLER")
+                .antMatchers("/seller/viewProduct").hasAnyRole("SELLER")
+                .antMatchers("/seller/viewProductVariation").hasAnyRole("SELLER")
 
 //                .antMatchers("/admin/home").hasAnyRole("ADMIN")
 

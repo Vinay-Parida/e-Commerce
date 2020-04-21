@@ -24,8 +24,6 @@ public class UserDAO {
             grantAuthorities.add(new GrantAuthorityImpl(role.getAuthority()));
         }
 
-        System.out.println(user);
-
         if(username!= null){
             return new AppUser(user.getEmail(), user.getPassword(), user.isAccountNotLocked(), grantAuthorities);
         }

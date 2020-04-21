@@ -4,16 +4,16 @@ import com.example.SpringSecurity.dao.CategoryDAO;
 import com.example.SpringSecurity.dao.CustomerDAO;
 import com.example.SpringSecurity.dao.ProductDAO;
 import com.example.SpringSecurity.dao.SellerDAO;
-import com.example.SpringSecurity.dto.AddProductDTO;
-import com.example.SpringSecurity.dto.CategoryForSellerDTO;
-import com.example.SpringSecurity.dto.SellerProfileDTO;
+import com.example.SpringSecurity.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -61,6 +61,25 @@ public class SellerController {
     @PostMapping("/addProduct")
     public String addProduct(@RequestBody AddProductDTO addProductDto, HttpServletRequest httpServletRequest, WebRequest webRequest){
         return productDao.addProduct(addProductDto, httpServletRequest, webRequest);
+    }
+
+    @PostMapping(value = "/addProductVariation", consumes = {"multipart/form-data"})
+    public String addProductVariation(@RequestPart("primaryImage")MultipartFile primaryimage,
+                                      @RequestPart("secondaryImages") List<MultipartFile> secondaryImages,
+                                      HttpServletRequest httpServletRequest,
+                                      @RequestPart("productVariation")AddProductVariationDTO addProductVariationDTO,
+                                      WebRequest webRequest) throws IOException {
+        return productDao.addProductVariation(primaryimage, secondaryImages, httpServletRequest, addProductVariationDTO, webRequest);
+    }
+
+    @GetMapping("/viewProduct")
+    private ViewProductDTO viewProduct(@RequestParam("productId") Long productId, WebRequest webRequest, HttpServletRequest request){
+        return productDao.viewProduct(productId, webRequest,request);
+    }
+
+    @GetMapping("/viewProductVariation")
+    private ViewProductVariationDTO viewProductVariation(@RequestParam("variationId") Long variationId, WebRequest webRequest, HttpServletRequest request){
+        return productDao.viewProductVariation(variationId, webRequest,request);
     }
 
 }

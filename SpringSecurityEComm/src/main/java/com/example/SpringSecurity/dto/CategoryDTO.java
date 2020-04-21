@@ -24,4 +24,6 @@ public class CategoryDTO {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
     }
+
+    public CategoryDTO(){}
 }

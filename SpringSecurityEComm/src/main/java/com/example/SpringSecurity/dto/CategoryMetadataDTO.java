@@ -8,6 +8,7 @@ public class CategoryMetadataDTO {
         this.metadataField = metadataField;
         this.metadataFieldValue = metadataFieldValues;
     }
+    public CategoryMetadataDTO(){}
 
     public String getMetadataField() {
         return metadataField;

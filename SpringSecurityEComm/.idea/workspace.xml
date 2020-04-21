@@ -42,7 +42,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/bootcamp-repo-ecomm-project/bootcamp-ecomm-project" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/ecommProject-5978a23bc7c352a35e1dbf19935fe1c1105dad91" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -97,10 +97,10 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="416" y="155" width="524" height="491" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.27.1366.741@0.27.1366.741" timestamp="1586727315301" />
-    <state x="491" y="108" width="374" height="577" key="#com.intellij.ide.util.MemberChooser" timestamp="1587376440101">
+    <state x="491" y="108" width="553" height="584" key="#com.intellij.ide.util.MemberChooser" timestamp="1587468389290">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="491" y="108" width="374" height="577" key="#com.intellij.ide.util.MemberChooser/0.27.1366.741@0.27.1366.741" timestamp="1587376440101" />
+    <state x="491" y="108" width="553" height="584" key="#com.intellij.ide.util.MemberChooser/0.27.1366.741@0.27.1366.741" timestamp="1587468389290" />
     <state x="524" y="289" width="308" height="223" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1586282137764">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -125,46 +125,46 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="461" height="478" key="DebuggerActiveHint/0.27.1366.741@0.27.1366.741" timestamp="1587127349807" />
-    <state x="460" y="155" width="424" height="484" key="FileChooserDialogImpl" timestamp="1587405928696">
+    <state x="460" y="155" width="424" height="484" key="FileChooserDialogImpl" timestamp="1587450795840">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="460" y="155" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1587405928696" />
-    <state width="1320" height="141" key="GridCell.Tab.0.bottom" timestamp="1587407677685">
+    <state x="460" y="155" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1587450795840" />
+    <state width="1320" height="161" key="GridCell.Tab.0.bottom" timestamp="1587471205500">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="141" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1587407677685" />
-    <state width="1320" height="141" key="GridCell.Tab.0.center" timestamp="1587407677685">
+    <state width="1320" height="161" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1587471205500" />
+    <state width="1320" height="161" key="GridCell.Tab.0.center" timestamp="1587471205499">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="141" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1587407677685" />
-    <state width="1320" height="141" key="GridCell.Tab.0.left" timestamp="1587407677685">
+    <state width="1320" height="161" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1587471205499" />
+    <state width="1320" height="161" key="GridCell.Tab.0.left" timestamp="1587471205499">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="141" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1587407677685" />
-    <state width="1320" height="141" key="GridCell.Tab.0.right" timestamp="1587407677685">
+    <state width="1320" height="161" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1587471205499" />
+    <state width="1320" height="161" key="GridCell.Tab.0.right" timestamp="1587471205500">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="141" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1587407677685" />
-    <state width="1320" height="155" key="GridCell.Tab.1.bottom" timestamp="1587313687203">
+    <state width="1320" height="161" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1587471205500" />
+    <state width="1320" height="186" key="GridCell.Tab.1.bottom" timestamp="1587469989315">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="155" key="GridCell.Tab.1.bottom/0.27.1366.741@0.27.1366.741" timestamp="1587313687203" />
-    <state width="1320" height="155" key="GridCell.Tab.1.center" timestamp="1587313687203">
+    <state width="1320" height="186" key="GridCell.Tab.1.bottom/0.27.1366.741@0.27.1366.741" timestamp="1587469989315" />
+    <state width="1320" height="186" key="GridCell.Tab.1.center" timestamp="1587469989315">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="155" key="GridCell.Tab.1.center/0.27.1366.741@0.27.1366.741" timestamp="1587313687203" />
-    <state width="1320" height="155" key="GridCell.Tab.1.left" timestamp="1587313687202">
+    <state width="1320" height="186" key="GridCell.Tab.1.center/0.27.1366.741@0.27.1366.741" timestamp="1587469989315" />
+    <state width="1320" height="186" key="GridCell.Tab.1.left" timestamp="1587469989314">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="155" key="GridCell.Tab.1.left/0.27.1366.741@0.27.1366.741" timestamp="1587313687202" />
-    <state width="1320" height="155" key="GridCell.Tab.1.right" timestamp="1587313687203">
+    <state width="1320" height="186" key="GridCell.Tab.1.left/0.27.1366.741@0.27.1366.741" timestamp="1587469989314" />
+    <state width="1320" height="186" key="GridCell.Tab.1.right" timestamp="1587469989315">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="155" key="GridCell.Tab.1.right/0.27.1366.741@0.27.1366.741" timestamp="1587313687203" />
-    <state x="166" y="27" width="1024" height="741" key="SettingsEditor" timestamp="1586830985575">
+    <state width="1320" height="186" key="GridCell.Tab.1.right/0.27.1366.741@0.27.1366.741" timestamp="1587469989315" />
+    <state x="166" y="27" width="1024" height="741" key="SettingsEditor" timestamp="1587409856104">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="166" y="27" width="1024" height="741" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1586830985575" />
+    <state x="166" y="27" width="1024" height="741" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1587409856104" />
     <state x="412" y="128" width="540" height="524" key="StructurePopup" timestamp="1585905762413">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -173,30 +173,30 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="683" height="370" key="XDebugger.FullValuePopup/0.27.1366.741@0.27.1366.741" timestamp="1587127312035" />
-    <state x="141" y="227" width="1166" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1587356307922">
+    <state x="141" y="227" width="1166" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1587455820125">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="141" y="227" width="1166" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.27.1366.741@0.27.1366.741" timestamp="1587356307922" />
+    <state x="141" y="227" width="1166" height="541" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.27.1366.741@0.27.1366.741" timestamp="1587455820125" />
     <state x="178" y="109" width="999" height="583" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1586700058465">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="178" y="109" width="999" height="583" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.27.1366.741@0.27.1366.741" timestamp="1586700058465" />
-    <state x="507" y="150" width="710" height="618" key="find.popup" timestamp="1587397362713">
+    <state x="507" y="150" width="724" height="618" key="find.popup" timestamp="1587465152174">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="507" y="150" width="710" height="618" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1587397362713" />
+    <state x="507" y="150" width="724" height="618" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1587465152174" />
     <state x="428" y="27" width="500" height="741" key="refactoring.ChangeSignatureDialog" timestamp="1585942233874">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="428" y="27" width="500" height="741" key="refactoring.ChangeSignatureDialog/0.27.1366.741@0.27.1366.741" timestamp="1585942233874" />
-    <state x="347" y="174" key="run.anything.popup" timestamp="1587356883469">
+    <state x="347" y="174" key="run.anything.popup" timestamp="1587413926626">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="347" y="174" key="run.anything.popup/0.27.1366.741@0.27.1366.741" timestamp="1587356883469" />
-    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1586924434315">
+    <state x="347" y="174" key="run.anything.popup/0.27.1366.741@0.27.1366.741" timestamp="1587413926626" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1587409753704">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1586924434315" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1587409753704" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -240,6 +240,14 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/example/SpringSecurity/dao/SellerDAO.java</url>
           <line>178</line>
           <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/SpringSecurity/dao/ProductDAO.java</url>
+          <line>127</line>
+          <properties class="com.example.SpringSecurity.dao.ProductDAO" method="addProductVariation">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="141" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

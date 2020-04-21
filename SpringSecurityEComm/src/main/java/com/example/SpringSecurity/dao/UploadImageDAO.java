@@ -5,6 +5,7 @@ import com.example.SpringSecurity.exceptions.ProductException;
 import com.example.SpringSecurity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Component
 public class UploadImageDAO {
@@ -50,7 +54,7 @@ public class UploadImageDAO {
     private String renameFile(String fileName, Long id) {
         Integer index = fileName.lastIndexOf(".");
         fileName = fileName.substring(index);
-        if (fileName.equalsIgnoreCase(".jpg") || fileName.equalsIgnoreCase(".jpeg")|| fileName.equalsIgnoreCase(".png") || fileName.equalsIgnoreCase(".bmp"))
+        if (fileName.equalsIgnoreCase(".jpg") || fileName.equalsIgnoreCase(".jpeg") || fileName.equalsIgnoreCase(".png") || fileName.equalsIgnoreCase(".bmp"))
             return id + fileName;
         else
             throw new ProductException("Image format is not valid");
@@ -63,16 +67,41 @@ public class UploadImageDAO {
         return user;
     }
 
-//
-//    public String uploadProductVariationPrimaryImage(MultipartFile image, Long id) throws IOException {
-//        if (image.isEmpty())
-//            return "No file Selected";
-//
-//        byte[] bytes = image.getBytes();
-//        String fileName = renameFile(image.getOriginalFilename(), id);
-//        Path path = Paths.get("/home/vinay/images/productVariation" + fileName);
-//
-//
-//    }
+
+    public String uploadPrimaryImage(MultipartFile image, Long id, WebRequest webRequest) throws IOException {
+        if (image.isEmpty())
+            return "No file Selected";
+        
+        byte[] bytes = image.getBytes();
+        String fileName = renameFile(image.getOriginalFilename(), id);
+        Path path = Paths.get("/home/vinay/images/productVariation/primaryImage" + fileName);
+        Files.write(path, bytes);
+        return "/home/vinay/images/productVariation/primaryImage" + fileName;
+    }
+
+    public Set<String> uploadSecondaryImage(List<MultipartFile> images , WebRequest webRequest, Long productId) throws IOException {
+
+        Integer count=0;
+        Set<String> pathNames=new HashSet<>();
+        for (MultipartFile image:images) {
+            count++;
+            String folder = "/home/vinay/images/productVariation/secondaryImage";
+            byte[] bytes = image.getBytes();
+            String fileName=getSecondaryFileName(image.getOriginalFilename(),productId,count);
+            Path path = Paths.get(folder + fileName);
+            Files.write(path, bytes);
+            pathNames.add(folder+fileName);
+        }
+        return pathNames;
+    }
+    private String getSecondaryFileName(String fileName,Long id,Integer count){
+        Integer l=fileName.lastIndexOf(".");
+        fileName=fileName.substring(l);
+        if(fileName.equalsIgnoreCase(".jpg") || fileName.equalsIgnoreCase(".jpeg") ||
+                fileName.equalsIgnoreCase(".png") || fileName.equalsIgnoreCase(".bmp"))
+            return  (id+"."+count+fileName);
+        else
+            throw new ProductException("Image format is not valid!");
+    }
 
 }
