@@ -70,7 +70,6 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("/admin/activate/seller").hasAnyRole("ADMIN")
                 .antMatchers("/admin/deactivate/seller").hasAnyRole("ADMIN")
                 .antMatchers("/admin/allCategory").hasAnyRole("ADMIN")
-
                 .antMatchers("/admin/addMetadataField").hasAnyRole("ADMIN")
                 .antMatchers("/admin/metadataFields").hasAnyRole("ADMIN")
                 .antMatchers("/admin/category").hasAnyRole("ADMIN")
@@ -78,6 +77,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("/admin/updateCategory").hasAnyRole("ADMIN")
                 .antMatchers("/admin/addCategoryMetadataField").hasAnyRole("ADMIN")
                 .antMatchers("/admin/updateCategoryMetadataField").hasAnyRole("ADMIN")
+                .antMatchers("/admin/viewProduct").hasAnyRole("ADMIN")
+                .antMatchers("/admin/viewAllProduct").hasAnyRole("ADMIN")
                 .antMatchers("/admin/activateProduct").hasAnyRole("ADMIN")
                 .antMatchers("/admin/deactivateProduct").hasAnyRole("ADMIN")
 
@@ -93,6 +94,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("/customer/updateAddress").hasAnyRole("CUSTOMER")
                 .antMatchers("/customer/getAllCategories").hasAnyRole("CUSTOMER")
                 .antMatchers("/customer/filterCategory").hasAnyRole("CUSTOMER")
+                .antMatchers("/customer/viewProduct").hasAnyRole("CUSTOMER")
+                .antMatchers("/customer/viewAllProduct").hasAnyRole("CUSTOMER")
+                .antMatchers("/customer/viewSimilarProduct").hasAnyRole("CUSTOMER")
 
 //                .antMatchers("/seller/**").hasAnyRole("SELLER")
                 .antMatchers("/seller/profile").hasAnyRole("SELLER")
@@ -104,6 +108,11 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("/seller/addProductVariation").hasAnyRole("SELLER")
                 .antMatchers("/seller/viewProduct").hasAnyRole("SELLER")
                 .antMatchers("/seller/viewProductVariation").hasAnyRole("SELLER")
+                .antMatchers("/seller/viewAllProduct").hasAnyRole("SELLER")
+                .antMatchers("/seller/viewAllProductVariation").hasAnyRole("SELLER")
+                .antMatchers("/seller/deleteProduct").hasAnyRole("SELLER")
+                .antMatchers("/seller/updateProduct").hasAnyRole("SELLER")
+                .antMatchers("/seller/updateProductVariation").hasAnyRole("SELLER")
 
 //                .antMatchers("/admin/home").hasAnyRole("ADMIN")
 

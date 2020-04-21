@@ -3,10 +3,7 @@ package com.example.SpringSecurity.controller;
 import com.example.SpringSecurity.dao.AdminDAO;
 import com.example.SpringSecurity.dao.CategoryDAO;
 import com.example.SpringSecurity.dao.ProductDAO;
-import com.example.SpringSecurity.dto.CategoryMetadataFieldValueDTO;
-import com.example.SpringSecurity.dto.FindAllCustomerDTO;
-import com.example.SpringSecurity.dto.FindAllSellerDTO;
-import com.example.SpringSecurity.dto.SingleCategoryDTO;
+import com.example.SpringSecurity.dto.*;
 import com.example.SpringSecurity.entity.products.CategoryMetadataField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -109,6 +106,21 @@ public class AdminController {
     @PutMapping("/updateCategoryMetadataField")
     public String updateMetadataField(@RequestBody CategoryMetadataFieldValueDTO categoryMetadataFieldValueDto){
         return categoryDao.updateMetadataField(categoryMetadataFieldValueDto);
+    }
+
+    @GetMapping("/viewProduct")
+    public ViewCustomerProductDTO viewProductForCustomer(@RequestParam("productId") Long productId, WebRequest webRequest){
+        return productDao.viewAdminProduct(productId, webRequest);
+    }
+
+    @GetMapping("/viewAllProduct")
+    private List<ViewCustomerAllProductDTO> viewAllProduct(
+            @RequestParam(defaultValue = "0") String offset,
+            @RequestParam(defaultValue = "10") String max,
+            @RequestParam(defaultValue = "id") String field,
+            @RequestParam(defaultValue= "Ascending") String order
+    ){
+        return productDao.viewAllProduct(offset, max, field, order);
     }
 
     @PutMapping("/activateProduct")

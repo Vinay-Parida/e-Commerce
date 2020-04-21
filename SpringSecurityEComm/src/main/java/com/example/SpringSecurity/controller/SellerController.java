@@ -34,12 +34,12 @@ public class SellerController {
     ProductDAO productDao;
 
     @GetMapping("/profile")
-    public SellerProfileDTO getSellerProfile(HttpServletRequest httpServletRequest){
+    public SellerProfileDTO getSellerProfile(HttpServletRequest httpServletRequest) {
         return sellerDao.getSellerProfile(httpServletRequest);
     }
 
     @PutMapping("/updatePassword")
-    public String updatePassword(@Param("password") String password, @Param("confirmPassword") String confirmPassword, HttpServletRequest httpServletRequest){
+    public String updatePassword(@Param("password") String password, @Param("confirmPassword") String confirmPassword, HttpServletRequest httpServletRequest) {
         return customerDao.updatePassword(password, confirmPassword, httpServletRequest);
     }
 
@@ -49,37 +49,73 @@ public class SellerController {
     }
 
     @PutMapping("/updateProfile")
-    public String updateProfile(@Valid @RequestBody HashMap<String, Object> map, HttpServletRequest httpServletRequest){
+    public String updateProfile(@Valid @RequestBody HashMap<String, Object> map, HttpServletRequest httpServletRequest) {
         return sellerDao.updateProfile(map, httpServletRequest);
     }
 
     @GetMapping("/getAllCategories")
-    public List<CategoryForSellerDTO> getAllCategories(){
+    public List<CategoryForSellerDTO> getAllCategories() {
         return categoryDao.getCategoryForSeller();
     }
 
     @PostMapping("/addProduct")
-    public String addProduct(@RequestBody AddProductDTO addProductDto, HttpServletRequest httpServletRequest, WebRequest webRequest){
+    public String addProduct(@RequestBody AddProductDTO addProductDto, HttpServletRequest httpServletRequest, WebRequest webRequest) {
         return productDao.addProduct(addProductDto, httpServletRequest, webRequest);
     }
 
     @PostMapping(value = "/addProductVariation", consumes = {"multipart/form-data"})
-    public String addProductVariation(@RequestPart("primaryImage")MultipartFile primaryimage,
+    public String addProductVariation(@RequestPart("primaryImage") MultipartFile primaryimage,
                                       @RequestPart("secondaryImages") List<MultipartFile> secondaryImages,
                                       HttpServletRequest httpServletRequest,
-                                      @RequestPart("productVariation")AddProductVariationDTO addProductVariationDTO,
+                                      @RequestPart("productVariation") AddProductVariationDTO addProductVariationDTO,
                                       WebRequest webRequest) throws IOException {
         return productDao.addProductVariation(primaryimage, secondaryImages, httpServletRequest, addProductVariationDTO, webRequest);
     }
 
     @GetMapping("/viewProduct")
-    private ViewProductDTO viewProduct(@RequestParam("productId") Long productId, WebRequest webRequest, HttpServletRequest request){
-        return productDao.viewProduct(productId, webRequest,request);
+    private ViewProductDTO viewProduct(@RequestParam("productId") Long productId, WebRequest webRequest, HttpServletRequest request) {
+        return productDao.viewProduct(productId, webRequest, request);
     }
 
     @GetMapping("/viewProductVariation")
-    private ViewProductVariationDTO viewProductVariation(@RequestParam("variationId") Long variationId, WebRequest webRequest, HttpServletRequest request){
-        return productDao.viewProductVariation(variationId, webRequest,request);
+    private ViewProductVariationDTO viewProductVariation(@RequestParam("variationId") Long variationId, WebRequest webRequest, HttpServletRequest request) {
+        return productDao.viewProductVariation(variationId, webRequest, request);
+    }
+
+    @GetMapping("/viewAllProduct")
+    private List<ViewProductDTO> viewAllProduct(@RequestParam(defaultValue = "0") String offset,
+                                                @RequestParam(defaultValue = "10") String max,
+                                                @RequestParam(defaultValue = "id") String field,
+                                                @RequestParam(defaultValue = "Ascending") String order, HttpServletRequest request) {
+        return productDao.viewAllProduct(offset, max, field, order, request);
+    }
+
+    @GetMapping("/viewAllProductVariation")
+    private List<ViewAllProductVariationDTO> productVariationList(@RequestParam("productId") Long productId,
+                                                                  @RequestParam(defaultValue = "0") String offset,
+                                                                  @RequestParam(defaultValue = "10") String max,
+                                                                  @RequestParam(defaultValue = "id") String field,
+                                                                  @RequestParam(defaultValue= "asc") String order,
+                                                                  HttpServletRequest request,WebRequest webRequest){
+        return productDao.viewAllProductVariation(productId, offset, max, field, order, request, webRequest);
+    }
+
+    @DeleteMapping("/deleteProduct")
+    private String deleteProduct(@RequestParam("productId")Long productId,HttpServletRequest request,WebRequest webRequest){
+        return productDao.deleteProduct(productId, request, webRequest);
+    }
+
+    @PutMapping("/updateProduct")
+    private String updateProduct(@RequestBody UpdateProductDTO updateProductDto,HttpServletRequest request,WebRequest webRequest){
+        return productDao.updateProduct(updateProductDto,request,webRequest);
+    }
+
+    @PutMapping(value = "/updateProductVariation",consumes ={"multipart/form-data"})
+    private String updateProductVariation(@RequestPart("primaryImage") MultipartFile primaryImage,
+                                          @RequestPart("secondaryImage") List<MultipartFile> secondaryImage,
+                                          @RequestPart("updateProductVariationDto") UpdateProductVariationDTO updateProductVariationDto,
+                                          WebRequest webRequest,HttpServletRequest request ) throws IOException {
+        return productDao.updateProductVariation(primaryImage,secondaryImage,request,updateProductVariationDto,webRequest);
     }
 
 }

@@ -2,10 +2,8 @@ package com.example.SpringSecurity.controller;
 
 import com.example.SpringSecurity.dao.CategoryDAO;
 import com.example.SpringSecurity.dao.CustomerDAO;
-import com.example.SpringSecurity.dto.AddressDTO;
-import com.example.SpringSecurity.dto.CategoryDTO;
-import com.example.SpringSecurity.dto.CategoryFilterDTO;
-import com.example.SpringSecurity.dto.CustomerProfileDTO;
+import com.example.SpringSecurity.dao.ProductDAO;
+import com.example.SpringSecurity.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
@@ -24,6 +22,9 @@ public class CustomerController {
 
     @Autowired
     private CategoryDAO categoryDao;
+
+    @Autowired
+    private ProductDAO productDAO;
 
     @GetMapping("/profile")
     public CustomerProfileDTO viewProfile(HttpServletRequest httpServletRequest){
@@ -65,9 +66,40 @@ public class CustomerController {
         return categoryDao.getAllCategoryForCustomer(id);
     }
 
-    @GetMapping(value = "/filterCategory")
+    @GetMapping("/filterCategory")
     public CategoryFilterDTO filterCategory(@RequestParam("CategoryId") Long categoryId, WebRequest webRequest){
         return categoryDao.getFilterData(categoryId,webRequest);
     }
+
+    @GetMapping("/viewProduct")
+    public ViewCustomerProductDTO viewProductForCustomer(@RequestParam("productId") Long productId, WebRequest webRequest){
+        return productDAO.viewCustomerProduct(productId, webRequest);
+    }
+
+    @GetMapping("/viewAllProduct")
+    public List<ViewCustomerAllProductDTO> viewAllProductForCustomer(
+            @RequestParam(defaultValue = "0") String offset,
+            @RequestParam(defaultValue = "10") String max,
+            @RequestParam(defaultValue = "id") String field,
+            @RequestParam(defaultValue= "Ascending") String order,
+            @RequestParam("categoryId") Long categoryId,
+            WebRequest webRequest
+    ){
+        return productDAO.viewCustomerAllProduct(categoryId,offset,webRequest,max,field,order);
+    }
+
+    @GetMapping(value = "/viewSimilarProduct")
+    public List<ViewCustomerAllProductDTO> viewSimilarProduct(
+            @RequestParam(defaultValue = "0") String offset,
+            @RequestParam(defaultValue = "10") String max,
+            @RequestParam(defaultValue = "id") String field,
+            @RequestParam(defaultValue= "Ascending") String order,
+            @RequestParam("productId") Long productId,
+            WebRequest webRequest
+    ){
+        return productDAO.viewSimilarProduct(productId,webRequest,offset,max,field,order);
+    }
+
+
 
 }
