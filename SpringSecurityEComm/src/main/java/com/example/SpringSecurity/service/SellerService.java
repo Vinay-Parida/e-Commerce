@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.dao;
+package com.example.SpringSecurity.service;
 
 import com.example.SpringSecurity.dto.SellerProfileDTO;
 import com.example.SpringSecurity.entity.users.*;
@@ -27,7 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Component
-public class SellerDAO {
+public class SellerService {
 
     @Autowired
     SellerRepository sellerRepository;
@@ -56,6 +56,10 @@ public class SellerDAO {
         else if(sellerRepository.findByGst(sellerDto.getGst()) != null){
             String messageGstAlreadyExists = messageSource.getMessage("exception.gst.already.exists", null, locale);
             throw new GstException(messageGstAlreadyExists);
+        }
+        else if(!sellerDto.getPassword().equals(sellerDto.getConfirmPassword())){
+            String messagePasswordAndConfirmPassDontMatch = messageSource.getMessage("exception.password.confirmpassword.dont.match", null, locale);
+            return messagePasswordAndConfirmPassDontMatch;
         }
         else {
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

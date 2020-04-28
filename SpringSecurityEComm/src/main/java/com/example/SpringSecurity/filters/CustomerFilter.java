@@ -2,7 +2,7 @@ package com.example.SpringSecurity.filters;
 
 import com.example.SpringSecurity.repository.UserAttemptsRepository;
 import com.example.SpringSecurity.repository.UserRepository;
-import com.example.SpringSecurity.dao.UserAttemptsDAO;
+import com.example.SpringSecurity.service.UserAttemptsService;
 import com.example.SpringSecurity.entity.users.User;
 import com.example.SpringSecurity.exceptions.UserNotFoundException;
 import com.example.SpringSecurity.modals.UserAttempts;
@@ -19,7 +19,7 @@ public class CustomerFilter extends DaoAuthenticationProvider {
     UserRepository userRepository;
 
     @Autowired
-    UserAttemptsDAO userAttemptsDao;
+    UserAttemptsService userAttemptsService;
 
     @Autowired
     UserAttemptsRepository userAttemptsRepository;
@@ -41,8 +41,8 @@ public class CustomerFilter extends DaoAuthenticationProvider {
             User user = userRepository.findByEmail(email);
 
             if (user != null) {
-                UserAttempts userAttempts = userAttemptsDao.getUserAttempts(email);
-                if(userAttemptsDao.checkIsActive(email) == false){
+                UserAttempts userAttempts = userAttemptsService.getUserAttempts(email);
+                if(userAttemptsService.checkIsActive(email) == false){
 
 //                    String receiverEmail = user.getEmail();
 //                    String messageSubject = "Invalid login";
@@ -56,8 +56,8 @@ public class CustomerFilter extends DaoAuthenticationProvider {
 
                     throw new UserNotFoundException("Login without activating account");             //HTDL: Make a custom exception
                 }
-                else if (userAttemptsDao.checkLock(email) && userAttemptsDao.checkIsActive(email)) {
-                    userAttemptsDao.updateAttemptsToNull(email);
+                else if (userAttemptsService.checkLock(email) && userAttemptsService.checkIsActive(email)) {
+                    userAttemptsService.updateAttemptsToNull(email);
                     return auth;
                 }
                 else {
@@ -79,8 +79,8 @@ public class CustomerFilter extends DaoAuthenticationProvider {
             }
         } catch (Exception e) {
             String email = authentication.getName();
-            userAttemptsDao.getUserAttempts(email);
-            userAttemptsDao.updateAttempts(email);
+            userAttemptsService.getUserAttempts(email);
+            userAttemptsService.updateAttempts(email);
 //            e.printStackTrace();
             throw e;
         }

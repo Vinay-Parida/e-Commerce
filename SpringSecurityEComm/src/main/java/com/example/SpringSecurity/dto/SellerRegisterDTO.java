@@ -38,7 +38,11 @@ public class SellerRegisterDTO {
     @Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})",message="Password must be 8 characters long")
     private String password;
 
-    public SellerRegisterDTO(@NotNull @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_.]*@[a-zA-Z]+[.][a-zA-Z]+", message = "Invalid Email Format") String email, @NotNull String first_name, String middle_name, @NotNull String last_name, @NotNull String company_name, @Pattern(regexp = "(^$|[0-9]{10})", message = "Contact can be only 10 digits") String company_contact, @NotNull @Pattern(regexp = "(\\d{2}[A-Z]{5}\\d{4}[A-Z]{1}[A-Z\\d]{1}[Z]{1}[A-Z\\d]{1})") String gst, @NotNull @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})", message = "Password must be 8 characters long") String password) {
+    @NotNull
+    @Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})",message="Password must be 8 characters long")
+    private String confirmPassword;
+
+    public SellerRegisterDTO(@NotNull @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_.]*@[a-zA-Z]+[.][a-zA-Z]+", message = "Invalid Email Format") String email, @NotNull String first_name, String middle_name, @NotNull String last_name, @NotNull String company_name, @Pattern(regexp = "(^$|[0-9]{10})", message = "Contact can be only 10 digits") String company_contact, @NotNull @Pattern(regexp = "(\\d{2}[A-Z]{5}\\d{4}[A-Z]{1}[A-Z\\d]{1}[Z]{1}[A-Z\\d]{1})") String gst, @NotNull @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})", message = "Password must be 8 characters long") String password, @NotNull @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})", message = "Password must be 8 characters long") String confirmPassword) {
         this.email = email;
         this.first_name = first_name;
         this.middle_name = middle_name;
@@ -47,6 +51,7 @@ public class SellerRegisterDTO {
         this.company_contact = company_contact;
         this.gst = gst;
         this.password = password;
+        this.confirmPassword = confirmPassword;
     }
 
     public String getEmail() {
@@ -159,5 +164,13 @@ public class SellerRegisterDTO {
 
     public void setLabel(Label label) {
         this.label = label;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

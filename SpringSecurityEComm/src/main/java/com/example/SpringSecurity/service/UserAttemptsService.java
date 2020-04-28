@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.dao;
+package com.example.SpringSecurity.service;
 
 import com.example.SpringSecurity.repository.UserAttemptsRepository;
 import com.example.SpringSecurity.repository.UserRepository;
@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Component
-public class UserAttemptsDAO {
+public class UserAttemptsService {
 
     @Autowired
     private UserAttemptsRepository userAttemptsRepository;

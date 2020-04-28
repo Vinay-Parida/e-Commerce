@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.dao;
+package com.example.SpringSecurity.service;
 
 import com.example.SpringSecurity.dto.*;
 import com.example.SpringSecurity.entity.products.Category;
@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.util.*;
 
 @Component
-public class ProductDAO {
+public class ProductService {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
@@ -52,7 +52,7 @@ public class ProductDAO {
     private CategoryMetadataFieldRepository categoryMetadataFieldRepository;
 
     @Autowired
-    private UploadImageDAO uploadImageDao;
+    private UploadImageService uploadImageService;
 
     @Autowired
     private ProductVariationRepository productVariationRepository;
@@ -137,12 +137,12 @@ public class ProductDAO {
         Product product = productRepository.findById(addProductVariationDto.getProductId()).get();
         productVariation.setPrice(addProductVariationDto.getPrice());
         productVariation.setProduct(product);
-        productVariation.setPrimaryImageName(uploadImageDao.uploadPrimaryImage(primaryImage, addProductVariationDto.getProductId(), webRequest));
+        productVariation.setPrimaryImageName(uploadImageService.uploadPrimaryImage(primaryImage, addProductVariationDto.getProductId(), webRequest));
         productVariation.setQuantityAvailable(addProductVariationDto.getQuantityAvailable());
         productVariation.setMetadata(addProductVariationDto.getMetadata());
 
         if (!secondaryImages.isEmpty()) {
-            Set<String> strings = uploadImageDao.uploadSecondaryImage(secondaryImages, webRequest, productVariation.getProduct().getId());
+            Set<String> strings = uploadImageService.uploadSecondaryImage(secondaryImages, webRequest, productVariation.getProduct().getId());
             String convert = SetStringConverter.convertToString(strings);
             productVariation.setSecondaryImage(convert);
         }
@@ -157,13 +157,8 @@ public class ProductDAO {
 
         if (product == null)
             throw new EmailException("Product no available");
-
-        if (!product.getActive())
-            throw new EmailException("Product is not active");
-
         if (!product.getSeller().getEmail().equalsIgnoreCase(sellerEmail))
             throw new EmailException("This is not product of the seller");
-
         if (addProductVariationDto.getQuantityAvailable() != null) {
             if (addProductVariationDto.getQuantityAvailable() < 0)
                 throw new EmailException("Quantity can't be negative");
@@ -172,6 +167,8 @@ public class ProductDAO {
             if (addProductVariationDto.getPrice() < 0)
                 throw new EmailException("Price can't be negative");
         }
+        if (!product.getActive())
+            throw new EmailException("Product is not active");
         if (product.getDeleted()) {
             throw new EmailException("Product is deleted");
         }
@@ -180,17 +177,17 @@ public class ProductDAO {
         Long categoryId = category.getId();
         Map<String, String> metadata = addProductVariationDto.getMetadata();
 
-        List<String> recievedFields = new ArrayList<>(metadata.keySet());
+        List<String> receivedFields = new ArrayList<>(metadata.keySet());
         List<String> actualFields = new ArrayList<>();
         List<Object> metadataFieldName = categoryMetadataFieldValueRepository.getMetadataFieldName(categoryId);
         metadataFieldName.forEach((e) -> {
             actualFields.add((String) e);
         });
-        if (recievedFields.size() < actualFields.size())
+        if (receivedFields.size() < actualFields.size())
             throw new EmailException("Fields are less. Not as same as required fields");
 
-        recievedFields.removeAll(actualFields);
-        if (!recievedFields.isEmpty())
+        receivedFields.removeAll(actualFields);
+        if (!receivedFields.isEmpty())
             throw new EmailException("Fields are more. Not as same as required fields");
 
         List<String> metadataFields = new ArrayList<>(metadata.keySet());
@@ -394,7 +391,7 @@ public class ProductDAO {
         if (!sellerEmail.equalsIgnoreCase(email))
             throw new EmailException("Product doesn't belong to seller");
 
-        productRepository.deleteById(productId);
+        product.setDeleted(true);
         return "Product deleted successfully";
     }
 
@@ -447,7 +444,7 @@ public class ProductDAO {
             productVariation.setPrice(updateProductVariationDto.getPrice());
         }
         if(primaryImage!=null) {
-            productVariation.setPrimaryImageName(uploadImageDao.uploadPrimaryImage(primaryImage, productVariation.getProduct().getId(), webRequest));
+            productVariation.setPrimaryImageName(uploadImageService.uploadPrimaryImage(primaryImage, productVariation.getProduct().getId(), webRequest));
         }
         productVariation.setQuantityAvailable(updateProductVariationDto.getQuantityAvailable());
         productVariation.setMetadata(updateProductVariationDto.getMetadata());
@@ -455,7 +452,7 @@ public class ProductDAO {
             productVariation.setActive(updateProductVariationDto.getActive());
         }
         if(!secondaryImages.isEmpty()){
-            Set<String> strings = uploadImageDao.uploadSecondaryImage(secondaryImages, webRequest, productVariation.getProduct().getId());
+            Set<String> strings = uploadImageService.uploadSecondaryImage(secondaryImages, webRequest, productVariation.getProduct().getId());
             String convert = SetStringConverter.convertToString(strings);
             productVariation.setSecondaryImage(convert);
         }
@@ -579,6 +576,7 @@ public class ProductDAO {
         return viewCustomerProductDTO;
     }
 
+
     public List<ViewCustomerAllProductDTO> viewCustomerAllProduct(Long categoryId,String offset,WebRequest webRequest, String max,  String field, String order) {
 
         Integer offSetPage = Integer.parseInt(offset);
@@ -693,37 +691,6 @@ public class ProductDAO {
         }
         return viewCustomerAllProductDtos;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public String activateProduct(Long productId, WebRequest webRequest) {
         Product product = productRepository.findById(productId).get();

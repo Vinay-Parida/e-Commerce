@@ -34,6 +34,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query(value = "select * from user where id in (select user_id from user_role u inner join role r on u.role_id=r.id where authority='ROLE_ADMIN')",nativeQuery = true)
     List<User> getUserAdmin();
 
-
+    @Query(value = "select email from user where is_active =0", nativeQuery = true)
+    List<String> getNotActiveUserEmail();
 
 }

@@ -15,6 +15,7 @@ public class CustomerRegisterDTO {
     @NotNull
     private String last_name;
 
+    @NotNull
     @Pattern(regexp="(^$|[0-9]{10})",message = "Contact can be only 10 digits")
     private String contact;
 
@@ -22,13 +23,18 @@ public class CustomerRegisterDTO {
     @Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})",message="Password must be 8 characters long")
     private String password;
 
-    public CustomerRegisterDTO(@NotNull @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_.]*@[a-zA-Z]+[.][a-zA-Z]+", message = "Invalid Email Format") String email, @NotNull String first_name, String middle_name, @NotNull String last_name, @Pattern(regexp = "(^$|[0-9]{10})", message = "Contact can be only 10 digits") String contact, @NotNull @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})", message = "Password must be 8 characters long") String password) {
+    @NotNull
+    @Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})",message="Password must be 8 characters long")
+    private String confirmPassword;
+
+    public CustomerRegisterDTO(@NotNull @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_.]*@[a-zA-Z]+[.][a-zA-Z]+", message = "Invalid Email Format") String email, @NotNull String first_name, String middle_name, @NotNull String last_name, @Pattern(regexp = "(^$|[0-9]{10})", message = "Contact can be only 10 digits") String contact, @NotNull @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})", message = "Password must be 8 characters long") String password, @NotNull @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})", message = "Password must be 8 characters long") String confirmPassword) {
         this.email = email;
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
         this.contact = contact;
         this.password = password;
+        this.confirmPassword = confirmPassword;
     }
 
     public String getEmail() {
@@ -86,5 +92,13 @@ public class CustomerRegisterDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

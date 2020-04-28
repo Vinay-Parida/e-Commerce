@@ -29,10 +29,10 @@ public class AppController {
         return name + " is Logged out successfully";
     }
 
-    @GetMapping("/")
-    public String index(){
-        return "index";
-    }
+//    @GetMapping("/")
+//    public String index(){
+//        return "index";
+//    }
 
     @GetMapping("/admin/home")
     public String adminHome(){

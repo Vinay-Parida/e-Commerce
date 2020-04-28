@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.dao;
+package com.example.SpringSecurity.service;
 
 import com.example.SpringSecurity.repository.CustomerRepository;
 import com.example.SpringSecurity.repository.SellerRepository;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Component
-public class AdminDAO {
+public class AdminService {
 
     @Autowired
     private UserRepository userRepository;

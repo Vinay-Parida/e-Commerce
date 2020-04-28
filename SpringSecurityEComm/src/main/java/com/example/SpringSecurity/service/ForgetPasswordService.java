@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.dao;
+package com.example.SpringSecurity.service;
 
 import com.example.SpringSecurity.repository.ForgetPasswordTokenRepository;
 import com.example.SpringSecurity.repository.UserRepository;
@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 
 @Component
-public class ForgetPasswordDAO {
+public class ForgetPasswordService {
 
     @Autowired
     private ForgetPasswordTokenRepository forgetPasswordTokenRepository;

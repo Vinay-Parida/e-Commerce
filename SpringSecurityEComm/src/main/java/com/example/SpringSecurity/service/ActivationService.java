@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.dao;
+package com.example.SpringSecurity.service;
 
 import com.example.SpringSecurity.repository.UserRepository;
 import com.example.SpringSecurity.repository.VerificationTokenRepository;
@@ -19,7 +19,7 @@ import java.util.Locale;
 import java.util.UUID;
 
 @Component
-public class ActivationDAO {
+public class ActivationService {
 
     @Autowired
     private UserRepository userRepository;

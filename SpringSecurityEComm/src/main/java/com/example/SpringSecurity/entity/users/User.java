@@ -34,10 +34,10 @@ public class User extends AuditingInfo<String> {
     private List<Role> roles;
 
 
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
     private Boolean isActive = false;
     private Boolean isAccountNotLocked = true;
-    private Boolean isEnabled;
+    private Boolean isEnabled = false;
 
     @Lob
     private String image;

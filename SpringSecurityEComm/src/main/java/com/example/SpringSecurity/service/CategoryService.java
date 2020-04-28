@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.dao;
+package com.example.SpringSecurity.service;
 
 import com.example.SpringSecurity.dto.*;
 import com.example.SpringSecurity.entity.products.*;
@@ -18,7 +18,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.*;
 
 @Component
-public class CategoryDAO {
+public class CategoryService {
 
     @Autowired
     private CategoryMetadataFieldRepository categoryMetadataFieldRepository;

@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.dao;
+package com.example.SpringSecurity.service;
 
 import com.example.SpringSecurity.entity.users.User;
 import com.example.SpringSecurity.exceptions.ProductException;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class UploadImageDAO {
+public class UploadImageService {
 
     @Autowired
     UserRepository userRepository;

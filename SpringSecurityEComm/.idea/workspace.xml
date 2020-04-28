@@ -97,22 +97,22 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="416" y="155" width="524" height="491" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.27.1366.741@0.27.1366.741" timestamp="1586727315301" />
-    <state x="491" y="108" width="553" height="584" key="#com.intellij.ide.util.MemberChooser" timestamp="1587496204419">
+    <state x="491" y="108" width="553" height="584" key="#com.intellij.ide.util.MemberChooser" timestamp="1588069228388">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="491" y="108" width="553" height="584" key="#com.intellij.ide.util.MemberChooser/0.27.1366.741@0.27.1366.741" timestamp="1587496204419" />
+    <state x="491" y="108" width="553" height="584" key="#com.intellij.ide.util.MemberChooser/0.27.1366.741@0.27.1366.741" timestamp="1588069228388" />
     <state x="524" y="289" width="308" height="223" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1586282137764">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="524" y="289" width="308" height="223" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.27.1366.741@0.27.1366.741" timestamp="1586282137764" />
-    <state x="408" y="256" width="549" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1587391465242">
+    <state x="408" y="256" width="549" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1588070476431">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="408" y="256" width="549" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.27.1366.741@0.27.1366.741" timestamp="1587391465242" />
-    <state x="851" y="27" width="515" height="741" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1587407673706">
+    <state x="408" y="256" width="549" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.27.1366.741@0.27.1366.741" timestamp="1588070476431" />
+    <state x="851" y="27" width="515" height="741" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588012268449">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="851" y="27" width="515" height="741" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.27.1366.741@0.27.1366.741" timestamp="1587407673706" />
+    <state x="851" y="27" width="515" height="741" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.27.1366.741@0.27.1366.741" timestamp="1588012268449" />
     <state x="416" y="146" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586554833207">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -129,22 +129,22 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="460" y="155" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1587450795840" />
-    <state width="1320" height="2" key="GridCell.Tab.0.bottom" timestamp="1587499142698">
+    <state width="1320" height="143" key="GridCell.Tab.0.bottom" timestamp="1588077485596">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="2" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1587499142698" />
-    <state width="1320" height="2" key="GridCell.Tab.0.center" timestamp="1587499142698">
+    <state width="1320" height="143" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1588077485596" />
+    <state width="1320" height="143" key="GridCell.Tab.0.center" timestamp="1588077485596">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="2" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1587499142698" />
-    <state width="1320" height="2" key="GridCell.Tab.0.left" timestamp="1587499142697">
+    <state width="1320" height="143" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1588077485596" />
+    <state width="1320" height="143" key="GridCell.Tab.0.left" timestamp="1588077485596">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="2" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1587499142697" />
-    <state width="1320" height="2" key="GridCell.Tab.0.right" timestamp="1587499142698">
+    <state width="1320" height="143" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1588077485596" />
+    <state width="1320" height="143" key="GridCell.Tab.0.right" timestamp="1588077485596">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="2" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1587499142698" />
+    <state width="1320" height="143" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1588077485596" />
     <state width="1320" height="171" key="GridCell.Tab.1.bottom" timestamp="1587495564368">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -181,10 +181,10 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="178" y="109" width="999" height="583" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.27.1366.741@0.27.1366.741" timestamp="1586700058465" />
-    <state x="507" y="150" width="724" height="618" key="find.popup" timestamp="1587492523366">
+    <state x="507" y="150" width="724" height="618" key="find.popup" timestamp="1588073882445">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="507" y="150" width="724" height="618" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1587492523366" />
+    <state x="507" y="150" width="724" height="618" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1588073882445" />
     <state x="428" y="27" width="500" height="741" key="refactoring.ChangeSignatureDialog" timestamp="1585942233874">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -237,25 +237,9 @@
           <option name="timeStamp" value="82" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/SpringSecurity/dao/SellerDAO.java</url>
-          <line>178</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/SpringSecurity/service/SellerService.java</url>
+          <line>182</line>
           <option name="timeStamp" value="85" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/SpringSecurity/dao/ProductDAO.java</url>
-          <line>129</line>
-          <properties class="com.example.SpringSecurity.dao.ProductDAO" method="addProductVariation">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="141" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/SpringSecurity/dao/ProductDAO.java</url>
-          <line>400</line>
-          <properties class="com.example.SpringSecurity.dao.ProductDAO" method="updateProduct">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="151" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.dao;
+package com.example.SpringSecurity.service;
 
 import com.example.SpringSecurity.dto.AddressDTO;
 import com.example.SpringSecurity.dto.CustomerProfileDTO;
@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 
 @EnableAutoConfiguration
 @Component
-public class CustomerDAO {
+public class CustomerService {
 
     @Autowired
     CustomerRepository customerRepository;
@@ -56,38 +56,43 @@ public class CustomerDAO {
             String messageEmailAlreadyExists = messageSource.getMessage("exception.email.already.exists", null, locale);
             throw new EmailException(messageEmailAlreadyExists);
         } else {
-            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            Customer user1 = new Customer();
-            user1.setEmail(customerDto.getEmail());
-            Name name = new Name();
-            name.setFirstName(customerDto.getFirst_name());
-            name.setMiddleName(customerDto.getMiddle_name());
-            name.setLastName(customerDto.getLast_name());
-            user1.setName(name);
-            user1.setIsActive(false);
-            user1.setPassword(passwordEncoder.encode(customerDto.getPassword()));
-            user1.setRoles(Arrays.asList(new Role("ROLE_CUSTOMER")));
-            user1.setContact(customerDto.getContact());
+            if (customerDto.getPassword().equals(customerDto.getConfirmPassword())) {
+                PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                Customer user1 = new Customer();
+                user1.setEmail(customerDto.getEmail());
+                Name name = new Name();
+                name.setFirstName(customerDto.getFirst_name());
+                name.setMiddleName(customerDto.getMiddle_name());
+                name.setLastName(customerDto.getLast_name());
+                user1.setName(name);
+                user1.setIsActive(false);
+                user1.setPassword(passwordEncoder.encode(customerDto.getPassword()));
+                user1.setRoles(Arrays.asList(new Role("ROLE_CUSTOMER")));
+                user1.setContact(customerDto.getContact());
 
-            customerRepository.save(user1);
+                customerRepository.save(user1);
 
-            String token = UUID.randomUUID().toString();
-            VerificationToken verificationToken = new VerificationToken(token, user1, new VerificationToken().calculateExpiryDate(new VerificationToken().getEXPIRATION()));
-            verificationTokenRepository.save(verificationToken);
+                String token = UUID.randomUUID().toString();
+                VerificationToken verificationToken = new VerificationToken(token, user1, new VerificationToken().calculateExpiryDate(new VerificationToken().getEXPIRATION()));
+                verificationTokenRepository.save(verificationToken);
 
-            String receiverEmail = user1.getEmail();
-            String subject = "Registration Confirmation for Customer";
-            String confirmationUrl = webRequest.getContextPath() + "/registrationConfirm?token=" + token;
-            String message = "Registration Successful \n Click the link to activate the user ";
+                String receiverEmail = user1.getEmail();
+                String subject = "Registration Confirmation for Customer";
+                String confirmationUrl = webRequest.getContextPath() + "/registrationConfirm?token=" + token;
+                String message = "Registration Successful \n Click the link to activate the user ";
 
-            SimpleMailMessage email = new SimpleMailMessage();
-            email.setTo(receiverEmail);
-            email.setSubject(subject);
-            email.setText(message + "http://localhost:8080" + confirmationUrl);
-            javaMailSender.send(email);
+                SimpleMailMessage email = new SimpleMailMessage();
+                email.setTo(receiverEmail);
+                email.setSubject(subject);
+                email.setText(message + "http://localhost:8080" + confirmationUrl);
+                javaMailSender.send(email);
 
-            String messageSuccessful = messageSource.getMessage("customer.registration.successful", null, locale);
-            return messageSuccessful;
+                String messageSuccessful = messageSource.getMessage("customer.registration.successful", null, locale);
+                return messageSuccessful;
+            }
+            else {
+                return messageSource.getMessage("exception.password.confirmpassword.dont.match", null, locale);
+            }
         }
     }
 
@@ -141,7 +146,7 @@ public class CustomerDAO {
     }
 
 
-    public String updateProfile(HashMap<String, Object> customerDetails, HttpServletRequest httpServletRequest){
+    public String updateProfile(HashMap<String, Object> customerDetails, HttpServletRequest httpServletRequest) {
         String email = httpServletRequest.getUserPrincipal().getName();
         Customer customer = customerRepository.findByEmail(email);
 
@@ -153,20 +158,19 @@ public class CustomerDAO {
         String contact = (String) customerDetails.get("contact");
 
 
-        if (checkNotNull(first_name)){
+        if (checkNotNull(first_name)) {
             name.setFirstName(first_name);
         }
-        if (checkNotNull(middle_name)){
+        if (checkNotNull(middle_name)) {
             name.setMiddleName(middle_name);
         }
-        if (checkNotNull(last_name)){
+        if (checkNotNull(last_name)) {
             name.setLastName(last_name);
         }
-        if (checkNotNull(contact)){
+        if (checkNotNull(contact)) {
             if (!isContactValid(contact)) {
                 return "Not a Valid Phone number";
-            }
-            else {
+            } else {
                 customer.setContact(contact);
             }
         }
@@ -177,7 +181,7 @@ public class CustomerDAO {
         return "Update Successful";
     }
 
-    private Boolean isContactValid(String contact){
+    private Boolean isContactValid(String contact) {
         String regex = "(^$|[0-9]{10})";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(contact);

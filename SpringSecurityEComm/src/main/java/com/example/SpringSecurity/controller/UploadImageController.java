@@ -1,6 +1,6 @@
 package com.example.SpringSecurity.controller;
 
-import com.example.SpringSecurity.dao.UploadImageDAO;
+import com.example.SpringSecurity.service.UploadImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,10 +14,10 @@ import java.io.IOException;
 public class UploadImageController {
 
     @Autowired
-    private UploadImageDAO uploadImageDao;
+    private UploadImageService uploadImageService;
 
     @PostMapping("/uploadImage")
         public String uploadImage(@RequestBody MultipartFile image, HttpServletRequest httpServletRequest) throws IOException {
-            return uploadImageDao.uploadImage(image, httpServletRequest);
+            return uploadImageService.uploadImage(image, httpServletRequest);
     }
 }

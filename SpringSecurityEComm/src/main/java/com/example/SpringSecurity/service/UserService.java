@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.dao;
+package com.example.SpringSecurity.service;
 
 import com.example.SpringSecurity.entity.users.AppUser;
 import com.example.SpringSecurity.entity.users.Role;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserDAO {
+public class UserService {
 
     @Autowired
     UserRepository userRepository;

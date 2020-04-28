@@ -1,8 +1,8 @@
 package com.example.SpringSecurity.controller;
 
-import com.example.SpringSecurity.dao.CategoryDAO;
-import com.example.SpringSecurity.dao.CustomerDAO;
-import com.example.SpringSecurity.dao.ProductDAO;
+import com.example.SpringSecurity.service.CategoryService;
+import com.example.SpringSecurity.service.CustomerService;
+import com.example.SpringSecurity.service.ProductService;
 import com.example.SpringSecurity.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,62 +18,62 @@ import java.util.List;
 public class CustomerController {
 
     @Autowired
-    private CustomerDAO customerDao;
+    private CustomerService customerService;
 
     @Autowired
-    private CategoryDAO categoryDao;
+    private CategoryService categoryService;
 
     @Autowired
-    private ProductDAO productDAO;
+    private ProductService productService;
 
     @GetMapping("/profile")
     public CustomerProfileDTO viewProfile(HttpServletRequest httpServletRequest){
-        return customerDao.getProfile(httpServletRequest);
+        return customerService.getProfile(httpServletRequest);
     }
 
     @PostMapping("/addAddress")
     public String addAddress(@RequestBody AddressDTO addressDto, HttpServletRequest httpServletRequest){
-        return customerDao.addAddress(addressDto, httpServletRequest);
+        return customerService.addAddress(addressDto, httpServletRequest);
     }
 
     @GetMapping("/address")
     public List<AddressDTO> getAddressList(HttpServletRequest httpServletRequest){
-        return customerDao.getAddressList(httpServletRequest);
+        return customerService.getAddressList(httpServletRequest);
     }
 
     @PutMapping("/updateProfile")
     public String updateProfile(@Valid @RequestBody HashMap<String, Object> stringObjectHashMap, HttpServletRequest httpServletRequest){
-        return customerDao.updateProfile(stringObjectHashMap,httpServletRequest);
+        return customerService.updateProfile(stringObjectHashMap,httpServletRequest);
     }
 
     @PutMapping("/updatePassword")
     public String updatePassword(@RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword, HttpServletRequest httpServletRequest){
-        return customerDao.updatePassword(password, confirmPassword,httpServletRequest);
+        return customerService.updatePassword(password, confirmPassword,httpServletRequest);
     }
 
     @DeleteMapping("/deleteAddress")
     public String deleteAddress(@RequestParam("Id") Long id, HttpServletRequest httpServletRequest){
-        return customerDao.deleteAddress(id, httpServletRequest);
+        return customerService.deleteAddress(id, httpServletRequest);
     }
 
     @PutMapping("/updateAddress")
     public String updateAddress(@RequestParam("addressId") Long id, @RequestBody HashMap<String, Object> map, HttpServletRequest httpServletRequest) throws Exception {
-        return customerDao.updateAddress(map, id, httpServletRequest);
+        return customerService.updateAddress(map, id, httpServletRequest);
     }
 
     @GetMapping("/getAllCategories")
     public List<CategoryDTO> getAllCategory(@RequestParam("CategoryId")Long id){
-        return categoryDao.getAllCategoryForCustomer(id);
+        return categoryService.getAllCategoryForCustomer(id);
     }
 
     @GetMapping("/filterCategory")
     public CategoryFilterDTO filterCategory(@RequestParam("CategoryId") Long categoryId, WebRequest webRequest){
-        return categoryDao.getFilterData(categoryId,webRequest);
+        return categoryService.getFilterData(categoryId,webRequest);
     }
 
     @GetMapping("/viewProduct")
     public ViewCustomerProductDTO viewProductForCustomer(@RequestParam("productId") Long productId, WebRequest webRequest){
-        return productDAO.viewCustomerProduct(productId, webRequest);
+        return productService.viewCustomerProduct(productId, webRequest);
     }
 
     @GetMapping("/viewAllProduct")
@@ -85,7 +85,7 @@ public class CustomerController {
             @RequestParam("categoryId") Long categoryId,
             WebRequest webRequest
     ){
-        return productDAO.viewCustomerAllProduct(categoryId,offset,webRequest,max,field,order);
+        return productService.viewCustomerAllProduct(categoryId,offset,webRequest,max,field,order);
     }
 
     @GetMapping(value = "/viewSimilarProduct")
@@ -97,7 +97,7 @@ public class CustomerController {
             @RequestParam("productId") Long productId,
             WebRequest webRequest
     ){
-        return productDAO.viewSimilarProduct(productId,webRequest,offset,max,field,order);
+        return productService.viewSimilarProduct(productId,webRequest,offset,max,field,order);
     }
 
 
