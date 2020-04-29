@@ -78,6 +78,7 @@ public class SellerService {
             address.setCountry(sellerDto.getCountry());
             address.setZipCode(sellerDto.getZip_code());
             address.setLabel(sellerDto.getLabel());
+
             user1.addAddresses(address);
 
             user1.setIsActive(false);

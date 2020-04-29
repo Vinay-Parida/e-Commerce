@@ -16,7 +16,7 @@ import java.util.Locale;
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EnableScheduling
-public class ECommerceApplication {
+public class ECommerceApplication{
 
 	public static void main(String[] args) {
 		SpringApplication.run(ECommerceApplication.class, args);
@@ -41,5 +41,4 @@ public class ECommerceApplication {
 
 		return resourceBundleMessageSource;
 	}
-
 }

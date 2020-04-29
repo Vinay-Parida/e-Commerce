@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.security;
+package com.example.SpringSecurity.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
