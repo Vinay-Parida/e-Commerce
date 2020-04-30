@@ -50,6 +50,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+
                 .antMatchers("/").anonymous()
                 .antMatchers("/register/customer").anonymous()
                 .antMatchers("/register/seller").anonymous()
@@ -118,11 +119,10 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
                 .antMatchers("/doLogout").hasAnyRole("ADMIN", "CUSTOMER", "SELLER")
 
-
-
                 .antMatchers("/user/home").hasAnyRole("USER")
+
                 .anyRequest()
-                .authenticated()
+                .permitAll()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

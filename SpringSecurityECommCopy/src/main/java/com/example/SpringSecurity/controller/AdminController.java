@@ -1,10 +1,15 @@
 package com.example.SpringSecurity.controller;
 
+import com.example.SpringSecurity.dto.*;
+import com.example.SpringSecurity.entity.products.CategoryMetadataField;
 import com.example.SpringSecurity.service.AdminService;
 import com.example.SpringSecurity.service.CategoryService;
 import com.example.SpringSecurity.service.ProductService;
-import com.example.SpringSecurity.dto.*;
-import com.example.SpringSecurity.entity.products.CategoryMetadataField;
+import com.example.SpringSecurity.swagger.SwaggerConfig;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
@@ -12,6 +17,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.List;
 
 @RestController
+@Api(tags = {SwaggerConfig.ADMIN_TAG})
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -24,6 +30,10 @@ public class AdminController {
     @Autowired
     private ProductService productService;
 
+    @ApiOperation(value = "Admin can view the list of all the registered customer")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
+                    required = true, dataType = "string", paramType = "header") })
     @GetMapping("/customers")
     public List<FindAllCustomerDTO> getCustomersList(@RequestParam(defaultValue = "10") Integer pageSize,
                                                      @RequestParam(defaultValue = "0") Integer pageOffset,
