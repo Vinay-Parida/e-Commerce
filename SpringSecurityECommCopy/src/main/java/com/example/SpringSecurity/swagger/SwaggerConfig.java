@@ -37,6 +37,10 @@ public class SwaggerConfig {
                 .build()
                 .apiInfo(DEFAULT)
                 .tags(new Tag(ACTIVATION_TAG, "Customer can activate and reactivate his account"))
-                .tags(new Tag(ADMIN_TAG, "Admin can activate and deactivate all user and can "));
+                .tags(new Tag(ADMIN_TAG, "Admin can perform following activities: \n" +
+                        "Activate and deactivate all user and can activate and deactivate user \n" +
+                        "Activate and deactivate product added by seller and can see all products\n" +
+                        "Add category and view a and all category \n" +
+                        "Add category metadata field and metadata field"));
     }
 }

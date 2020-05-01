@@ -3,7 +3,6 @@
 //import org.springframework.http.HttpHeaders;
 //import org.springframework.http.HttpStatus;
 //import org.springframework.http.ResponseEntity;
-//import org.springframework.security.oauth2.common.exceptions.InvalidTokenException;
 //import org.springframework.web.bind.MethodArgumentNotValidException;
 //import org.springframework.web.bind.annotation.ControllerAdvice;
 //import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -43,8 +42,15 @@
 //        return new ResponseEntity(exceptionResponse, HttpStatus.CONFLICT);
 //    }
 //
-//    @ExceptionHandler(InvalidTokenException.class)
+//    @ExceptionHandler(TokenInvalidException.class)
 //    public final ResponseEntity<Object> invalidTokenException(Exception ex, WebRequest request) throws Exception {
+//        ExceptionResponse exceptionResponse = new ExceptionResponse
+//                (new Date(), ex.getMessage(), request.getDescription(false));
+//
+//        return new ResponseEntity(exceptionResponse, HttpStatus.UNAUTHORIZED);
+//    }
+//    @ExceptionHandler(ValueNotFoundException.class)
+//    public final ResponseEntity<Object> valueNotFoundException(Exception ex, WebRequest request) throws Exception {
 //        ExceptionResponse exceptionResponse = new ExceptionResponse
 //                (new Date(), ex.getMessage(), request.getDescription(false));
 //
@@ -56,6 +62,13 @@
 //                (new Date(), ex.getMessage(), request.getDescription(false));
 //
 //        return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+//    }
+//    @ExceptionHandler(CategoryException.class)
+//    public final ResponseEntity<Object> categoryException(Exception ex, WebRequest request) throws Exception {
+//        ExceptionResponse exceptionResponse = new ExceptionResponse
+//                (new Date(), ex.getMessage(), request.getDescription(false));
+//
+//        return new ResponseEntity(exceptionResponse, HttpStatus.CONFLICT);
 //    }
 //    @ExceptionHandler(PasswordException.class)
 //    public final ResponseEntity<Object> passwordException(Exception ex, WebRequest request) throws Exception {

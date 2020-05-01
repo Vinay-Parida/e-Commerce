@@ -4,6 +4,7 @@ import com.example.SpringSecurity.dto.*;
 import com.example.SpringSecurity.entity.products.*;
 import com.example.SpringSecurity.exceptions.CategoryException;
 import com.example.SpringSecurity.exceptions.EmailException;
+import com.example.SpringSecurity.exceptions.ValueNotFoundException;
 import com.example.SpringSecurity.repository.CategoryMetadataFieldRepository;
 import com.example.SpringSecurity.repository.CategoryMetadataFieldValueRepository;
 import com.example.SpringSecurity.repository.CategoryRepository;
@@ -34,7 +35,7 @@ public class CategoryService {
 
     public String addMetadataField(String fieldName){
         if (fieldName ==null || fieldName =="") {
-            throw new NullPointerException("Please Enter fieldName");
+            throw new CategoryException("Please Enter fieldName");
         }
         else {
             CategoryMetadataField categoryMetadataField = categoryMetadataFieldRepository.findByName(fieldName);
@@ -93,7 +94,7 @@ public class CategoryService {
             }
         }
         else {
-            throw new NullPointerException("Enter Category name");
+            throw new ValueNotFoundException("Enter Category name");
         }
     }
 
@@ -154,8 +155,6 @@ public class CategoryService {
         });
         return singleCategoryDtoList;
     }
-
-
 
     public String updateCategory(Long categoryId, String categoryName){
         Category category = categoryRepository.findByid(categoryId);

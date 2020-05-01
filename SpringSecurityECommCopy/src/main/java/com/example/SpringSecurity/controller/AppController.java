@@ -1,5 +1,7 @@
 package com.example.SpringSecurity.controller;
 
+import com.example.SpringSecurity.entity.users.User;
+import com.example.SpringSecurity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -15,6 +17,9 @@ public class AppController {
     @Autowired
     private TokenStore tokenStore;
 
+    @Autowired
+    UserRepository userRepository;
+
     @GetMapping("/doLogout")
     public String logout(HttpServletRequest request){
         String name = "";
@@ -29,10 +34,13 @@ public class AppController {
         return name + " is Logged out successfully";
     }
 
-//    @GetMapping("/")
-//    public String index(){
-//        return "index";
-//    }
+    @GetMapping("/")
+    public String index(HttpServletRequest httpServletRequest){
+        String email = httpServletRequest.getUserPrincipal().getName();
+        User user = userRepository.findByEmail(email);
+
+        return "index";
+    }
 
     @GetMapping("/admin/home")
     public String adminHome(){
