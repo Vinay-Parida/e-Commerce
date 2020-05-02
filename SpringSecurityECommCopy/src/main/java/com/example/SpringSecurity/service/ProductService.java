@@ -10,6 +10,7 @@ import com.example.SpringSecurity.entity.users.User;
 import com.example.SpringSecurity.exceptions.CategoryException;
 import com.example.SpringSecurity.exceptions.EmailException;
 import com.example.SpringSecurity.exceptions.ProductException;
+import com.example.SpringSecurity.exceptions.ValueNotFoundException;
 import com.example.SpringSecurity.repository.*;
 import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -591,7 +592,7 @@ public class ProductService {
         if(categoryList.isEmpty()){
             return getProductDetails(categoryId,pageable);
         }else{
-            return null;
+            throw new ValueNotFoundException("Category is not leaf node");
         }
     }
     private List<ViewCustomerAllProductDTO> getProductDetails(Long categoryId, Pageable pageable){

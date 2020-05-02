@@ -26,6 +26,10 @@ public class SwaggerConfig {
 
     public static final String ACTIVATION_TAG = "Activation Controller";
     public static final String ADMIN_TAG = "Admin Controller";
+    public static final String CUSTOMER_TAG = "Customer Controller";
+    public static final String SELLER_TAG = "Seller Controller";
+    public static final String FORGET_PASSWORD_TAG = "Forgot Password Controller";
+    public static final String RESISTER_TAG = "Registration Controller";
 
 
     @Bean
@@ -38,9 +42,23 @@ public class SwaggerConfig {
                 .apiInfo(DEFAULT)
                 .tags(new Tag(ACTIVATION_TAG, "Customer can activate and reactivate his account"))
                 .tags(new Tag(ADMIN_TAG, "Admin can perform following activities: \n" +
-                        "Activate and deactivate all user and can activate and deactivate user \n" +
-                        "Activate and deactivate product added by seller and can see all products\n" +
-                        "Add category and view a and all category \n" +
-                        "Add category metadata field and metadata field"));
+                        "• Activate and deactivate all user and can activate and deactivate user \n" +
+                        "• Activate and deactivate product added by seller and can see all products\n" +
+                        "• Add category and view a and all category \n" +
+                        "• Add category metadata field and metadata field"))
+                .tags(new Tag(CUSTOMER_TAG, "Customer can perform following activities: \n" +
+                        "• View and update his profile \n" +
+                        "• Add, view update and delete his address \n" +
+                        "• Update his password \n" +
+                        "• Get list of categories and filter out category \n" +
+                        "• View a single and all products and also a customer can view similar products"))
+                .tags(new Tag(SELLER_TAG, "Seller can perform following activities \n" +
+                        "• View and update profile\n" +
+                        "• Update Address and Password \n" +
+                        "• Get a list of all categories\n" +
+                        "• Add, update, delete and view a Product\n" +
+                        "• Add, update and view product Variation"))
+                .tags(new Tag(FORGET_PASSWORD_TAG, "A user can Forget Password and reset it via token"))
+                .tags(new Tag(RESISTER_TAG, "A User can register himself as a seller or a customer"));
     }
 }

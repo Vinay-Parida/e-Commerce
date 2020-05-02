@@ -309,7 +309,7 @@ public class CategoryService {
 
         Category category = categoryRepository.findByid(categoryId);
         if(category==null){
-            throw new EmailException("Email doesn't exist");
+            throw new EmailException("Category doesn't exist");
         }
         List<Product> productList = productRepository.getProduct(categoryId);
         Set<String> brandList=new HashSet<>();

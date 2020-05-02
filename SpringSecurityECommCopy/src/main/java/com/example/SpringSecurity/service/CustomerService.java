@@ -6,6 +6,7 @@ import com.example.SpringSecurity.dto.CustomerRegisterDTO;
 import com.example.SpringSecurity.entity.users.*;
 import com.example.SpringSecurity.exceptions.EmailException;
 import com.example.SpringSecurity.exceptions.UserNotFoundException;
+import com.example.SpringSecurity.exceptions.ValueNotFoundException;
 import com.example.SpringSecurity.modals.VerificationToken;
 import com.example.SpringSecurity.repository.AddressRepository;
 import com.example.SpringSecurity.repository.CustomerRepository;
@@ -226,7 +227,7 @@ public class CustomerService {
             addressRepository.deleteById(addressId);
             return "Address Deleted Successfully";
         } else {
-            return "Address not found";
+            throw new ValueNotFoundException("Address not found");
         }
     }
 

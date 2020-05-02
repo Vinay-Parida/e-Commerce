@@ -1,14 +1,15 @@
 package com.example.SpringSecurity.service;
 
-import com.example.SpringSecurity.repository.ForgetPasswordTokenRepository;
-import com.example.SpringSecurity.repository.UserRepository;
 import com.example.SpringSecurity.entity.users.User;
 import com.example.SpringSecurity.exceptions.EmailException;
 import com.example.SpringSecurity.exceptions.PasswordException;
 import com.example.SpringSecurity.exceptions.TokenInvalidException;
 import com.example.SpringSecurity.modals.ForgetPasswordToken;
+import com.example.SpringSecurity.repository.ForgetPasswordTokenRepository;
+import com.example.SpringSecurity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -64,17 +65,17 @@ public class ForgetPasswordService {
                 ForgetPasswordToken forgetPasswordToken = new ForgetPasswordToken(token, user, new ForgetPasswordToken().calculateExpiryTime(new ForgetPasswordToken().getEXPIRATION()));
                 forgetPasswordTokenRepository.save(forgetPasswordToken);
 
-//                String receiverEmail = email;
-//                String subject = "Forget Password";
+                String receiverEmail = email;
+                String subject = "Forget Password Token";
 //                String confirmationUrl = webRequest.getContextPath() + "/resetPassword?token=" + token;
-//                String message = "Link to reset password \n ";
-//
-//                SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-//                simpleMailMessage.setTo(receiverEmail);
-//                simpleMailMessage.setSubject(subject);
-//                simpleMailMessage.setText(message + "\r\n" + "http://localhost:8080" + confirmationUrl);
-//
-//                javaMailSender.send(simpleMailMessage);
+                String message = "Unique token to reset password " + forgetPasswordToken;
+
+                SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+                simpleMailMessage.setTo(receiverEmail);
+                simpleMailMessage.setSubject(subject);
+                simpleMailMessage.setText(message);
+
+                javaMailSender.send(simpleMailMessage);
 
                 String messageSuccessful = messageSource.getMessage("forget.password.mail.sent.successful", null, locale);
 
