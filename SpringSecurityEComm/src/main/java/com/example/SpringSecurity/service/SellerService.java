@@ -1,16 +1,19 @@
 package com.example.SpringSecurity.service;
 
 import com.example.SpringSecurity.dto.SellerProfileDTO;
-import com.example.SpringSecurity.entity.users.*;
-import com.example.SpringSecurity.exceptions.UserNotFoundException;
+import com.example.SpringSecurity.dto.SellerRegisterDTO;
+import com.example.SpringSecurity.entity.users.Address;
+import com.example.SpringSecurity.entity.users.Name;
+import com.example.SpringSecurity.entity.users.Role;
+import com.example.SpringSecurity.entity.users.Seller;
+import com.example.SpringSecurity.exceptions.EmailException;
+import com.example.SpringSecurity.exceptions.GstException;
+import com.example.SpringSecurity.exceptions.ValueNotFoundException;
+import com.example.SpringSecurity.modals.VerificationToken;
 import com.example.SpringSecurity.repository.AddressRepository;
 import com.example.SpringSecurity.repository.SellerRepository;
 import com.example.SpringSecurity.repository.UserRepository;
 import com.example.SpringSecurity.repository.VerificationTokenRepository;
-import com.example.SpringSecurity.dto.SellerRegisterDTO;
-import com.example.SpringSecurity.exceptions.EmailException;
-import com.example.SpringSecurity.exceptions.GstException;
-import com.example.SpringSecurity.modals.VerificationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.SimpleMailMessage;
@@ -78,6 +81,7 @@ public class SellerService {
             address.setCountry(sellerDto.getCountry());
             address.setZipCode(sellerDto.getZip_code());
             address.setLabel(sellerDto.getLabel());
+
             user1.addAddresses(address);
 
             user1.setIsActive(false);
@@ -123,7 +127,8 @@ public class SellerService {
         return sellerProfileDto;
     }
 
-    public String updateSellerAddress(HashMap<String, Object> addressDetails, HttpServletRequest httpServletRequest) throws Exception {
+    public String updateSellerAddress(HashMap<String, Object> addressDetails, HttpServletRequest httpServletRequest, WebRequest webRequest) throws Exception {
+        Locale locale = webRequest.getLocale();
         String email = httpServletRequest.getUserPrincipal().getName();
         Long id = userRepository.findByEmail(email).getId();
 
@@ -153,9 +158,9 @@ public class SellerService {
             }
 
             addressRepository.save(address);
-            return "Address Updated Successfully";
+            return messageSource.getMessage("address.update.success", null, locale);
         } else {
-            throw new UserNotFoundException("Address Not found");
+            throw new ValueNotFoundException(messageSource.getMessage("address.not.found", null, locale));
         }
     }
     private Boolean checkNotNull(String value) {
@@ -165,7 +170,8 @@ public class SellerService {
             return false;
     }
 
-    public String updateProfile(HashMap<String, Object> customerDetails, HttpServletRequest httpServletRequest){
+    public String updateProfile(HashMap<String, Object> customerDetails, HttpServletRequest httpServletRequest, WebRequest webRequest){
+        Locale locale = webRequest.getLocale();
         String email = httpServletRequest.getUserPrincipal().getName();
 
         Seller seller = sellerRepository.findByEmail(email);
@@ -188,19 +194,19 @@ public class SellerService {
         }
         if (checkNotNull(company_contact)){
             if (!isContactValid(company_contact)) {
-                return "Not a Valid Phone number";
+                return messageSource.getMessage("phone.number.not.valid", null, locale);
             }
             else {
                 seller.setCompanyContact(company_contact);
             }
         }
         else {
-            return "Phone number Can't be empty";
+            return messageSource.getMessage("phone.number.not.null", null, locale);
         }
         seller.setName(name);
         sellerRepository.save(seller);
 
-        return "Update Successful";
+        return messageSource.getMessage("profile.update.success", null, locale);
     }
 
     private Boolean isContactValid(String contact){

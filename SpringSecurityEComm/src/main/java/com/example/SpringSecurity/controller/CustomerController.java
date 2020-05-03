@@ -32,8 +32,8 @@ public class CustomerController {
     }
 
     @PostMapping("/addAddress")
-    public String addAddress(@RequestBody AddressDTO addressDto, HttpServletRequest httpServletRequest){
-        return customerService.addAddress(addressDto, httpServletRequest);
+    public String addAddress(@RequestBody AddressDTO addressDto, HttpServletRequest httpServletRequest, WebRequest webRequest){
+        return customerService.addAddress(addressDto, httpServletRequest, webRequest);
     }
 
     @GetMapping("/address")
@@ -42,23 +42,23 @@ public class CustomerController {
     }
 
     @PutMapping("/updateProfile")
-    public String updateProfile(@Valid @RequestBody HashMap<String, Object> stringObjectHashMap, HttpServletRequest httpServletRequest){
-        return customerService.updateProfile(stringObjectHashMap,httpServletRequest);
+    public String updateProfile(@Valid @RequestBody HashMap<String, Object> stringObjectHashMap, HttpServletRequest httpServletRequest, WebRequest webRequest){
+        return customerService.updateProfile(stringObjectHashMap,httpServletRequest, webRequest);
     }
 
     @PutMapping("/updatePassword")
-    public String updatePassword(@RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword, HttpServletRequest httpServletRequest){
-        return customerService.updatePassword(password, confirmPassword,httpServletRequest);
+    public String updatePassword(@RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword, HttpServletRequest httpServletRequest, WebRequest webRequest){
+        return customerService.updatePassword(password, confirmPassword,httpServletRequest, webRequest);
     }
 
     @DeleteMapping("/deleteAddress")
-    public String deleteAddress(@RequestParam("Id") Long id, HttpServletRequest httpServletRequest){
-        return customerService.deleteAddress(id, httpServletRequest);
+    public String deleteAddress(@RequestParam("Id") Long id, HttpServletRequest httpServletRequest, WebRequest webRequest){
+        return customerService.deleteAddress(id, httpServletRequest, webRequest);
     }
 
     @PutMapping("/updateAddress")
-    public String updateAddress(@RequestParam("addressId") Long id, @RequestBody HashMap<String, Object> map, HttpServletRequest httpServletRequest) throws Exception {
-        return customerService.updateAddress(map, id, httpServletRequest);
+    public String updateAddress(@RequestParam("addressId") Long id, @RequestBody HashMap<String, Object> map, HttpServletRequest httpServletRequest, WebRequest webRequest) throws Exception {
+        return customerService.updateAddress(map, id, httpServletRequest, webRequest);
     }
 
     @GetMapping("/getAllCategories")

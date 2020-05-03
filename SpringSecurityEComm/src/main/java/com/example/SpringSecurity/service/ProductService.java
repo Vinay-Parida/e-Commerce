@@ -58,6 +58,7 @@ public class ProductService {
     private ProductVariationRepository productVariationRepository;
 
     public String addProduct(AddProductDTO addProductDto, HttpServletRequest httpServletRequest, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
         String email = httpServletRequest.getUserPrincipal().getName();
         Long userId = userRepository.findByEmail(email).getId();
         Seller seller = sellerRepository.findById(userId);
@@ -69,13 +70,16 @@ public class ProductService {
             product.setName(addProductDto.getName());
             product.setSeller(seller);
             product.setBrand(addProductDto.getBrand());
-        } else
-            throw new ProductException("Product with this name is already exist.");
-
+        } else {
+            String messageProductAlreadyExists = messageSource.getMessage("product.already.exists", null, locale);
+            throw new ProductException(messageProductAlreadyExists);
+        }
         if (categoryRepository.findByParentId(addProductDto.getCategoryId()).isEmpty() && category != null)
             product.setCategory(category);
-        else
-            throw new CategoryException("Invalid category id");
+        else {
+            String messageCategoryIdDoesNotExists = messageSource.getMessage("category.does.not.exists", null, locale);
+            throw new CategoryException(messageCategoryIdDoesNotExists);
+        }
 
         if (addProductDto.getDescription() != null)
             product.setDescription(addProductDto.getDescription());
@@ -90,17 +94,19 @@ public class ProductService {
         List<User> userAdmin = userRepository.getUserAdmin();
         String confirmationUrl = webRequest.getContextPath() + "/admin/activateProduct?id=" + productId;
         userAdmin.forEach(user -> {
-            sendMailToAdmin(user.getEmail(), confirmationUrl, product);
+            sendMailToAdmin(user.getEmail(), confirmationUrl, product, webRequest);
         });
 
-        return "Product Saved Successfully";
+        String messageProductSavedSuccessful = messageSource.getMessage("product.saved.successful", null, locale);
+        return messageProductSavedSuccessful;
     }
 
-    private void sendMailToAdmin(String emailRecipient, String confirmationUrl, Product product) {
+    private void sendMailToAdmin(String emailRecipient, String confirmationUrl, Product product, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
         String message = getMailBody(product);
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setTo(emailRecipient);
-        simpleMailMessage.setSubject("Product Activation Confirmation");
+        simpleMailMessage.setSubject(messageSource.getMessage("product.activation.confirmation", null, locale));
         simpleMailMessage.setText(message + "\r\n" + "http://localhost:8080" + confirmationUrl);
         javaMailSender.send(simpleMailMessage);
     }
@@ -128,11 +134,12 @@ public class ProductService {
 
 
     public String addProductVariation(MultipartFile primaryImage, List<MultipartFile> secondaryImages, HttpServletRequest request, AddProductVariationDTO addProductVariationDto, WebRequest webRequest) throws IOException {
+        Locale locale = webRequest.getLocale();
         String sellerEmail = request.getUserPrincipal().getName();
         String validateData = validateData(addProductVariationDto, sellerEmail, webRequest);
-        if (!validateData.equalsIgnoreCase("success"))
-            throw new EmailException("Validation Failed");
-
+        if (!validateData.equalsIgnoreCase("success")) {
+            throw new EmailException(messageSource.getMessage("product.validation.failed", null, locale));
+        }
         ProductVariation productVariation = new ProductVariation();
         Product product = productRepository.findById(addProductVariationDto.getProductId()).get();
         productVariation.setPrice(addProductVariationDto.getPrice());
@@ -148,29 +155,41 @@ public class ProductService {
         }
 
         productVariationRepository.save(productVariation);
-        return "Product variation Saved successfully";
+        String messageProductVariationSaved = messageSource.getMessage("product.variation.saved.successful", null, locale);
+        return messageProductVariationSaved;
     }
 
     private String validateData(AddProductVariationDTO addProductVariationDto, String sellerEmail, WebRequest webRequest) {
-
+        Locale locale = webRequest.getLocale();
         Product product = productRepository.findById(addProductVariationDto.getProductId()).get();
 
-        if (product == null)
-            throw new EmailException("Product no available");
-        if (!product.getSeller().getEmail().equalsIgnoreCase(sellerEmail))
-            throw new EmailException("This is not product of the seller");
+        if (product == null) {
+            String messageProductNotAvailable = messageSource.getMessage("product.not.available", null, locale);
+            throw new EmailException(messageProductNotAvailable);
+        }
+        if (!product.getSeller().getEmail().equalsIgnoreCase(sellerEmail)) {
+            String messageProductNotSeller = messageSource.getMessage("product.not.seller", null, locale);
+            throw new EmailException(messageProductNotSeller);
+        }
         if (addProductVariationDto.getQuantityAvailable() != null) {
-            if (addProductVariationDto.getQuantityAvailable() < 0)
-                throw new EmailException("Quantity can't be negative");
+            if (addProductVariationDto.getQuantityAvailable() < 0) {
+                String messageQuantityNegative = messageSource.getMessage("product.quantity.negative", null, locale);
+                throw new EmailException(messageQuantityNegative);
+            }
         }
         if (addProductVariationDto.getPrice() != null) {
-            if (addProductVariationDto.getPrice() < 0)
-                throw new EmailException("Price can't be negative");
+            if (addProductVariationDto.getPrice() < 0) {
+                String messagePriceNegative = messageSource.getMessage("product.price.negative", null, locale);
+                throw new EmailException(messagePriceNegative);
+            }
         }
-        if (!product.getActive())
-            throw new EmailException("Product is not active");
+        if (!product.getActive()) {
+            String messageProductNotActive = messageSource.getMessage("product.not.active", null, locale);
+            throw new EmailException(messageProductNotActive);
+        }
         if (product.getDeleted()) {
-            throw new EmailException("Product is deleted");
+            String messageProductDeleted = messageSource.getMessage("product.deleted", null, locale);
+            throw new EmailException(messageProductDeleted);
         }
 
         Category category = product.getCategory();
@@ -183,12 +202,16 @@ public class ProductService {
         metadataFieldName.forEach((e) -> {
             actualFields.add((String) e);
         });
-        if (receivedFields.size() < actualFields.size())
-            throw new EmailException("Fields are less. Not as same as required fields");
+        if (receivedFields.size() < actualFields.size()) {
+            String messageCategoryMetadataFiledSizeLess = messageSource.getMessage("category.metadata.field.less", null, locale);
+            throw new EmailException(messageCategoryMetadataFiledSizeLess);
+        }
 
         receivedFields.removeAll(actualFields);
-        if (!receivedFields.isEmpty())
-            throw new EmailException("Fields are more. Not as same as required fields");
+        if (!receivedFields.isEmpty()) {
+            String messageCategoryMetadataFiledSizeMore = messageSource.getMessage("category.metadata.field.more", null, locale);
+            throw new EmailException(messageCategoryMetadataFiledSizeMore);
+        }
 
         List<String> metadataFields = new ArrayList<>(metadata.keySet());
         for (String fieldName : metadataFields) {
@@ -198,31 +221,40 @@ public class ProductService {
             Set<String> dbValue = SetStringConverter.convertToSet(values);
 
             String receivedValues = metadata.get(fieldName);
-            if (receivedValues.isEmpty())
-                throw new EmailException("Values can't be empty");
+            if (receivedValues.isEmpty()) {
+                String messageCategoryMetadataValueEmpty = messageSource.getMessage("category.metadata.value.empty", null, locale);
+                throw new EmailException(messageCategoryMetadataValueEmpty);
+            }
 
             Set<String> actualSet = SetStringConverter.convertToSet(receivedValues);
             Set<String> union = Sets.union(actualSet, dbValue);
-            if (union.size() > dbValue.size())
-                throw new EmailException("This variation value doesn't exists");
+            if (union.size() > dbValue.size()) {
+                String messageCategoryMetadataValueEmpty = messageSource.getMessage("product.variation.does.not.exits", null, locale);
+                throw new EmailException(messageCategoryMetadataValueEmpty);
+            }
         }
         return "Success";
     }
 
     public ViewProductDTO viewProduct(Long productId, WebRequest webRequest, HttpServletRequest request) {
+        Locale locale = webRequest.getLocale();
         String sellerEmail = request.getUserPrincipal().getName();
 
         Optional<Product> productOptional = productRepository.findById(productId);
-        if (!productOptional.isPresent())
-            throw new EmailException("Invalid Product Id");
+        if (!productOptional.isPresent()) {
+            String messageProductDoesNotExist = messageSource.getMessage("product.not.available", null, locale);
+            throw new EmailException(messageProductDoesNotExist);
+        }
 
         Product product = productOptional.get();
         String email = product.getSeller().getEmail();
-        if (!email.equalsIgnoreCase(sellerEmail))
-            throw new EmailException("Product doesn't belong to the seller");
-
-        else if (product.getDeleted())
-            throw new EmailException("Product is deleted");
+        if (!email.equalsIgnoreCase(sellerEmail)) {
+            String messageProductNotSeller = messageSource.getMessage("product.not.seller", null, locale);
+            throw new EmailException(messageProductNotSeller);
+        } else if (product.getDeleted()) {
+            String messageProductDeleted = messageSource.getMessage("product.deleted", null, locale);
+            throw new EmailException(messageProductDeleted);
+        }
 
         ViewProductDTO viewProductDto = new ViewProductDTO();
         viewProductDto.setProductId(product.getId());
@@ -249,21 +281,25 @@ public class ProductService {
     }
 
     public ViewProductVariationDTO viewProductVariation(Long variationId, WebRequest webRequest, HttpServletRequest request) {
+        Locale locale = webRequest.getLocale();
 
         String sellerEmail = request.getUserPrincipal().getName();
         Optional<ProductVariation> variationOptional = productVariationRepository.findById(variationId);
-        if (!variationOptional.isPresent())
-            throw new EmailException("Variation doesn't exists");
-
+        if (!variationOptional.isPresent()) {
+            String messageCVariationDoNotExists = messageSource.getMessage("product.variation.does.not.exits", null, locale);
+            throw new EmailException(messageCVariationDoNotExists);
+        }
         ProductVariation productVariation = variationOptional.get();
         Product product = productVariation.getProduct();
-        if (product.getDeleted())
-            throw new EmailException("Product is deleted");
-
+        if (product.getDeleted()) {
+            String messageProductDeleted = messageSource.getMessage("product.deleted", null, locale);
+            throw new EmailException(messageProductDeleted);
+        }
         String email = product.getSeller().getEmail();
-        if (!email.equalsIgnoreCase(sellerEmail))
-            throw new EmailException("Product doesn't belong to the seller");
-
+        if (!email.equalsIgnoreCase(sellerEmail)) {
+            String messageProductNotSeller = messageSource.getMessage("product.not.seller", null, locale);
+            throw new EmailException(messageProductNotSeller);
+        }
 
         ViewProductVariationDTO viewProductVariationDto = new ViewProductVariationDTO();
         viewProductVariationDto.setProductId(product.getId());
@@ -326,6 +362,8 @@ public class ProductService {
     }
 
     public List<ViewAllProductVariationDTO> viewAllProductVariation(Long productId, String offset, String max, String field, String order, HttpServletRequest request, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
+
         String sellerEmail = request.getUserPrincipal().getName();
         Integer offSetPage = Integer.parseInt(offset);
         Integer sizeOfPage = Integer.parseInt(max);
@@ -336,22 +374,28 @@ public class ProductService {
             pageable = PageRequest.of(offSetPage, sizeOfPage, Sort.Direction.DESC, field);
         }
         List<ProductVariation> productVariations = productVariationRepository.getAllVariationByProductId(productId, pageable);
-        if (productVariations.isEmpty())
-            throw new EmailException("Product Variation doesn't exist");
+        if (productVariations.isEmpty()) {
+            String messageCVariationDoNotExists = messageSource.getMessage("product.variation.does.not.exits", null, locale);
+            throw new EmailException(messageCVariationDoNotExists);
+        }
 
         Product product = productRepository.findById(productId).get();
         List<ViewAllProductVariationDTO> productVariationDtoList = new ArrayList<>();
 
-        if (product == null)
-            throw new ProductException("Invalid Product");
-
-        if (product.getDeleted())
-            throw new ProductException("Product is deleted");
+        if (product == null) {
+            String messageProductDoesNotExist = messageSource.getMessage("product.not.available", null, locale);
+            throw new EmailException(messageProductDoesNotExist);
+        }
+        if (product.getDeleted()) {
+            String messageProductDeleted = messageSource.getMessage("product.deleted", null, locale);
+            throw new EmailException(messageProductDeleted);
+        }
 
         String email = product.getSeller().getEmail();
-        if (!email.equalsIgnoreCase(sellerEmail))
-            throw new EmailException("Seller have no product variation");
-
+        if (!email.equalsIgnoreCase(sellerEmail)) {
+            String messageProductNotSeller = messageSource.getMessage("product.not.seller", null, locale);
+            throw new EmailException(messageProductNotSeller);
+        }
         for (ProductVariation productVariation : productVariations) {
             ViewAllProductVariationDTO productVariationDto = setAllVariation(product, productVariation);
             productVariationDtoList.add(productVariationDto);
@@ -379,40 +423,52 @@ public class ProductService {
     }
 
     public String deleteProduct(Long productId, HttpServletRequest request, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
 
         String sellerEmail = request.getUserPrincipal().getName();
         Optional<Product> productOptional = productRepository.findById(productId);
 
-        if (!productOptional.isPresent())
-            throw new EmailException("Invalid Product");
+        if (!productOptional.isPresent()) {
+            String messageProductDoesNotExist = messageSource.getMessage("product.not.available", null, locale);
+            throw new EmailException(messageProductDoesNotExist);
+        }
 
         Product product = productOptional.get();
         String email = product.getSeller().getEmail();
-        if (!sellerEmail.equalsIgnoreCase(email))
-            throw new EmailException("Product doesn't belong to seller");
+        if (!sellerEmail.equalsIgnoreCase(email)) {
+            String messageProductNotSeller = messageSource.getMessage("product.not.seller", null, locale);
+            throw new EmailException(messageProductNotSeller);
+        }
 
         product.setDeleted(true);
-        return "Product deleted successfully";
+        String messageProductDeletedSuccessful = messageSource.getMessage("product.deleted.success", null, locale);
+        return messageProductDeletedSuccessful;
     }
 
     public String updateProduct(UpdateProductDTO updateProductDto, HttpServletRequest request, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
         String sellerEmail = request.getUserPrincipal().getName();
         Long productId = updateProductDto.getProductId();
         Optional<Product> productOptional = productRepository.findById(productId);
 
-        if (!productOptional.isPresent())
-            throw new ProductException("Invalid Product Id");
+        if (!productOptional.isPresent()) {
+            String messageProductDoesNotExist = messageSource.getMessage("product.not.available", null, locale);
+            throw new EmailException(messageProductDoesNotExist);
+        }
 
         Product product = productOptional.get();
         String email = product.getSeller().getEmail();
 
-        if (!sellerEmail.equalsIgnoreCase(email))
-            throw new EmailException("Product doesn't belong to the seller");
-
+        if (!sellerEmail.equalsIgnoreCase(email)) {
+            String messageProductNotSeller = messageSource.getMessage("product.not.seller", null, locale);
+            throw new EmailException(messageProductNotSeller);
+        }
         if (updateProductDto.getName() != null) {
             Product productByName = productRepository.getUniqueProduct(product.getBrand(), product.getCategory().getId(), product.getSeller().getId(), updateProductDto.getName());
-            if (productByName != null)
-                throw new EmailException("Product already exist with this name");
+            if (productByName != null) {
+                String messageProductAlreadyExists = messageSource.getMessage("product.already.exists", null, locale);
+                throw new ProductException(messageProductAlreadyExists);
+            }
         }
         product.setName(updateProductDto.getName());
 
@@ -428,71 +484,86 @@ public class ProductService {
         }
         productRepository.save(product);
 
-        return "Product updated successfully";
+        String messageProductUpdateSuccess = messageSource.getMessage("product.update.successful", null, locale);
+        return messageProductUpdateSuccess;
     }
 
-    public String updateProductVariation(MultipartFile primaryImage, List<MultipartFile> secondaryImages,HttpServletRequest request, UpdateProductVariationDTO updateProductVariationDto,WebRequest webRequest) throws IOException {
-        Locale locale=webRequest.getLocale();
+    public String updateProductVariation(MultipartFile primaryImage, List<MultipartFile> secondaryImages, HttpServletRequest request, UpdateProductVariationDTO updateProductVariationDto, WebRequest webRequest) throws IOException {
+        Locale locale = webRequest.getLocale();
         Optional<ProductVariation> variationOptional = productVariationRepository.findById(updateProductVariationDto.getProductVariationId());
         String sellerEmail = request.getUserPrincipal().getName();
         String validateData = validateUpdateData(updateProductVariationDto, sellerEmail, webRequest);
-        if(!validateData.equalsIgnoreCase("success")){
-            throw  new ProductException("Validation failed");
+        if (!validateData.equalsIgnoreCase("success")) {
+            throw new EmailException(messageSource.getMessage("product.validation.failed", null, locale));
         }
-        ProductVariation productVariation= variationOptional.get();
-        if(updateProductVariationDto.getPrice()!=null) {
+        ProductVariation productVariation = variationOptional.get();
+        if (updateProductVariationDto.getPrice() != null) {
             productVariation.setPrice(updateProductVariationDto.getPrice());
         }
-        if(primaryImage!=null) {
+        if (primaryImage != null) {
             productVariation.setPrimaryImageName(uploadImageService.uploadPrimaryImage(primaryImage, productVariation.getProduct().getId(), webRequest));
         }
         productVariation.setQuantityAvailable(updateProductVariationDto.getQuantityAvailable());
         productVariation.setMetadata(updateProductVariationDto.getMetadata());
-        if(updateProductVariationDto.getActive()!=null) {
+        if (updateProductVariationDto.getActive() != null) {
             productVariation.setActive(updateProductVariationDto.getActive());
         }
-        if(!secondaryImages.isEmpty()){
+        if (!secondaryImages.isEmpty()) {
             Set<String> strings = uploadImageService.uploadSecondaryImage(secondaryImages, webRequest, productVariation.getProduct().getId());
             String convert = SetStringConverter.convertToString(strings);
             productVariation.setSecondaryImage(convert);
         }
         productVariationRepository.save(productVariation);
 
-        return "Product variation Updated";
+        String messageProductVariationUpdateSuccessful = messageSource.getMessage("product.variation.update.success", null, locale);
+        return messageProductVariationUpdateSuccessful;
     }
 
     //Same problem with IsActive. CHECK LATER
-    private String validateUpdateData(UpdateProductVariationDTO updateProductVariationDto,String sellerEmail,WebRequest webRequest){
+    private String validateUpdateData(UpdateProductVariationDTO updateProductVariationDto, String sellerEmail, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
 
         Optional<ProductVariation> variationOptional = productVariationRepository.findById(updateProductVariationDto.getProductVariationId());
 
-        if(!variationOptional.isPresent())
-            throw new ProductException("Product Variation is not valid");
+        if (!variationOptional.isPresent()){
+            String messageProductDoesNotExist = messageSource.getMessage("product.not.available", null, locale);
+            throw new EmailException(messageProductDoesNotExist);
+        }
 
         ProductVariation productVariation = variationOptional.get();
-        Product product =productVariation.getProduct();
+        Product product = productVariation.getProduct();
 
-        if(!product.getActive())
-            throw new ProductException("Product is not active");
-
-        if(!product.getSeller().getEmail().equalsIgnoreCase(sellerEmail))
-            throw new ProductException("Product doesn't belong to seller");
-
-        if(updateProductVariationDto.getQuantityAvailable()!=null){
-            if(updateProductVariationDto.getQuantityAvailable()<0 )
-                throw new ProductException("Quantity can't be negative");
+        if (!product.getActive()) {
+            String messageProductNotActive = messageSource.getMessage("product.not.active", null, locale);
+            throw new EmailException(messageProductNotActive);
         }
-        if(updateProductVariationDto.getPrice()!=null) {
-            if (updateProductVariationDto.getPrice() < 0)
-                throw new ProductException("Price can't be negative");
+
+        if (!product.getSeller().getEmail().equalsIgnoreCase(sellerEmail)) {
+            String messageProductNotSeller = messageSource.getMessage("product.not.seller", null, locale);
+            throw new EmailException(messageProductNotSeller);
         }
-        if(product.getDeleted())
-            throw new ProductException("Product is deleted");
+
+        if (updateProductVariationDto.getQuantityAvailable() != null) {
+            if (updateProductVariationDto.getQuantityAvailable() < 0) {
+                String messageQuantityNegative = messageSource.getMessage("product.quantity.negative", null, locale);
+                throw new EmailException(messageQuantityNegative);
+            }
+        }
+        if (updateProductVariationDto.getPrice() != null) {
+            if (updateProductVariationDto.getPrice() < 0) {
+                String messagePriceNegative = messageSource.getMessage("product.price.negative", null, locale);
+                throw new EmailException(messagePriceNegative);
+            }
+        }
+        if (product.getDeleted()) {
+            String messageProductDeleted = messageSource.getMessage("product.deleted", null, locale);
+            throw new EmailException(messageProductDeleted);
+        }
 
 
-        Category category=product.getCategory();
+        Category category = product.getCategory();
         Long categoryId = category.getId();
-        if(updateProductVariationDto.getMetadata()!=null) {
+        if (updateProductVariationDto.getMetadata() != null) {
             Map<String, String> metadata = updateProductVariationDto.getMetadata();
 
             List<String> receivedFields = new ArrayList<>(metadata.keySet());
@@ -502,13 +573,16 @@ public class ProductService {
                 actualFields.add((String) e);
             });
 
-            if (receivedFields.size() < actualFields.size())
-                throw new ProductException("Entered field is less than existing field");
+            if (receivedFields.size() < actualFields.size()) {
+                String messageCategoryMetadataFiledSizeLess = messageSource.getMessage("category.metadata.field.less", null, locale);
+                throw new EmailException(messageCategoryMetadataFiledSizeLess);
+            }
 
             receivedFields.removeAll(actualFields);
 
             if (!receivedFields.isEmpty()) {
-                throw new EmailException("Entered field is more than existing fields");
+                String messageCategoryMetadataFiledSizeMore = messageSource.getMessage("category.metadata.field.more", null, locale);
+                throw new EmailException(messageCategoryMetadataFiledSizeMore);
             }
 
             List<String> metadataFields = new ArrayList<>(metadata.keySet());
@@ -520,38 +594,45 @@ public class ProductService {
 
                 String receivedValues = metadata.get(fieldName);
                 if (receivedValues.isEmpty()) {
-                    throw new EmailException("Values can't be empty");
+                    String messageCategoryMetadataValueEmpty = messageSource.getMessage("category.metadata.value.empty", null, locale);
+                    throw new EmailException(messageCategoryMetadataValueEmpty);
                 }
                 Set<String> actualSet = SetStringConverter.convertToSet(receivedValues);
                 Set<String> union = Sets.union(actualSet, dbValue);
                 if (union.size() > dbValue.size()) {
-                    throw new EmailException("This variation doesn't exists");
+                    String messageCVariationDoNotExists = messageSource.getMessage("product.variation.does.not.exits", null, locale);
+                    throw new EmailException(messageCVariationDoNotExists);
                 }
             }
         }
         return "Success";
     }
 
-    public ViewCustomerProductDTO viewCustomerProduct(Long productId,WebRequest webRequest){
+    public ViewCustomerProductDTO viewCustomerProduct(Long productId, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
 
         Optional<Product> productOptional = productRepository.findById(productId);
-        if(!productOptional.isPresent()){
-            throw new EmailException("ProductId is invalid");
+        if (!productOptional.isPresent()) {
+            String messageProductDoesNotExist = messageSource.getMessage("product.not.available", null, locale);
+            throw new EmailException(messageProductDoesNotExist);
         }
         Product product = productOptional.get();
-        if(product.getDeleted()){
-            throw new EmailException("Product is deleted");
+        if (product.getDeleted()) {
+            String messageProductDeleted = messageSource.getMessage("product.deleted", null, locale);
+            throw new EmailException(messageProductDeleted);
         }
-        if(!product.getActive()){
-            throw new EmailException("Product is inactive");
+        if (!product.getActive()) {
+            String messageProductNotActive = messageSource.getMessage("product.not.active", null, locale);
+            throw new EmailException(messageProductNotActive);
         }
         Category category = product.getCategory();
         List<ProductVariation> variationList = productVariationRepository.findByProductId(productId);
-        if(variationList.isEmpty()){
-            throw  new EmailException("This product have no variations available");
+        if (variationList.isEmpty()) {
+            String messageCVariationDoNotExists = messageSource.getMessage("product.variation.does.not.exits", null, locale);
+            throw new EmailException(messageCVariationDoNotExists);
         }
 
-        ViewCustomerProductDTO viewCustomerProductDTO =new ViewCustomerProductDTO();
+        ViewCustomerProductDTO viewCustomerProductDTO = new ViewCustomerProductDTO();
         viewCustomerProductDTO.setProductName(product.getName());
         viewCustomerProductDTO.setBrand(product.getBrand());
         viewCustomerProductDTO.setDescription(product.getDescription());
@@ -560,9 +641,9 @@ public class ProductService {
         viewCustomerProductDTO.setCategoryId(category.getId());
         viewCustomerProductDTO.setCategoryName(category.getName());
 
-        List<ProductVariationDTO> variationDtoList=new ArrayList<>();
-        for (ProductVariation productVariation:variationList) {
-            ProductVariationDTO variationDto=new ProductVariationDTO();
+        List<ProductVariationDTO> variationDtoList = new ArrayList<>();
+        for (ProductVariation productVariation : variationList) {
+            ProductVariationDTO variationDto = new ProductVariationDTO();
             variationDto.setQuantityAvailable(productVariation.getQuantityAvailable());
             variationDto.setPrice(productVariation.getPrice());
             variationDto.setMetadata(productVariation.getMetadata());
@@ -577,27 +658,30 @@ public class ProductService {
     }
 
 
-    public List<ViewCustomerAllProductDTO> viewCustomerAllProduct(Long categoryId,String offset,WebRequest webRequest, String max,  String field, String order) {
+    public List<ViewCustomerAllProductDTO> viewCustomerAllProduct(Long categoryId, String offset, WebRequest webRequest, String max, String field, String order) {
+        Locale locale = webRequest.getLocale();
 
         Integer offSetPage = Integer.parseInt(offset);
         Integer sizeOfPage = Integer.parseInt(max);
         Pageable pageable;
-        if(order.equalsIgnoreCase("Ascending")) {
+        if (order.equalsIgnoreCase("Ascending")) {
             pageable = PageRequest.of(offSetPage, sizeOfPage, Sort.Direction.ASC, field);
-        }else{
+        } else {
             pageable = PageRequest.of(offSetPage, sizeOfPage, Sort.Direction.DESC, field);
         }
         List<Category> categoryList = categoryRepository.findByParentId(categoryId);
-        if(categoryList.isEmpty()){
-            return getProductDetails(categoryId,pageable);
-        }else{
-            return null;
+        if (categoryList.isEmpty()) {
+            return getProductDetails(categoryId, pageable);
+        } else {
+            String messageCategoryNotLeaf = messageSource.getMessage("category.not.leaf", null, locale);
+            throw new CategoryException(messageCategoryNotLeaf);
         }
     }
-    private List<ViewCustomerAllProductDTO> getProductDetails(Long categoryId, Pageable pageable){
-        List<ViewCustomerAllProductDTO> viewCustomerAllProductDtos=new ArrayList<>();
+
+    private List<ViewCustomerAllProductDTO> getProductDetails(Long categoryId, Pageable pageable) {
+        List<ViewCustomerAllProductDTO> viewCustomerAllProductDtos = new ArrayList<>();
         List<Product> productList = productRepository.findByCategoryId(categoryId, pageable);
-        for (Product product:productList) {
+        for (Product product : productList) {
             if (!product.getDeleted() && product.getActive()) {
                 ViewCustomerAllProductDTO viewCustomerAllProductDto = setProductData(product);
                 viewCustomerAllProductDtos.add(viewCustomerAllProductDto);
@@ -605,7 +689,8 @@ public class ProductService {
         }
         return viewCustomerAllProductDtos;
     }
-    private ViewCustomerAllProductDTO setProductData(Product product){
+
+    private ViewCustomerAllProductDTO setProductData(Product product) {
         ViewCustomerAllProductDTO viewCustomerAllProductDto = new ViewCustomerAllProductDTO();
         viewCustomerAllProductDto.setProductId(product.getId());
         viewCustomerAllProductDto.setProductName(product.getName());
@@ -625,29 +710,32 @@ public class ProductService {
         return viewCustomerAllProductDto;
     }
 
-    public List<ViewCustomerAllProductDTO> viewSimilarProduct(Long productId,WebRequest webRequest,String offset,  String max,  String field, String order){
-        Locale locale=webRequest.getLocale();
+    public List<ViewCustomerAllProductDTO> viewSimilarProduct(Long productId, WebRequest webRequest, String offset, String max, String field, String order) {
+        Locale locale = webRequest.getLocale();
         Optional<Product> productOptional = productRepository.findById(productId);
-        if(!productOptional.isPresent()){
-            throw new EmailException("Invalid ProductId");
+        if (!productOptional.isPresent()) {
+            String messageProductDoesNotExist = messageSource.getMessage("product.not.available", null, locale);
+            throw new EmailException(messageProductDoesNotExist);
         }
         Long categoryId = productOptional.get().getCategory().getId();
-        return viewCustomerAllProduct(categoryId,offset,webRequest,max,field,order);
+        return viewCustomerAllProduct(categoryId, offset, webRequest, max, field, order);
     }
 
-    public ViewCustomerProductDTO viewAdminProduct(Long productId,WebRequest webRequest){
-        Locale locale=webRequest.getLocale();
+    public ViewCustomerProductDTO viewAdminProduct(Long productId, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
         Optional<Product> productOptional = productRepository.findById(productId);
-        if(!productOptional.isPresent()){
-            throw new EmailException("ProductId is invalid");
+        if (!productOptional.isPresent()) {
+            String messageProductDoesNotExist = messageSource.getMessage("product.not.available", null, locale);
+            throw new EmailException(messageProductDoesNotExist);
         }
         Product product = productOptional.get();
         Category category = product.getCategory();
         List<ProductVariation> variationList = productVariationRepository.findByProductId(productId);
-        if(variationList.isEmpty()){
-            throw  new EmailException("Variation doesn't exists");
+        if (variationList.isEmpty()) {
+            String messageProductVariationUpdateSuccessful = messageSource.getMessage("product.variation.update.success", null, locale);
+            throw new EmailException(messageProductVariationUpdateSuccessful);
         }
-        ViewCustomerProductDTO viewCustomerProductDTO =new ViewCustomerProductDTO();
+        ViewCustomerProductDTO viewCustomerProductDTO = new ViewCustomerProductDTO();
         viewCustomerProductDTO.setProductName(product.getName());
         viewCustomerProductDTO.setBrand(product.getBrand());
         viewCustomerProductDTO.setDescription(product.getDescription());
@@ -656,9 +744,9 @@ public class ProductService {
         viewCustomerProductDTO.setCategoryId(category.getId());
         viewCustomerProductDTO.setCategoryName(category.getName());
 
-        List<ProductVariationDTO> variationDtoList=new ArrayList<>();
-        for (ProductVariation productVariation:variationList) {
-            ProductVariationDTO variationDto=new ProductVariationDTO();
+        List<ProductVariationDTO> variationDtoList = new ArrayList<>();
+        for (ProductVariation productVariation : variationList) {
+            ProductVariationDTO variationDto = new ProductVariationDTO();
             variationDto.setQuantityAvailable(productVariation.getQuantityAvailable());
             variationDto.setPrice(productVariation.getPrice());
             variationDto.setMetadata(productVariation.getMetadata());
@@ -672,18 +760,18 @@ public class ProductService {
         return viewCustomerProductDTO;
     }
 
-    public List<ViewCustomerAllProductDTO> viewAllProduct(String offset,  String max,  String field, String order){
+    public List<ViewCustomerAllProductDTO> viewAllProduct(String offset, String max, String field, String order) {
         Integer offSetPage = Integer.parseInt(offset);
         Integer sizeOfPage = Integer.parseInt(max);
         Pageable pageable;
-        if(order.equalsIgnoreCase("Ascending")) {
+        if (order.equalsIgnoreCase("Ascending")) {
             pageable = PageRequest.of(offSetPage, sizeOfPage, Sort.Direction.ASC, field);
-        }else{
+        } else {
             pageable = PageRequest.of(offSetPage, sizeOfPage, Sort.Direction.DESC, field);
         }
         List<Product> productList = (List<Product>) productRepository.findAll();
-        List<ViewCustomerAllProductDTO> viewCustomerAllProductDtos=new ArrayList<>();
-        for (Product product:productList) {
+        List<ViewCustomerAllProductDTO> viewCustomerAllProductDtos = new ArrayList<>();
+        for (Product product : productList) {
             if (!product.getDeleted() && product.getActive()) {
                 ViewCustomerAllProductDTO viewCustomerAllProductDto = setProductData(product);
                 viewCustomerAllProductDtos.add(viewCustomerAllProductDto);
@@ -693,39 +781,43 @@ public class ProductService {
     }
 
     public String activateProduct(Long productId, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
         Product product = productRepository.findById(productId).get();
         product.setActive(true);
         productRepository.save(product);
 
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         String sellerEmail = product.getSeller().getEmail();
-        String subject = "Product Activation";
-        String message = "Your product " + product.getName() + ": " + product.getBrand() + " is activated by admin";
+        String subject = messageSource.getMessage("product.activate", null, locale);
+        String message = messageSource.getMessage("product.activate", null, locale) + "\n Product Details:  "+ product.getName() + ": " + product.getBrand();
 
         simpleMailMessage.setTo(sellerEmail);
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(message);
         javaMailSender.send(simpleMailMessage);
 
-        return "Product activated successfully";
+        String messageProductActivateSuccess = messageSource.getMessage("product.activate.success", null, locale);
+        return messageProductActivateSuccess;
     }
 
     public String deactivateProduct(Long productId, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
         Product product = productRepository.findById(productId).get();
         product.setActive(false);
         productRepository.save(product);
 
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         String sellerEmail = product.getSeller().getEmail();
-        String subject = "Product Deactivation";
-        String message = "Your product " + product.getName() + ": " + product.getBrand() + " is deactivated by admin";
+        String subject = messageSource.getMessage("product.deactivate", null, locale);
+        String message = messageSource.getMessage("product.deactivate", null, locale) + "\n Product details: " + product.getName() + ": " + product.getBrand();
 
         simpleMailMessage.setTo(sellerEmail);
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(message);
         javaMailSender.send(simpleMailMessage);
 
-        return "Product deactivated successfully";
+        String messageProductDeactivateSuccess = messageSource.getMessage("product.deactivate.success", null, locale);
+        return messageProductDeactivateSuccess;
     }
 
 

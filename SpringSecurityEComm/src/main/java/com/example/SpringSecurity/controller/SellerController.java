@@ -39,18 +39,18 @@ public class SellerController {
     }
 
     @PutMapping("/updatePassword")
-    public String updatePassword(@Param("password") String password, @Param("confirmPassword") String confirmPassword, HttpServletRequest httpServletRequest) {
-        return customerService.updatePassword(password, confirmPassword, httpServletRequest);
+    public String updatePassword(@Param("password") String password, @Param("confirmPassword") String confirmPassword, HttpServletRequest httpServletRequest, WebRequest webRequest) {
+        return customerService.updatePassword(password, confirmPassword, httpServletRequest, webRequest);
     }
 
     @PutMapping("/updateAddress")
-    public String updateAddress(@RequestBody HashMap<String, Object> map, HttpServletRequest httpServletRequest) throws Exception {
-        return sellerService.updateSellerAddress(map, httpServletRequest);
+    public String updateAddress(@RequestBody HashMap<String, Object> map, HttpServletRequest httpServletRequest, WebRequest webRequest) throws Exception {
+        return sellerService.updateSellerAddress(map, httpServletRequest, webRequest);
     }
 
     @PutMapping("/updateProfile")
-    public String updateProfile(@Valid @RequestBody HashMap<String, Object> map, HttpServletRequest httpServletRequest) {
-        return sellerService.updateProfile(map, httpServletRequest);
+    public String updateProfile(@Valid @RequestBody HashMap<String, Object> map, HttpServletRequest httpServletRequest, WebRequest webRequest) {
+        return sellerService.updateProfile(map, httpServletRequest, webRequest);
     }
 
     @GetMapping("/getAllCategories")

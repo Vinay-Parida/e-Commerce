@@ -42,7 +42,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/ecommProject-5978a23bc7c352a35e1dbf19935fe1c1105dad91" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SpringSecurityECommCopy" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -125,26 +125,26 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="461" height="478" key="DebuggerActiveHint/0.27.1366.741@0.27.1366.741" timestamp="1587127349807" />
-    <state x="460" y="155" width="424" height="484" key="FileChooserDialogImpl" timestamp="1587450795840">
+    <state x="460" y="155" width="424" height="484" key="FileChooserDialogImpl" timestamp="1588146409391">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="460" y="155" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1587450795840" />
-    <state width="1320" height="143" key="GridCell.Tab.0.bottom" timestamp="1588077485596">
+    <state x="460" y="155" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1588146409391" />
+    <state width="1320" height="2" key="GridCell.Tab.0.bottom" timestamp="1588433416321">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="143" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1588077485596" />
-    <state width="1320" height="143" key="GridCell.Tab.0.center" timestamp="1588077485596">
+    <state width="1320" height="2" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1588433416321" />
+    <state width="1320" height="2" key="GridCell.Tab.0.center" timestamp="1588433416321">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="143" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1588077485596" />
-    <state width="1320" height="143" key="GridCell.Tab.0.left" timestamp="1588077485596">
+    <state width="1320" height="2" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1588433416321" />
+    <state width="1320" height="2" key="GridCell.Tab.0.left" timestamp="1588433416321">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="143" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1588077485596" />
-    <state width="1320" height="143" key="GridCell.Tab.0.right" timestamp="1588077485596">
+    <state width="1320" height="2" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1588433416321" />
+    <state width="1320" height="2" key="GridCell.Tab.0.right" timestamp="1588433416321">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="143" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1588077485596" />
+    <state width="1320" height="2" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1588433416321" />
     <state width="1320" height="171" key="GridCell.Tab.1.bottom" timestamp="1587495564368">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -181,10 +181,10 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="178" y="109" width="999" height="583" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.27.1366.741@0.27.1366.741" timestamp="1586700058465" />
-    <state x="507" y="150" width="724" height="618" key="find.popup" timestamp="1588073882445">
+    <state x="507" y="150" width="724" height="618" key="find.popup" timestamp="1588491659291">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="507" y="150" width="724" height="618" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1588073882445" />
+    <state x="507" y="150" width="724" height="618" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1588491659291" />
     <state x="428" y="27" width="500" height="741" key="refactoring.ChangeSignatureDialog" timestamp="1585942233874">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -235,11 +235,6 @@
           <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-core/5.2.2.RELEASE/9b92fd9e4de96b97d7dc9ec7747758dfcac5a297/spring-security-core-5.2.2.RELEASE-sources.jar!/org/springframework/security/authentication/dao/AbstractUserDetailsAuthenticationProvider.java</url>
           <line>164</line>
           <option name="timeStamp" value="82" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/SpringSecurity/service/SellerService.java</url>
-          <line>182</line>
-          <option name="timeStamp" value="85" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

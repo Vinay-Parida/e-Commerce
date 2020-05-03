@@ -62,8 +62,8 @@ public class AdminController {
     // Admin Controller for Category
 
     @PostMapping("/addMetadataField")
-    public String addMetadataField(@RequestParam("FieldName") String fieldName){
-        return categoryService.addMetadataField(fieldName);
+    public String addMetadataField(@RequestParam("FieldName") String fieldName, WebRequest webRequest){
+        return categoryService.addMetadataField(fieldName, webRequest);
     }
 
     @GetMapping("/metadataFields")
@@ -76,36 +76,36 @@ public class AdminController {
 
     @PostMapping("/addCategory")
     public String addCategory(@RequestParam("CategoryName") String categoryName,
-                              @RequestParam(defaultValue = "")Long parentId){
-        return categoryService.addCategory(categoryName, parentId);
+                              @RequestParam(defaultValue = "")Long parentId, WebRequest webRequest){
+        return categoryService.addCategory(categoryName, parentId, webRequest);
     }
 
     @GetMapping("/category")
-    public SingleCategoryDTO getSingleCategory(@RequestParam("CategoryId")Long id){
-        return categoryService.getSingleCategory(id);
+    public SingleCategoryDTO getSingleCategory(@RequestParam("CategoryId")Long id, WebRequest webRequest){
+        return categoryService.getSingleCategory(id, webRequest);
     }
 
     @GetMapping("/allCategory")
     public List<SingleCategoryDTO> getAllCategory(@RequestParam(defaultValue = "10") Integer size,
                                                   @RequestParam(defaultValue = "0") Integer offset,
                                                   @RequestParam(defaultValue = "id") String field,
-                                                  @RequestParam(defaultValue = "asc") String order){
-        return categoryService.getAllCategory(size, offset, field, order);
+                                                  @RequestParam(defaultValue = "asc") String order, WebRequest webRequest){
+        return categoryService.getAllCategory(size, offset, field, order, webRequest);
     }
 
     @PutMapping("/updateCategory")
-    public String updateCategory(@RequestParam("CategoryId") Long id, @RequestParam("CategoryName") String name){
-        return categoryService.updateCategory(id, name);
+    public String updateCategory(@RequestParam("CategoryId") Long id, @RequestParam("CategoryName") String name, WebRequest webRequest){
+        return categoryService.updateCategory(id, name, webRequest);
     }
 
     @PostMapping("/addCategoryMetadataField")
-    public String addCategoryMetadataField(@RequestBody CategoryMetadataFieldValueDTO categoryMetadataFieldValueDto){
-        return categoryService.addMetadataFieldValue(categoryMetadataFieldValueDto);
+    public String addCategoryMetadataField(@RequestBody CategoryMetadataFieldValueDTO categoryMetadataFieldValueDto, WebRequest webRequest){
+        return categoryService.addMetadataFieldValue(categoryMetadataFieldValueDto, webRequest);
     }
 
     @PutMapping("/updateCategoryMetadataField")
-    public String updateMetadataField(@RequestBody CategoryMetadataFieldValueDTO categoryMetadataFieldValueDto){
-        return categoryService.updateMetadataField(categoryMetadataFieldValueDto);
+    public String updateMetadataField(@RequestBody CategoryMetadataFieldValueDTO categoryMetadataFieldValueDto, WebRequest webRequest){
+        return categoryService.updateMetadataField(categoryMetadataFieldValueDto, webRequest);
     }
 
     @GetMapping("/viewProduct")

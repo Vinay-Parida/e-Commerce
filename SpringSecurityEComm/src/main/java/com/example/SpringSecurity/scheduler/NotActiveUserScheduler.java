@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class Scheduler {
+public class NotActiveUserScheduler {
 
     @Autowired
     UserRepository userRepository;
@@ -20,15 +20,14 @@ public class Scheduler {
     @Autowired
     JavaMailSender javaMailSender;
 
-    Logger logger;
+    Logger logger = LoggerFactory.getLogger(NotActiveUserScheduler.class);
 
-    @Scheduled(initialDelay = 1000, fixedDelay = 10000)
+    @Scheduled(initialDelay = 1000, fixedDelay = 100000)
     public void scheduledMailSender(){
         List<String> userEmails = userRepository.getNotActiveUserEmail();
 
         for (String email: userEmails) {
 
-            logger = LoggerFactory.getLogger(Scheduler.class);
             logger.info("Sending mail for " + email);
 
             String subject = "Account not active.";
@@ -39,6 +38,8 @@ public class Scheduler {
             simpleMailMessage.setSubject(subject);
             simpleMailMessage.setText(text);
             javaMailSender.send(simpleMailMessage);
+
+            logger.info("Email sent to " + email);
         }
     }
 }

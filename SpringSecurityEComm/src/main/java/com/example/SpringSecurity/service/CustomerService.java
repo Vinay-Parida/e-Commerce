@@ -5,7 +5,7 @@ import com.example.SpringSecurity.dto.CustomerProfileDTO;
 import com.example.SpringSecurity.dto.CustomerRegisterDTO;
 import com.example.SpringSecurity.entity.users.*;
 import com.example.SpringSecurity.exceptions.EmailException;
-import com.example.SpringSecurity.exceptions.UserNotFoundException;
+import com.example.SpringSecurity.exceptions.ValueNotFoundException;
 import com.example.SpringSecurity.modals.VerificationToken;
 import com.example.SpringSecurity.repository.AddressRepository;
 import com.example.SpringSecurity.repository.CustomerRepository;
@@ -110,7 +110,8 @@ public class CustomerService {
     }
 
 
-    public String addAddress(AddressDTO addressDto, HttpServletRequest httpServletRequest) {
+    public String addAddress(AddressDTO addressDto, HttpServletRequest httpServletRequest, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
         String email = httpServletRequest.getUserPrincipal().getName();
         Long id = userRepository.findByEmail(email).getId();
 
@@ -127,7 +128,7 @@ public class CustomerService {
         address.setUser(customer);
         addressRepository.save(address);
 
-        return "Address Saved Successfully";
+        return messageSource.getMessage("customer.address.saved.success", null, locale);
     }
 
     public List<AddressDTO> getAddressList(HttpServletRequest httpServletRequest) {
@@ -146,7 +147,8 @@ public class CustomerService {
     }
 
 
-    public String updateProfile(HashMap<String, Object> customerDetails, HttpServletRequest httpServletRequest) {
+    public String updateProfile(HashMap<String, Object> customerDetails, HttpServletRequest httpServletRequest, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
         String email = httpServletRequest.getUserPrincipal().getName();
         Customer customer = customerRepository.findByEmail(email);
 
@@ -169,7 +171,7 @@ public class CustomerService {
         }
         if (checkNotNull(contact)) {
             if (!isContactValid(contact)) {
-                return "Not a Valid Phone number";
+                return messageSource.getMessage("phone.number.not.valid", null, locale);
             } else {
                 customer.setContact(contact);
             }
@@ -178,7 +180,7 @@ public class CustomerService {
         customer.setName(name);
         customerRepository.save(customer);
 
-        return "Update Successful";
+        return messageSource.getMessage("profile.update.success", null, locale);
     }
 
     private Boolean isContactValid(String contact) {
@@ -196,7 +198,8 @@ public class CustomerService {
     }
 
 
-    public String updatePassword(String password, String confirmPassword, HttpServletRequest httpServletRequest) {
+    public String updatePassword(String password, String confirmPassword, HttpServletRequest httpServletRequest, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
         String regex = "((?=.*[a-z])(?=.*[A-Z])(?=.*\\W).{8,25})";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
@@ -207,30 +210,32 @@ public class CustomerService {
         User user = userRepository.findByEmail(email);
 
         if (isValidPassword == false) {
-            return "Password is not valid";
+            return messageSource.getMessage("exception.not.a.valid.password", null, locale);
         } else if (password.equals(confirmPassword) == false) {
-            return "Password and Confirm Password Does not matches";
+            return messageSource.getMessage("exception.password.confirmpassword.dont.match", null, locale);
         } else {
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String newPassword = passwordEncoder.encode(password);
             userRepository.updatePassword(newPassword, user.getId());
-            return "Password Updated Successfully";
+            return messageSource.getMessage("password.update.successful", null, locale);
         }
     }
 
-    public String deleteAddress(Long addressId, HttpServletRequest httpServletRequest) {
+    public String deleteAddress(Long addressId, HttpServletRequest httpServletRequest, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
         String email = httpServletRequest.getUserPrincipal().getName();
         Long id = userRepository.findByEmail(email).getId();
         Address address = addressRepository.getAddressByUserAndAddressId(id, addressId);
         if (address != null) {
             addressRepository.deleteById(addressId);
-            return "Address Deleted Successfully";
+            return messageSource.getMessage("address.deleted.success", null, locale);
         } else {
-            return "Address not found";
+            throw new ValueNotFoundException(messageSource.getMessage("address.not.found", null, locale));
         }
     }
 
-    public String updateAddress(HashMap<String, Object> addressDetails, Long addressId, HttpServletRequest httpServletRequest) throws Exception {
+    public String updateAddress(HashMap<String, Object> addressDetails, Long addressId, HttpServletRequest httpServletRequest, WebRequest webRequest) throws Exception {
+        Locale locale = webRequest.getLocale();
         String email = httpServletRequest.getUserPrincipal().getName();
         Long id = userRepository.findByEmail(email).getId();
 
@@ -261,9 +266,10 @@ public class CustomerService {
                 }
 
                 addressRepository.save(address);
-                return "Address Updated Successfully";
+                return messageSource.getMessage("address.update.success", null, locale);
             } else {
-                throw new UserNotFoundException("Address Not found");
+                throw new ValueNotFoundException(messageSource.getMessage("address.not.found", null, locale));
+
             }
         } catch (Exception e) {
             e.printStackTrace();

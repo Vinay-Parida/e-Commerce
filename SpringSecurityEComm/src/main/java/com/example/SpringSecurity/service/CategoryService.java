@@ -3,12 +3,13 @@ package com.example.SpringSecurity.service;
 import com.example.SpringSecurity.dto.*;
 import com.example.SpringSecurity.entity.products.*;
 import com.example.SpringSecurity.exceptions.CategoryException;
-import com.example.SpringSecurity.exceptions.EmailException;
+import com.example.SpringSecurity.exceptions.ValueNotFoundException;
 import com.example.SpringSecurity.repository.CategoryMetadataFieldRepository;
 import com.example.SpringSecurity.repository.CategoryMetadataFieldValueRepository;
 import com.example.SpringSecurity.repository.CategoryRepository;
 import com.example.SpringSecurity.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -32,21 +33,25 @@ public class CategoryService {
     @Autowired
     private ProductRepository productRepository;
 
-    public String addMetadataField(String fieldName){
+    @Autowired
+    private MessageSource messageSource;
+
+    public String addMetadataField(String fieldName, WebRequest webRequest){
+        Locale locale = webRequest.getLocale();
         if (fieldName ==null || fieldName =="") {
-            throw new NullPointerException("Please Enter fieldName");
+            throw new ValueNotFoundException("Please Enter fieldName");
         }
         else {
             CategoryMetadataField categoryMetadataField = categoryMetadataFieldRepository.findByName(fieldName);
             if(categoryMetadataField != null){
-                return "Field already exists at field_id: " + categoryMetadataField.getId();
+                return messageSource.getMessage("metadata.field.already.exists", null, locale) + categoryMetadataField.getId();
             }
             else {
                 CategoryMetadataField categoryMetadataFieldObject = new CategoryMetadataField();
                 categoryMetadataFieldObject.setName(fieldName);
                 categoryMetadataFieldRepository.save(categoryMetadataFieldObject);
 
-                return "Field saved at field_id: " + categoryMetadataFieldRepository.findByName(fieldName).getId();
+                return messageSource.getMessage("metadata.field.saved.success", null, locale) + categoryMetadataFieldRepository.findByName(fieldName).getId();
             }
         }
     }
@@ -65,35 +70,42 @@ public class CategoryService {
 
 
 
-    public String addCategory(String categoryName, Long parentId){
+    public String addCategory(String categoryName, Long parentId, WebRequest webRequest){
+        Locale locale = webRequest.getLocale();
+
         if(checkNull(categoryName) && parentId != null){
             if(categoryRepository.findByName(categoryName)!= null){
-                throw new CategoryException("Category already Exists");
+                String messageCategoryAlreadyExists = messageSource.getMessage("category.already.exists", null, locale);
+                throw new CategoryException(messageCategoryAlreadyExists);
             }
             else if(!categoryRepository.findById(parentId).isPresent()){
-                throw new CategoryException("Parent Id does not exists");
+                String messageParentDoesNotExist = messageSource.getMessage("category.parent.does.not.exists", null, locale);
+                throw new CategoryException(messageParentDoesNotExist);
             }
             else {
                 Category category = new Category();
                 category.setName(categoryName);
                 category.setParentId(parentId);
                 categoryRepository.save(category);
-                return "Category saved at category_id: " + categoryRepository.findByName(categoryName).getId();
+                String messageCategorySaved = messageSource.getMessage("category.saved.success", null, locale);
+                return messageCategorySaved + categoryRepository.findByName(categoryName).getId();
             }
         }
         else if (checkNull(categoryName) && parentId == null){
             if (categoryRepository.findByName(categoryName) != null){
-                throw new CategoryException("Category already exists");
+                String messageCategoryAlreadyExists = messageSource.getMessage("category.already.exists", null, locale);
+                throw new CategoryException(messageCategoryAlreadyExists);
             }
             else {
                 Category category = new Category();
                 category.setName(categoryName);
                 categoryRepository.save(category);
-                return "Category saved at category_id: " + categoryRepository.findByName(categoryName).getId();
+                String messageCategorySaved = messageSource.getMessage("category.saved.success", null, locale);
+                return messageCategorySaved + categoryRepository.findByName(categoryName).getId();
             }
         }
         else {
-            throw new NullPointerException("Enter Category name");
+            throw new ValueNotFoundException("Enter Category name");
         }
     }
 
@@ -104,9 +116,8 @@ public class CategoryService {
             return false;
     }
 
-
-
-    public SingleCategoryDTO getSingleCategory(Long categoryId){
+    public SingleCategoryDTO getSingleCategory(Long categoryId, WebRequest webRequest){
+        Locale locale = webRequest.getLocale();
         Category category = categoryRepository.findByid(categoryId);
 
         List<String> emptyList = new ArrayList<>();
@@ -120,7 +131,8 @@ public class CategoryService {
             singleCategoryDto.setChildCategory(childCategory.get(0).getName());
         }
         else {
-            singleCategoryDto.setChildCategory("Child category doesn't exists");
+            String messageChildDoesNotExists = messageSource.getMessage("category.child.does.not.exists", null, locale);
+            singleCategoryDto.setChildCategory(messageChildDoesNotExists);
         }
 
         return singleCategoryDto;
@@ -138,7 +150,7 @@ public class CategoryService {
     }
 
 
-    public List<SingleCategoryDTO> getAllCategory(Integer size, Integer offset, String field, String order){
+    public List<SingleCategoryDTO> getAllCategory(Integer size, Integer offset, String field, String order, WebRequest webRequest){
         Pageable pageable;
 
         if (order.equalsIgnoreCase("ASC"))
@@ -150,34 +162,39 @@ public class CategoryService {
         List<Category> allCategory = categoryRepository.findAll(pageable);
 
         allCategory.forEach(category -> {
-            singleCategoryDtoList.add(getSingleCategory(category.getId()));
+            singleCategoryDtoList.add(getSingleCategory(category.getId(), webRequest));
         });
         return singleCategoryDtoList;
     }
 
 
 
-    public String updateCategory(Long categoryId, String categoryName){
+    public String updateCategory(Long categoryId, String categoryName, WebRequest webRequest){
+        Locale locale = webRequest.getLocale();
         Category category = categoryRepository.findByid(categoryId);
 
         if (category != null){
             if (categoryRepository.findByName(categoryName) == null){
                 category.setName(categoryName);
                 categoryRepository.save(category);
-                return "Category Updated Successfully";
+                String messageCategoryUpdateSuccess = messageSource.getMessage("category.update.success", null, locale);
+                return messageCategoryUpdateSuccess;
             }
             else {
-                throw new CategoryException("Category with this name already exists");
+                String messageCategoryAlreadyExists = messageSource.getMessage("category.already.exists", null, locale);
+                throw new CategoryException(messageCategoryAlreadyExists);
             }
         }
         else {
-            throw new CategoryException("Category doesn't exist");
+            String messageCategoryIdDoesNotExists = messageSource.getMessage("category.does.not.exists", null, locale);
+            throw new CategoryException(messageCategoryIdDoesNotExists);
         }
     }
 
 
 
-    public String addMetadataFieldValue(CategoryMetadataFieldValueDTO categoryMetadataFieldValueDto){
+    public String addMetadataFieldValue(CategoryMetadataFieldValueDTO categoryMetadataFieldValueDto, WebRequest webRequest){
+        Locale locale = webRequest.getLocale();
         Optional<Category> category = categoryRepository.findById(categoryMetadataFieldValueDto.getCategoryId());
         Optional<CategoryMetadataField> categoryMetadataField = categoryMetadataFieldRepository.findById(categoryMetadataFieldValueDto.getFieldId());
 
@@ -198,36 +215,42 @@ public class CategoryService {
 
                 categoryMetadataFieldValueRepository.save(categoryMetadataFieldValue);
 
-                return "Category Metadata Fields Values saved successfully";
+                String messageFieldValuedAdded = messageSource.getMessage("category.metadata.field.value.saved.success", null, locale);
+                return messageFieldValuedAdded;
             }
             else
-                throw new CategoryException("Category Metadata Field doesn't exists");
+                throw new CategoryException(messageSource.getMessage("category.metadata.field.not.exists", null, locale));
         }
-        else
-            throw new CategoryException("Category doesn't exists");
+        else {
+            String messageCategoryIdDoesNotExists = messageSource.getMessage("category.does.not.exists", null, locale);
+            throw new CategoryException(messageCategoryIdDoesNotExists);
+        }
     }
 
 
 
-    public String updateMetadataField(CategoryMetadataFieldValueDTO categoryMetadataFieldValueDto){
+    public String updateMetadataField(CategoryMetadataFieldValueDTO categoryMetadataFieldValueDto, WebRequest webRequest){
+        Locale locale = webRequest.getLocale();
         CategoryMetadataFieldValue categoryMetadataFieldValue = categoryMetadataFieldValueRepository
                                                                     .findByCategoryAndMetadataField(categoryMetadataFieldValueDto.getCategoryId(),
                                                                                                     categoryMetadataFieldValueDto.getFieldId());
         if (categoryMetadataFieldValue!= null){
             String updateValues = validateMetadataFieldValues(categoryMetadataFieldValueDto.getFieldValues(),
                                                                 categoryMetadataFieldValueDto.getCategoryId(),
-                                                                categoryMetadataFieldValueDto.getFieldId());
+                                                                categoryMetadataFieldValueDto.getFieldId(), webRequest);
             categoryMetadataFieldValue.setValues(updateValues);
             categoryMetadataFieldValueRepository.save(categoryMetadataFieldValue);
-            return "Category Metadata Field Updated Successfully";
+            String messageFieldValuedUpdate = messageSource.getMessage("category.metadata.field.update.success", null, locale);
+            return messageFieldValuedUpdate;
         }
         else {
-            throw new CategoryException("Enter valid category and metadata field");
+            String messageCategoryMetadataFieldException = messageSource.getMessage("category.metadata.field.exception.enter.valid.value", null, locale);
+            throw new CategoryException(messageCategoryMetadataFieldException);
         }
     }
 
 
-    private String validateMetadataFieldValues(Set<String> fieldValues, Long categoryId, Long fieldId){
+    private String validateMetadataFieldValues(Set<String> fieldValues, Long categoryId, Long fieldId, WebRequest webRequest){
         String value = categoryMetadataFieldValueRepository.findByCategoryAndMetadataField(categoryId, fieldId).getValues();
         if (!fieldValues.isEmpty()){
             Set<String> valueSet = SetStringConverter.convertToSet(value);
@@ -307,10 +330,11 @@ public class CategoryService {
 
 
     public CategoryFilterDTO getFilterData(Long categoryId, WebRequest webRequest){
-
+        Locale locale = webRequest.getLocale();
         Category category = categoryRepository.findByid(categoryId);
         if(category==null){
-            throw new EmailException("Email doesn't exist");
+            String messageCategoryIdDoesNotExists = messageSource.getMessage("category.does.not.exists", null, locale);
+            throw new CategoryException(messageCategoryIdDoesNotExists);
         }
         List<Product> productList = productRepository.getProduct(categoryId);
         Set<String> brandList=new HashSet<>();
