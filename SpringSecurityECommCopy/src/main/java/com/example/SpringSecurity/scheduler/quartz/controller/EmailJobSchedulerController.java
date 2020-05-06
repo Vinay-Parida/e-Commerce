@@ -71,4 +71,5 @@ public class EmailJobSchedulerController {
                 .withSchedule(SimpleScheduleBuilder.simpleSchedule().withMisfireHandlingInstructionFireNow())
                 .build();
     }
+
 }

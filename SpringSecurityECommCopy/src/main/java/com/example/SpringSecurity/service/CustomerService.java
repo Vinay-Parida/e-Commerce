@@ -71,6 +71,8 @@ public class CustomerService {
                 user1.setRoles(Arrays.asList(new Role("ROLE_CUSTOMER")));
                 user1.setContact(customerDto.getContact());
 
+                user1.setPasswordLastModified(new Date());
+
                 customerRepository.save(user1);
 
                 String token = UUID.randomUUID().toString();
@@ -215,6 +217,8 @@ public class CustomerService {
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String newPassword = passwordEncoder.encode(password);
             userRepository.updatePassword(newPassword, user.getId());
+            user.setPasswordLastModified(new Date());
+            userRepository.save(user);
             return "Password Updated Successfully";
         }
     }

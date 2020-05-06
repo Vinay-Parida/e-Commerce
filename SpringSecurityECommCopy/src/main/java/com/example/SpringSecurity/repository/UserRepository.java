@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 public interface UserRepository extends CrudRepository<User, Long> {
@@ -36,5 +37,10 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query(value = "select email from user where is_active =0", nativeQuery = true)
     List<String> getNotActiveUserEmail();
+
+    @Query(value = "SELECT email from user where password_last_modified +  >:date", nativeQuery = true)
+    List<String> emailWithPasswordNotResetIn30Days(Date date);
+
+    List<User> findAll();
 
 }
