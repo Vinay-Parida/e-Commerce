@@ -35,6 +35,9 @@ dependencies {
 	compile("org.apache.tomcat.embed:tomcat-embed-jasper")
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-quartz'
+//	compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.2'
+
 }
 
 test {

@@ -1,6 +1,5 @@
 package com.example.SpringSecurity.controller;
 
-import com.example.SpringSecurity.entity.users.User;
 import com.example.SpringSecurity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -34,13 +33,10 @@ public class AppController {
         return name + " is Logged out successfully";
     }
 
-    @GetMapping("/")
-    public String index(HttpServletRequest httpServletRequest){
-        String email = httpServletRequest.getUserPrincipal().getName();
-        User user = userRepository.findByEmail(email);
-
-        return "index";
-    }
+//    @GetMapping("/login")
+//    public String index(ModelMap modelMap){
+//        return "login";
+//    }
 
     @GetMapping("/admin/home")
     public String adminHome(){

@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 import javax.sql.DataSource;
 
@@ -67,7 +68,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.pathMapping("/oauth/token", "/login")
+        endpoints
+//                .pathMapping("/oauth/token", "/login")
                 .tokenStore(tokenStore())
                 .userDetailsService(userDetailsService)
                 .authenticationManager(authenticationManager);
@@ -76,6 +78,12 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Bean
     TokenStore tokenStore(){
         return new JdbcTokenStore(dataSource);
+    }
+
+
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/oauth/confirm_access").setViewName("authorize");
     }
 
 }

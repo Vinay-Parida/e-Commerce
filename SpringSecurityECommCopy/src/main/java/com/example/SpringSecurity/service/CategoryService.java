@@ -3,7 +3,6 @@ package com.example.SpringSecurity.service;
 import com.example.SpringSecurity.dto.*;
 import com.example.SpringSecurity.entity.products.*;
 import com.example.SpringSecurity.exceptions.CategoryException;
-import com.example.SpringSecurity.exceptions.EmailException;
 import com.example.SpringSecurity.exceptions.ValueNotFoundException;
 import com.example.SpringSecurity.repository.CategoryMetadataFieldRepository;
 import com.example.SpringSecurity.repository.CategoryMetadataFieldValueRepository;
@@ -309,7 +308,7 @@ public class CategoryService {
 
         Category category = categoryRepository.findByid(categoryId);
         if(category==null){
-            throw new EmailException("Category doesn't exist");
+            throw new CategoryException("Category doesn't exist");
         }
         List<Product> productList = productRepository.getProduct(categoryId);
         Set<String> brandList=new HashSet<>();

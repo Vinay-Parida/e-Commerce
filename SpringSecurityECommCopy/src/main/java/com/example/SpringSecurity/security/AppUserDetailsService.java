@@ -20,6 +20,7 @@ public class AppUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         String encryptedPassword = passwordEncoder.encode("pass");
+        //Caused by: java.lang.NullPointerException: null
         UserDetails userDetails = userService.loadByUsername(username);
         return userDetails;
     }

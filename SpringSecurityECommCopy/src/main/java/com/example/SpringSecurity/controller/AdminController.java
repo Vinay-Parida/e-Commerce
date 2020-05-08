@@ -34,9 +34,6 @@ public class AdminController {
                 @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
                 @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
         })
-        @ApiImplicitParams({
-                @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                        required = true, dataType = "string", paramType = "header") })
     @GetMapping("/customers")
     public List<FindAllCustomerDTO> getCustomersList(@RequestParam(defaultValue = "10") Integer pageSize,
                                                      @RequestParam(defaultValue = "0") Integer pageOffset,
@@ -51,9 +48,6 @@ public class AdminController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @GetMapping("/sellers")
     public List<FindAllSellerDTO> getSellersList(@RequestParam(defaultValue = "10") Integer pageSize,
                                                  @RequestParam(defaultValue = "0") Integer pageOffset,
@@ -70,9 +64,6 @@ public class AdminController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
             @ApiResponse(code = 409, message = "Customer Does Not Exists")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @PutMapping("/activate/customer")
     public String activateCustomer(@RequestParam("UserId") Long id, WebRequest webRequest){
         return adminService.activateCustomer(id, webRequest);
@@ -87,9 +78,6 @@ public class AdminController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
             @ApiResponse(code = 409, message = "Seller Does Not Exists")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @PutMapping("/deactivate/customer")
     public String deactivateCustomer(@RequestParam("UserId") Long id, WebRequest webRequest){
         return adminService.deactivateCustomer(id, webRequest);
@@ -104,9 +92,6 @@ public class AdminController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
             @ApiResponse(code = 409, message = "Seller Does Not Exists")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @PutMapping("/activate/seller")
     public String activateSeller(@RequestParam("UserId") Long id, WebRequest webRequest){
         return adminService.activateSeller(id, webRequest);
@@ -121,9 +106,6 @@ public class AdminController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
             @ApiResponse(code = 409, message = "Seller Does Not Exists")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @PutMapping("/deactivate/seller")
     public String deactivateSeller(@RequestParam("UserId") Long id, WebRequest webRequest){
         return adminService.deactivateSeller(id, webRequest);
@@ -140,9 +122,6 @@ public class AdminController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
             @ApiResponse(code = 409, message = "Field Name can't be null")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @PostMapping("/addMetadataField")
     public String addMetadataField(@RequestParam("FieldName") String fieldName){
         return categoryService.addMetadataField(fieldName);
@@ -155,8 +134,6 @@ public class AdminController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
     })
-    @ApiImplicitParams({ @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @GetMapping("/metadataFields")
     public List<CategoryMetadataField> getAllCategoryMetadataFields(@RequestParam(defaultValue = "10") Integer size,
                                                                     @RequestParam(defaultValue = "0") Integer offset,
@@ -174,9 +151,6 @@ public class AdminController {
             @ApiResponse(code = 404, message = "Required parameters doesn't exists"),
             @ApiResponse(code = 409, message = "Field Name can't be null")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @PostMapping("/addCategory")
     public String addCategory(@RequestParam("CategoryName") String categoryName,
                               @RequestParam(defaultValue = "")Long parentId){
@@ -192,9 +166,6 @@ public class AdminController {
             @ApiResponse(code = 404, message = "Required parameters doesn't exists"),
             @ApiResponse(code = 409, message = "Field Name can't be null")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @GetMapping("/category")
     public SingleCategoryDTO getSingleCategory(@RequestParam("CategoryId")Long id){
         return categoryService.getSingleCategory(id);
@@ -208,9 +179,6 @@ public class AdminController {
             @ApiResponse(code = 404, message = "Required parameters doesn't exists"),
             @ApiResponse(code = 409, message = "Field Name can't be null")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @GetMapping("/allCategory")
     public List<SingleCategoryDTO> getAllCategory(@RequestParam(defaultValue = "10") Integer size,
                                                   @RequestParam(defaultValue = "0") Integer offset,
@@ -228,9 +196,6 @@ public class AdminController {
             @ApiResponse(code = 404, message = "Required parameters doesn't exists"),
             @ApiResponse(code = 409, message = "Category name already exists")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @PutMapping("/updateCategory")
     public String updateCategory(@RequestParam("CategoryId") Long id, @RequestParam("CategoryName") String name){
         return categoryService.updateCategory(id, name);
@@ -244,9 +209,6 @@ public class AdminController {
             @ApiResponse(code = 404, message = "Required parameters doesn't exists"),
             @ApiResponse(code = 409, message = "Category metadata field or category metadata field value or category already exists")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @PostMapping("/addCategoryMetadataField")
     public String addCategoryMetadataField(@RequestBody CategoryMetadataFieldValueDTO categoryMetadataFieldValueDto){
         return categoryService.addMetadataFieldValue(categoryMetadataFieldValueDto);
@@ -274,9 +236,6 @@ public class AdminController {
             @ApiResponse(code = 404, message = "Required parameters doesn't exists"),
             @ApiResponse(code = 409, message = "ProductId can't be null")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @GetMapping("/viewProduct")
     public ViewCustomerProductDTO viewProductForCustomer(@RequestParam("productId") Long productId, WebRequest webRequest){
         return productService.viewAdminProduct(productId, webRequest);
@@ -289,9 +248,6 @@ public class AdminController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "Required parameters doesn't exists"),
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @GetMapping("/viewAllProduct")
     private List<ViewCustomerAllProductDTO> viewAllProduct(
             @RequestParam(defaultValue = "0") String offset,
@@ -311,9 +267,6 @@ public class AdminController {
             @ApiResponse(code = 404, message = "Required parameters doesn't exists"),
             @ApiResponse(code = 409, message = "ProductId can't be null")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @PutMapping("/activateProduct")
     public String activateProduct(@RequestParam("id") Long id, WebRequest webRequest){
         return productService.activateProduct(id, webRequest);
@@ -328,9 +281,6 @@ public class AdminController {
             @ApiResponse(code = 404, message = "Required parameters doesn't exists"),
             @ApiResponse(code = 409, message = "ProductId can't be null")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @PutMapping("/deactivateProduct")
     public String deactivateProduct(@RequestParam("id") Long id, WebRequest webRequest){
         return productService.deactivateProduct(id, webRequest);

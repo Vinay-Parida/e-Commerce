@@ -9,14 +9,10 @@
 </head>
 
 <body>
-<form method="POST", action = "${contextPath}/login">
+<form method="POST", action = "${contextPath}/oauth/token">
 UserName: <input type="text" name="username" required><br/>
 Password: <input type="password" name="password" required/><br/>
-<div hidden>
-Grant type: <input type= "text", name= "grant_type" value="password" required><br/>
-Client Id: <input type= "text", name= "client_id" value="live-test" required><br/>
-Client Secret: <input type= "text", name= "client_secret" value="abcde" required><br/>
-</div>
+<input type="hidden" id="csrf_token" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
 <input type="submit" value="Submit" />
 </form>

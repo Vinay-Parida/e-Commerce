@@ -88,6 +88,8 @@ public class SellerService {
             user1.setCompanyName(sellerDto.getCompany_name());
             user1.setGst(sellerDto.getGst());
 
+            user1.setPasswordLastModified(new Date());
+
             sellerRepository.save(user1);
 
             String token = UUID.randomUUID().toString();

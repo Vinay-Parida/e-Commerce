@@ -37,9 +37,6 @@ public class CustomerController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @GetMapping("/profile")
     public CustomerProfileDTO viewProfile(HttpServletRequest httpServletRequest){
         return customerService.getProfile(httpServletRequest);
@@ -147,9 +144,6 @@ public class CustomerController {
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
-                    required = true, dataType = "string", paramType = "header") })
     @GetMapping("/getAllCategories")
     public List<CategoryDTO> getAllCategory(@RequestParam("CategoryId")Long id){
         return categoryService.getAllCategoryForCustomer(id);
@@ -167,7 +161,7 @@ public class CustomerController {
             @ApiImplicitParam(name = "Authorization", value = "Authorization token",
                     required = true, dataType = "string", paramType = "header") })
     @GetMapping("/filterCategory")
-    public CategoryFilterDTO filterCategory(@RequestParam("CategoryId") Long categoryId, WebRequest webRequest){
+    public CategoryFilterDTO filterCategory(@RequestParam("categoryId") Long categoryId, WebRequest webRequest){
         return categoryService.getFilterData(categoryId,webRequest);
     }
 

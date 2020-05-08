@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.scheduler;
+package com.example.SpringSecurity.scheduler.simpleScheduler;
 
 import com.example.SpringSecurity.repository.UserRepository;
 import org.slf4j.Logger;

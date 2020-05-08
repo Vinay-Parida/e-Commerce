@@ -20,6 +20,7 @@ public class UserService {
     public AppUser loadByUsername(String username){
         User user = userRepository.findByEmail(username);
         List<GrantAuthorityImpl> grantAuthorities = new ArrayList<>();
+        //Caused by: java.lang.NullPointerException: null
         for(Role role: user.getRoles()){
             grantAuthorities.add(new GrantAuthorityImpl(role.getAuthority()));
         }

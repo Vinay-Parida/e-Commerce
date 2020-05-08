@@ -1,9 +1,11 @@
 package com.example.SpringSecurity.entity.users;
 
 import com.example.SpringSecurity.auditing.AuditingInfo;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -41,6 +43,10 @@ public class User extends AuditingInfo<String> {
 
     @Lob
     private String image;
+
+    @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date passwordLastModified;
 
     //Getters and Setters
 
@@ -149,5 +155,12 @@ public class User extends AuditingInfo<String> {
 //        this.username = username;
 //    }
 
+    public Date getPasswordLastModified() {
+        return passwordLastModified;
+    }
+
+    public void setPasswordLastModified(Date passwordLastModified) {
+        this.passwordLastModified = passwordLastModified;
+    }
 }
 

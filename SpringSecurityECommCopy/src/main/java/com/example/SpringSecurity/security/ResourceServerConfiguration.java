@@ -124,6 +124,16 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .anyRequest()
                 .permitAll()
                 .and()
+
+
+                //With this config other request are showing unauthorized
+//                .formLogin()
+//                .loginPage("/login").permitAll()
+//                .and()
+//                .requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
+//                .and()
+
+
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .csrf()
