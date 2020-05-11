@@ -11,39 +11,23 @@
 <h3>Product Count</h3>
 <hr>
 
-<div>
 <table style="float:left;">
     <thead>
     <tr>
         <th>Category</th>
+        <th>Product Count</th>
     </tr>
     </thead>
 
     <tbody>
-    <tr th:each="tempCategory: ${categories}">
-        <td th:text="${tempCategory}" />
+    <tr th:each="tempVariable: ${productCount}">
+        <td th:text="${tempVariable.categoryName}" />
+        <td th:text="${tempVariable.productCount}" />
+
     </tr>
     </tbody>
 
 </table>
-
-    <table style="float:right;">
-        <thead>
-        <tr>
-            <th>Product Count</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr th:each="tempProductCount: ${productsPerCategory}">
-            <td th:text="${tempProductCount}" />
-        </tr>
-        </tbody>
-
-    </table>
-
-
-</div>
 
 </body>
 
