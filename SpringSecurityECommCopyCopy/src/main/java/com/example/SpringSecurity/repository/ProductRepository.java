@@ -21,5 +21,8 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     List<Product>  findByCategoryId(Long categoryId, Pageable pageable);
 
+    @Query(value = "select count(*) from product where category_id=:categoryId", nativeQuery = true)
+    Long countProductByCategoryId(Long categoryId);
+
 }
 

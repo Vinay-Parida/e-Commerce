@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Variation</title>
+    <link rel="stylesheet" th:href="@{/css/productVariationStock.css}" />
+</head>
+
+<body>
+
+<h3>Product Count</h3>
+<hr>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Product Brand</th>
+            <th>Product Name</th>
+            <th>Product Variation</th>
+            <th>Stock</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempDetails: ${productVariation}">
+            <td th:text="${tempDetails.product.brand}" />
+            <td th:text="${tempDetails.product.name}" />
+            <td th:text="${tempDetails.metadata}" />
+            <td th:text="${tempDetails.quantityAvailable}" />
+        </tr>
+        </tbody>
+
+    </table>
+
+
+
+</body>
+
+</html>

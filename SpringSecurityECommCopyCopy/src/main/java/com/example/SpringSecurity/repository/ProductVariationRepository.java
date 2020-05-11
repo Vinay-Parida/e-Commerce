@@ -24,4 +24,6 @@ public interface ProductVariationRepository extends CrudRepository<ProductVariat
             "user u inner join product p on u.id = p.seller_user_id " +
             "inner join product_variation pv on p.id = pv.product_id where  pv.quantity_available =0", nativeQuery = true)
     public List<Object[]> getDetailedProductAndEmailWithProductVariationNone();
+
+    public List<ProductVariation> findAll();
 }

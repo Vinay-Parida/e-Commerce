@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product</title>
+    <link rel="stylesheet" th:href="@{/css/productCount.css}" />
+</head>
+
+<body>
+
+<h3>Product Count</h3>
+<hr>
+
+<div>
+<table style="float:left;">
+    <thead>
+    <tr>
+        <th>Category</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="tempCategory: ${categories}">
+        <td th:text="${tempCategory}" />
+    </tr>
+    </tbody>
+
+</table>
+
+    <table style="float:right;">
+        <thead>
+        <tr>
+            <th>Product Count</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempProductCount: ${productsPerCategory}">
+            <td th:text="${tempProductCount}" />
+        </tr>
+        </tbody>
+
+    </table>
+
+
+</div>
+
+</body>
+
+</html>
