@@ -1,8 +1,10 @@
 package com.example.SpringSecurity.security;
 
 import com.example.SpringSecurity.filters.CustomerFilter;
+import com.jfilter.EnableJsonFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -19,6 +21,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @EnableResourceServer
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@ComponentScan({"com.jfilter.components"})
+@EnableJsonFilter
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
     @Autowired

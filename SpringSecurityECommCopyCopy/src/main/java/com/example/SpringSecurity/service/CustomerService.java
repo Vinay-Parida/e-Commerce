@@ -1,8 +1,8 @@
 package com.example.SpringSecurity.service;
 
 import com.example.SpringSecurity.dto.AddressDTO;
-import com.example.SpringSecurity.dto.CustomerProfileDTO;
 import com.example.SpringSecurity.dto.CustomerRegisterDTO;
+import com.example.SpringSecurity.dto.SellerProfileDTO;
 import com.example.SpringSecurity.entity.users.*;
 import com.example.SpringSecurity.exceptions.EmailException;
 import com.example.SpringSecurity.exceptions.UserNotFoundException;
@@ -99,15 +99,31 @@ public class CustomerService {
         }
     }
 
-    public CustomerProfileDTO getProfile(HttpServletRequest httpServletRequest) {
+
+
+    public SellerProfileDTO getProfile(HttpServletRequest httpServletRequest) {
+
+//        SimpleFilterProvider filterProvider = new SimpleFilterProvider().addFilter("customerFilter",
+//                SimpleBeanPropertyFilter.filterOutAllExcept("id", "firstName", "lastName", "isActive", "image"));
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.setFilterProvider(filterProvider);
+
         Principal principal = httpServletRequest.getUserPrincipal();
         String email = principal.getName();
 
-        CustomerProfileDTO customerProfileDto = null;
+        SellerProfileDTO customerProfileDto = new SellerProfileDTO();
 
         List<Object[]> customerDetails = customerRepository.getCustomerDetails(email);
         for (Object[] customer : customerDetails) {
-            customerProfileDto = new CustomerProfileDTO((BigInteger) customer[0], (String) customer[1], (String) customer[2], (Boolean) customer[3], (String) customer[4], (String) customer[5]);
+//            customerProfileDto = new CustomerProfileDTO((BigInteger) customer[0], (String) customer[1], (String) customer[2], (Boolean) customer[3], (String) customer[4], (String) customer[5]);
+
+            customerProfileDto.setId((BigInteger) customer[0]);
+            customerProfileDto.setFirstName((String) customer[1]);
+            customerProfileDto.setLastName((String) customer[2]);
+            customerProfileDto.setIsActive((Boolean) customer[3]);
+            customerProfileDto.setImage((String) customer[5]);
+            customerProfileDto.setContact((String) customer[4]);
         }
         return customerProfileDto;
     }

@@ -1,28 +1,39 @@
 package com.example.SpringSecurity.dto;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
-public class SellerProfileDTO {
+public class SellerProfileDTO  implements Serializable {
 
     private BigInteger id;
-    private String first_name;
-    private String last_name;
-    private Boolean is_Active;
-    private String company_contact;
-    private String company_name;
+    private String firstName;
+    private String lastName;
+    private Boolean isActive;
     private String image;
+
+    private String contact;
+
+
+    private String company_contact;
+
+    private String company_name;
+
     private String gst;
+
     private String address_line;
     private String city;
     private String state;
     private String country;
     private String zip_code;
 
-    public SellerProfileDTO(BigInteger id, String first_name, String last_name, Boolean is_Active, String company_contact, String company_name, String image, String gst, String address_line, String city, String state, String country, String zip_code) {
+    public SellerProfileDTO(){}
+
+
+    public SellerProfileDTO(BigInteger id, String firstName, String lastName, Boolean isActive, String company_contact, String company_name, String image, String gst, String address_line, String city, String state, String country, String zip_code) {
         this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.is_Active = is_Active;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.isActive = isActive;
         this.company_contact = company_contact;
         this.company_name = company_name;
         this.image = image;
@@ -42,28 +53,28 @@ public class SellerProfileDTO {
         this.id = id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Boolean getIs_Active() {
-        return is_Active;
+    public Boolean getIsActive() {
+        return isActive;
     }
 
-    public void setIs_Active(Boolean is_Active) {
-        this.is_Active = is_Active;
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     public String getCompany_contact() {
@@ -136,5 +147,13 @@ public class SellerProfileDTO {
 
     public void setZip_code(String zip_code) {
         this.zip_code = zip_code;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }

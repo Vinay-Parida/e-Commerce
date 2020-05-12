@@ -1,10 +1,11 @@
 package com.example.SpringSecurity.controller;
 
+import com.example.SpringSecurity.dto.*;
 import com.example.SpringSecurity.service.CategoryService;
 import com.example.SpringSecurity.service.CustomerService;
 import com.example.SpringSecurity.service.ProductService;
-import com.example.SpringSecurity.dto.*;
 import com.example.SpringSecurity.swagger.SwaggerConfig;
+import com.jfilter.filter.FieldFilterSetting;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,8 +38,15 @@ public class CustomerController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
+    @FieldFilterSetting(className = SellerProfileDTO.class, fields = {"company_name","company_contact","gst", "address_line", "city", "state", "country", "zip_code"})
     @GetMapping("/profile")
-    public CustomerProfileDTO viewProfile(HttpServletRequest httpServletRequest){
+    public SellerProfileDTO viewProfile(HttpServletRequest httpServletRequest){
+//        SimpleFilterProvider filterProvider = new SimpleFilterProvider().addFilter("customerFilter",
+//                SimpleBeanPropertyFilter.filterOutAllExcept("id", "firstName", "lastName", "isActive", "image"));
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.setFilterProvider(filterProvider);
+//        objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         return customerService.getProfile(httpServletRequest);
     }
 
