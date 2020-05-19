@@ -51,6 +51,8 @@ public class CustomerService {
     @Autowired
     private MessageSource messageSource;
 
+
+
     public String registerCustomer(CustomerRegisterDTO customerDto, WebRequest webRequest) {
         Locale locale = webRequest.getLocale();
         if (userRepository.findByEmail(customerDto.getEmail()) != null) {

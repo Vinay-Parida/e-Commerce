@@ -47,7 +47,7 @@ public class PasswordChangeEmailController {
                 .withIdentity(jobDetail.getKey().getName(), "email-triggers-new")
                 .withDescription("Send Email Trigger")
                 .startAt(new Date())
-                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMilliseconds(10000))
+                .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(00,00))
                 .build();
     }
 

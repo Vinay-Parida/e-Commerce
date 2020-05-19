@@ -1,5 +1,7 @@
 package com.example.SpringSecurity.scheduler.quartz.job;
 
+import com.example.SpringSecurity.mongodb.model.Logs;
+import com.example.SpringSecurity.repository.LogsRepository;
 import com.example.SpringSecurity.repository.ProductVariationRepository;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -7,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.quartz.QuartzJobBean;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Component;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -30,9 +34,24 @@ public class EmailJob extends QuartzJobBean {
     @Autowired
     private ProductVariationRepository variationRepository;
 
+    @Autowired
+    MongoTemplate mongoTemplate;
+
+    @Autowired
+    LogsRepository logsRepository;
+
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        Logs logs = new Logs();
         logger.info("Executing Job");
+
+        logs.setLogger("Kooowepowekl");
+        logs.setDate(new Date());
+        logs.setLevel("INFO");
+        logs.setMessage("Executing Job");
+
+        mongoTemplate.insert(logs);
+
 
 //        JobDataMap jobDataMap = jobExecutionContext.getMergedJobDataMap();
 //        String subject = jobDataMap.getString("subject");

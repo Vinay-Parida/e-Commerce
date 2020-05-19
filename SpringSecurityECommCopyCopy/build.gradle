@@ -39,8 +39,8 @@ dependencies {
 //	compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.2'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
 	compile group: 'com.github.rkonovalov', name: 'json-ignore', version: '1.0.8'
-
-
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb'
+	compile group: 'org.mongodb', name: 'mongodb-crypt', version: '1.0.1'
 
 }
 

@@ -3,7 +3,9 @@ package com.example.SpringSecurity;
 import com.example.SpringSecurity.auditing.AuditingAwareImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -16,10 +18,11 @@ import java.util.Locale;
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EnableScheduling
+@ImportResource("classpath*:logback.xml")
 public class ECommerceApplication{
 
 	public static void main(String[] args) {
-		SpringApplication.run(ECommerceApplication.class, args);
+		ConfigurableApplicationContext applicationContext = SpringApplication.run(ECommerceApplication.class, args);
 	}
 
 	@Bean
@@ -41,6 +44,8 @@ public class ECommerceApplication{
 
 		return resourceBundleMessageSource;
 	}
+
+
 
 
 }
