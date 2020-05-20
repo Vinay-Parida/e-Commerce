@@ -12,7 +12,8 @@ import java.util.Date;
 @Document
 public class Logs {
     private static Logger logger = null;
-//
+
+
     public void init(Class<?> c){
         logger = LoggerFactory.getLogger(c);
     }

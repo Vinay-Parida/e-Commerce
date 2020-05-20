@@ -3,11 +3,11 @@ package com.example.SpringSecurity.service;
 import com.example.SpringSecurity.mongodb.model.Logs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-@Component
+@Service
 public class CustomLoggerService {
 
     @Autowired

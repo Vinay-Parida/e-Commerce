@@ -290,6 +290,7 @@ public class CustomerService {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            // TODO: Remove this exception
             throw new Exception(e);
         }
 
