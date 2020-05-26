@@ -3,6 +3,7 @@ package com.example.SpringSecurity.service;
 import com.example.SpringSecurity.entity.users.AppUser;
 import com.example.SpringSecurity.entity.users.Role;
 import com.example.SpringSecurity.entity.users.User;
+import com.example.SpringSecurity.exceptions.UserNotFoundException;
 import com.example.SpringSecurity.repository.UserRepository;
 import com.example.SpringSecurity.security.GrantAuthorityImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class UserService {
             return new AppUser(user.getEmail(), user.getPassword(), user.isAccountNotLocked(), grantAuthorities);
         }
         else {
-            throw new RuntimeException("User not found");
+            throw new UserNotFoundException("User not found");
         }
     }
 }

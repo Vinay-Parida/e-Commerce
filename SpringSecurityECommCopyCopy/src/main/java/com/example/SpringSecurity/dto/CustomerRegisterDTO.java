@@ -10,10 +10,10 @@ public class CustomerRegisterDTO {
     private String email;
 
     @NotNull
-    private String first_name;
-    private String middle_name;
+    private String firstName;
+    private String middleName;
     @NotNull
-    private String last_name;
+    private String lastName;
 
     @NotNull
     @Pattern(regexp="(^$|[0-9]{10})",message = "Contact can be only 10 digits")
@@ -27,11 +27,11 @@ public class CustomerRegisterDTO {
     @Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})",message="Password must be 8 characters long")
     private String confirmPassword;
 
-    public CustomerRegisterDTO(@NotNull @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_.]*@[a-zA-Z]+[.][a-zA-Z]+", message = "Invalid Email Format") String email, @NotNull String first_name, String middle_name, @NotNull String last_name, @Pattern(regexp = "(^$|[0-9]{10})", message = "Contact can be only 10 digits") String contact, @NotNull @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})", message = "Password must be 8 characters long") String password, @NotNull @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})", message = "Password must be 8 characters long") String confirmPassword) {
+    public CustomerRegisterDTO(@NotNull @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_.]*@[a-zA-Z]+[.][a-zA-Z]+", message = "Invalid Email Format") String email, @NotNull String firstName, String middleName, @NotNull String lastName, @Pattern(regexp = "(^$|[0-9]{10})", message = "Contact can be only 10 digits") String contact, @NotNull @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})", message = "Password must be 8 characters long") String password, @NotNull @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})", message = "Password must be 8 characters long") String confirmPassword) {
         this.email = email;
-        this.first_name = first_name;
-        this.middle_name = middle_name;
-        this.last_name = last_name;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
         this.contact = contact;
         this.password = password;
         this.confirmPassword = confirmPassword;
@@ -45,37 +45,28 @@ public class CustomerRegisterDTO {
         this.email = email;
     }
 
-//    public Name getName() {
-//        return name;
-//    }
-//
-//    public void setName(Name name) {
-//        this.name = name;
-////        return name;
-//    }
-
-        public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getMiddle_name() {
-        return middle_name;
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public void setMiddle_name(String middle_name) {
-        this.middle_name = middle_name;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String  getContact() {

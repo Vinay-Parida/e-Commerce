@@ -23,8 +23,6 @@ public class User extends AuditingInfo<String> {
     @Embedded
     private Name name;
 
-//    private String username;
-
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -70,8 +68,8 @@ public class User extends AuditingInfo<String> {
         return isEnabled;
     }
 
-    public void setIsEnabled(Boolean is_unabled) {
-        this.isEnabled = is_unabled;
+    public void setIsEnabled(Boolean isUnabled) {
+        this.isEnabled = isUnabled;
     }
 
     public long getId() {
@@ -106,7 +104,7 @@ public class User extends AuditingInfo<String> {
         this.roles = roles;
     }
 
-    public Boolean isIs_deleted() {
+    public Boolean isDeleted() {
         return isDeleted;
     }
 
@@ -146,14 +144,6 @@ public class User extends AuditingInfo<String> {
         address.setUser(this);
         this.setAddresses(addresses);
     }
-
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
 
     public Date getPasswordLastModified() {
         return passwordLastModified;

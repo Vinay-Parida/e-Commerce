@@ -3,7 +3,6 @@ package com.example.SpringSecurity;
 import com.example.SpringSecurity.auditing.AuditingAwareImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.domain.AuditorAware;
@@ -20,7 +19,7 @@ import java.util.Locale;
 public class ECommerceApplication{
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext applicationContext = SpringApplication.run(ECommerceApplication.class, args);
+		SpringApplication.run(ECommerceApplication.class, args);
 	}
 
 	@Bean

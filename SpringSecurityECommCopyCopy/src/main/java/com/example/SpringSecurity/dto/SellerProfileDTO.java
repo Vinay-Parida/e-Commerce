@@ -14,35 +14,35 @@ public class SellerProfileDTO  implements Serializable {
     private String contact;
 
 
-    private String company_contact;
+    private String companyContact;
 
-    private String company_name;
+    private String companyName;
 
     private String gst;
 
-    private String address_line;
+    private String addressLine;
     private String city;
     private String state;
     private String country;
-    private String zip_code;
+    private String zipCode;
 
     public SellerProfileDTO(){}
 
 
-    public SellerProfileDTO(BigInteger id, String firstName, String lastName, Boolean isActive, String company_contact, String company_name, String image, String gst, String address_line, String city, String state, String country, String zip_code) {
+    public SellerProfileDTO(BigInteger id, String firstName, String lastName, Boolean isActive, String companyContact, String companyName, String image, String gst, String addressLine, String city, String state, String country, String zipCode) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.isActive = isActive;
-        this.company_contact = company_contact;
-        this.company_name = company_name;
+        this.companyContact = companyContact;
+        this.companyName = companyName;
         this.image = image;
         this.gst = gst;
-        this.address_line = address_line;
+        this.addressLine = addressLine;
         this.city = city;
         this.state = state;
         this.country = country;
-        this.zip_code = zip_code;
+        this.zipCode = zipCode;
     }
 
     public BigInteger getId() {
@@ -77,20 +77,20 @@ public class SellerProfileDTO  implements Serializable {
         this.isActive = isActive;
     }
 
-    public String getCompany_contact() {
-        return company_contact;
+    public String getCompanyContact() {
+        return companyContact;
     }
 
-    public void setCompany_contact(String company_contact) {
-        this.company_contact = company_contact;
+    public void setCompanyContact(String companyContact) {
+        this.companyContact = companyContact;
     }
 
-    public String getCompany_name() {
-        return company_name;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setCompany_name(String company_name) {
-        this.company_name = company_name;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getImage() {
@@ -109,12 +109,12 @@ public class SellerProfileDTO  implements Serializable {
         this.gst = gst;
     }
 
-    public String getAddress_line() {
-        return address_line;
+    public String getAddressLine() {
+        return addressLine;
     }
 
-    public void setAddress_line(String address_line) {
-        this.address_line = address_line;
+    public void setAddressLine(String addressLine) {
+        this.addressLine = addressLine;
     }
 
     public String getCity() {
@@ -141,12 +141,12 @@ public class SellerProfileDTO  implements Serializable {
         this.country = country;
     }
 
-    public String getZip_code() {
-        return zip_code;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setZip_code(String zip_code) {
-        this.zip_code = zip_code;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getContact() {

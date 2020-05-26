@@ -24,11 +24,6 @@ public class CriteriaController {
     @Autowired
     private UserRepository userRepository;
 
-//    @GetMapping("/userList")
-//    public List<User> userList(String email){
-//        return userRepository.findAll(  )
-//    }
-
     @FieldFilterSetting(className = Category.class, fields = {"productSet","categoryMetadataFieldValueList"})
     @GetMapping("/categoriesList")
     public List<Category> allCategories(){

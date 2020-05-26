@@ -5,7 +5,7 @@ public class CriteriaDTO {
     private Long id;
     private String name;
     private String value;
-    private Long category_id;
+    private Long categoryId;
     private Long categoryMetadataFieldId;
 
     public Long getId() {
@@ -32,12 +32,12 @@ public class CriteriaDTO {
         this.value = value;
     }
 
-    public Long getCategory_id() {
-        return category_id;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory_id(Long category_id) {
-        this.category_id = category_id;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Long getCategoryMetadataFieldId() {

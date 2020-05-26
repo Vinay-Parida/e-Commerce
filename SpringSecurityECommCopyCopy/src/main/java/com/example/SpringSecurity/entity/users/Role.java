@@ -15,9 +15,6 @@ public class Role extends AuditingInfo<String> {
 
     String authority;
 
-//    @ManyToMany(mappedBy = "roles")
-//    private List<User> users;
-
     public Role(){}
 
     public Role(String authority) {

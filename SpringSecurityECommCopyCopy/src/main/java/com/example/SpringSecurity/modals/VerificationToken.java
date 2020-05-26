@@ -23,7 +23,7 @@ public class VerificationToken {
     private User user;
 
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date expiry_date;
+    private Date expiryDate;
 
     public Date calculateExpiryDate(int expiryTimeInMinutes){
         Calendar calendar = Calendar.getInstance();
@@ -33,12 +33,12 @@ public class VerificationToken {
         return new Date(calendar.getTime().getTime());
     }
 
-    public   VerificationToken(){}
+    public VerificationToken(){}
 
-    public VerificationToken(String token, User user, Date expiry_date) {
+    public VerificationToken(String token, User user, Date expiryDate) {
         this.token = token;
         this.user = user;
-        this.expiry_date = expiry_date;
+        this.expiryDate = expiryDate;
     }
 
     public static int getEXPIRATION() {
@@ -69,12 +69,12 @@ public class VerificationToken {
         this.user = user;
     }
 
-    public Date getExpiry_date() {
-        return expiry_date;
+    public Date getExpiryDate() {
+        return expiryDate;
     }
 
-    public void setExpiry_date(Date expiry_date) {
-        this.expiry_date = expiry_date;
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
     }
 }
 

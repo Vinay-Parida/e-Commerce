@@ -18,26 +18,9 @@ public class Address extends AuditingInfo<String> {
     @Enumerated(EnumType.STRING)
     private Label label;
 
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-//    @OneToOne(targetEntity = Seller.class, fetch = FetchType.EAGER)
-//    @JoinColumn(nullable = false, name = "seller_id")
-//    private Seller seller;
-
-//
-//    Address(){}
-//
-//    public Address(String city, String state, String country, String addressLine, int zipCode, Label label) {
-//        this.city = city;
-//        this.state = state;
-//        this.country = country;
-//        this.addressLine = addressLine;
-//        this.zipCode = zipCode;
-//        this.label = label;
-//    }
 
     public Long getId() {
         return id;

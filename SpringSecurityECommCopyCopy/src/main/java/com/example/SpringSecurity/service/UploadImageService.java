@@ -3,6 +3,8 @@ package com.example.SpringSecurity.service;
 import com.example.SpringSecurity.entity.users.User;
 import com.example.SpringSecurity.exceptions.ProductException;
 import com.example.SpringSecurity.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequest;
@@ -24,6 +26,8 @@ public class UploadImageService {
     @Autowired
     UserRepository userRepository;
 
+    private static Logger logger = LoggerFactory.getLogger(UploadImageService.class);
+
     public String uploadImage(MultipartFile image, HttpServletRequest httpServletRequest) throws IOException {
 
         if (image.isEmpty()) {
@@ -41,7 +45,7 @@ public class UploadImageService {
             return "Photo successfully uploaded";
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Error thrown: " + e);
             throw e;
         }
     }
@@ -52,10 +56,10 @@ public class UploadImageService {
     }
 
     private String renameFile(String fileName, Long id) {
-        Integer index = fileName.lastIndexOf(".");
-        fileName = fileName.substring(index);
-        if (fileName.equalsIgnoreCase(".jpg") || fileName.equalsIgnoreCase(".jpeg") || fileName.equalsIgnoreCase(".png") || fileName.equalsIgnoreCase(".bmp"))
-            return id + fileName;
+        Integer index = fileName.lastIndexOf('.');
+        String fileNameNew = fileName.substring(index);
+        if (fileNameNew.equalsIgnoreCase(".jpg") || fileNameNew.equalsIgnoreCase(".jpeg") || fileNameNew.equalsIgnoreCase(".png") || fileNameNew.equalsIgnoreCase(".bmp"))
+            return id + fileNameNew;
         else
             throw new ProductException("Image format is not valid");
     }
@@ -63,8 +67,7 @@ public class UploadImageService {
     private User getUser(HttpServletRequest httpServletRequest) {
         Principal principal = httpServletRequest.getUserPrincipal();
         String email = principal.getName();
-        User user = userRepository.findByEmail(email);
-        return user;
+        return userRepository.findByEmail(email);
     }
 
 
@@ -95,11 +98,11 @@ public class UploadImageService {
         return pathNames;
     }
     private String getSecondaryFileName(String fileName,Long id,Integer count){
-        Integer l=fileName.lastIndexOf(".");
-        fileName=fileName.substring(l);
-        if(fileName.equalsIgnoreCase(".jpg") || fileName.equalsIgnoreCase(".jpeg") ||
-                fileName.equalsIgnoreCase(".png") || fileName.equalsIgnoreCase(".bmp"))
-            return  (id+"."+count+fileName);
+        Integer l=fileName.lastIndexOf('.');
+        String fileNewName = fileName.substring(l);
+        if(fileNewName.equalsIgnoreCase(".jpg") || fileNewName.equalsIgnoreCase(".jpeg") ||
+                fileNewName.equalsIgnoreCase(".png") || fileNewName.equalsIgnoreCase(".bmp"))
+            return  (id+"."+count+ fileNewName);
         else
             throw new ProductException("Image format is not valid!");
     }

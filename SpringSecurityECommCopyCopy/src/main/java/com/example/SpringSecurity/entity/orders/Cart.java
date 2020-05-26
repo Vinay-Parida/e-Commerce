@@ -5,10 +5,13 @@ public class Cart {
         //CUSTOMER_USER_ID   foreign
 
     //PRODUCT_VARIATION_ID  foreign
+    private Long customerUserId;
 
-    private int quantity;
-    private Boolean isWishlistItem;
+    public Long getCustomerUserId() {
+        return customerUserId;
+    }
 
-    public Cart() {
+    public void setCustomerUserId(Long customerUserId) {
+        this.customerUserId = customerUserId;
     }
 }

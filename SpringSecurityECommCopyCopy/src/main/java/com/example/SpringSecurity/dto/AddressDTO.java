@@ -6,17 +6,17 @@ public class AddressDTO {
     private String city;
     private String state;
     private String country;
-    private String address_line;
+    private String addressLine;
     private Label label;
-    private String zip_code;
+    private String zipCode;
 
-    public AddressDTO(String city, String state, String country, String address_line, Label label, String zip_code) {
+    public AddressDTO(String city, String state, String country, String addressLine, Label label, String zipCode) {
         this.city = city;
         this.state = state;
         this.country = country;
-        this.address_line = address_line;
+        this.addressLine = addressLine;
         this.label = label;
-        this.zip_code = zip_code;
+        this.zipCode = zipCode;
     }
 
     public String getCity() {
@@ -43,12 +43,12 @@ public class AddressDTO {
         this.country = country;
     }
 
-    public String getAddress_line() {
-        return address_line;
+    public String getAddressLine() {
+        return addressLine;
     }
 
-    public void setAddress_line(String address_line) {
-        this.address_line = address_line;
+    public void setAddressLine(String addressLine) {
+        this.addressLine = addressLine;
     }
 
     public Label getLabel() {
@@ -59,11 +59,11 @@ public class AddressDTO {
         this.label = label;
     }
 
-    public String getZip_code() {
-        return zip_code;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setZip_code(String zip_code) {
-        this.zip_code = zip_code;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 }

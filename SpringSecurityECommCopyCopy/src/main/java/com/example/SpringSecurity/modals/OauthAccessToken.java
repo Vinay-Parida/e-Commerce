@@ -8,32 +8,32 @@ import javax.persistence.Lob;
 public class OauthAccessToken {
 
     @Id
-    private String authentication_id;
-    private String token_id;
+    private String authenticationId;
+    private String tokenId;
 
     @Lob
     private byte[] token;
-    private String user_name;
-    private String client_id;
+    private String userName;
+    private String clientId;
 
     @Lob
     private byte[] authentication;
-    private String refresh_token;
+    private String refreshToken;
 
-    public String getAuthentication_id() {
-        return authentication_id;
+    public String getAuthenticationId() {
+        return authenticationId;
     }
 
-    public void setAuthentication_id(String authentication_id) {
-        this.authentication_id = authentication_id;
+    public void setAuthenticationId(String authenticationId) {
+        this.authenticationId = authenticationId;
     }
 
-    public String getToken_id() {
-        return token_id;
+    public String getTokenId() {
+        return tokenId;
     }
 
-    public void setToken_id(String token_id) {
-        this.token_id = token_id;
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
     }
 
     public byte[] getToken() {
@@ -44,20 +44,20 @@ public class OauthAccessToken {
         this.token = token;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getClient_id() {
-        return client_id;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setClient_id(String client_id) {
-        this.client_id = client_id;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public byte[] getAuthentication() {
@@ -68,11 +68,11 @@ public class OauthAccessToken {
         this.authentication = authentication;
     }
 
-    public String getRefresh_token() {
-        return refresh_token;
+    public String getRefreshToken() {
+        return refreshToken;
     }
 
-    public void setRefresh_token(String refresh_token) {
-        this.refresh_token = refresh_token;
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

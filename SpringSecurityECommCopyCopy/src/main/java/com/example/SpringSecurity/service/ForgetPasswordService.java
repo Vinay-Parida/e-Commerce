@@ -38,9 +38,7 @@ public class ForgetPasswordService {
     @Autowired
     private MessageSource messageSource;
 
-    private String newPassword;
-
-//    @Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})",message="Password must be 8 characters long")
+    //    @Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,})",message="Password must be 8 characters long")
 
     public String sendForgetPasswordToken(String email, WebRequest webRequest) {
         Locale locale = webRequest.getLocale();
@@ -56,18 +54,17 @@ public class ForgetPasswordService {
             if (user == null) {
                 String messageEmailDoesNotExists = messageSource.getMessage("exception.email.does.not.exists", null, locale);
                 throw new EmailException(messageEmailDoesNotExists);
-            } else if (user.isActive() == false) {
+            } else if (!user.isActive()) {
                 String messageUserNotActivated = messageSource.getMessage("exception.user.not.active", null, locale);
                 throw new EmailException(messageUserNotActivated);
             } else {
                 String token = UUID.randomUUID().toString();
 
-                ForgetPasswordToken forgetPasswordToken = new ForgetPasswordToken(token, user, new ForgetPasswordToken().calculateExpiryTime(new ForgetPasswordToken().getEXPIRATION()));
+                ForgetPasswordToken forgetPasswordToken = new ForgetPasswordToken(token, user, new ForgetPasswordToken().calculateExpiryTime(ForgetPasswordToken.getEXPIRATION()));
                 forgetPasswordTokenRepository.save(forgetPasswordToken);
 
                 String receiverEmail = email;
                 String subject = "Forget Password Token";
-//                String confirmationUrl = webRequest.getContextPath() + "/resetPassword?token=" + token;
                 String message = "Unique token to reset password " + forgetPasswordToken;
 
                 SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
@@ -77,9 +74,7 @@ public class ForgetPasswordService {
 
                 javaMailSender.send(simpleMailMessage);
 
-                String messageSuccessful = messageSource.getMessage("forget.password.mail.sent.successful", null, locale);
-
-                return messageSuccessful;
+                return messageSource.getMessage("forget.password.mail.sent.successful", null, locale);
             }
         } else {
             String messageInvalidEmail = messageSource.getMessage("exception.invalid.email", null, locale);
@@ -92,10 +87,10 @@ public class ForgetPasswordService {
 
         Locale locale = webRequest.getLocale();
 
-        String passwordValidate = "((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*\\W).{8,})";
-        Pattern pattern1 = Pattern.compile(passwordValidate);
-        Matcher matcher1 = pattern1.matcher(password);
-        Boolean isValidPassword = matcher1.matches();
+        String patternValidator = "((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*\\W).{8,})";
+        Pattern pattern = Pattern.compile(patternValidator);
+        Matcher matcher = pattern.matcher(password);
+        Boolean isValidPassword = matcher.matches();
 
         ForgetPasswordToken forgetPasswordToken = forgetPasswordTokenRepository.findByToken(token);
 
@@ -106,21 +101,20 @@ public class ForgetPasswordService {
             if ((forgetPasswordToken.getExpiryDate().getTime() - calendar.getTime().getTime()) < 0) {
                 String messageTokenExpired = messageSource.getMessage("exception.token.expired", null, locale);
                 throw new TokenInvalidException(messageTokenExpired);
-            } else if (isValidPassword == false) {
+            } else if (!isValidPassword) {
                 String messageNotAValidPassword = messageSource.getMessage("exception.not.a.valid.password", null, locale);
                 throw new PasswordException(messageNotAValidPassword);
-            } else if (password.equals(confirmPassword) == false) {
+            } else if (!password.equals(confirmPassword)) {
                 String messagePasswordNotMatched = messageSource.getMessage("exception.password.confirmpassword.dont.match", null, locale);
                 throw new PasswordException(messagePasswordNotMatched);
             } else {
                 PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-                newPassword = passwordEncoder.encode(password);
+                String newPassword = passwordEncoder.encode(password);
                 userRepository.updatePassword(newPassword, user.getId());
                 forgetPasswordTokenRepository.deleteToken(token);
 
-                String messageResetPasswordSuccessful = messageSource.getMessage("reset.password.successful", null, locale);
-                return messageResetPasswordSuccessful;
+                return messageSource.getMessage("reset.password.successful", null, locale);
             }
         } else {
             String messageTokenInvalid = messageSource.getMessage("exception.token.invalid", null, locale);

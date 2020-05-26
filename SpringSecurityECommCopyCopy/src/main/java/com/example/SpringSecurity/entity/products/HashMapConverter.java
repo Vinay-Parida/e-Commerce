@@ -2,6 +2,8 @@ package com.example.SpringSecurity.entity.products;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.AttributeConverter;
@@ -9,6 +11,8 @@ import java.io.IOException;
 import java.util.Map;
 
 public class HashMapConverter implements AttributeConverter<Map<String,String> ,String> {
+
+    private static Logger logger = LoggerFactory.getLogger(HashMapConverter.class);
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -19,7 +23,7 @@ public class HashMapConverter implements AttributeConverter<Map<String,String> ,
         try{
             productVariationJson=objectMapper.writeValueAsString(productVariation);
         } catch (final JsonProcessingException e) {
-            e.printStackTrace();
+            logger.error("Error Thrown: " + e);
         }
         return productVariationJson;
     }
@@ -31,7 +35,7 @@ public class HashMapConverter implements AttributeConverter<Map<String,String> ,
             productVariation = objectMapper.readValue(productVariationJson, Map.class);
         }
         catch (final IOException e) {
-            e.printStackTrace();
+            logger.error("Error Thrown: " + e);
         }
         return productVariation;
     }

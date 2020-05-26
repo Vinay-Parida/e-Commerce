@@ -98,10 +98,7 @@ public class CategoryService {
     }
 
     private Boolean checkNull(String value){
-        if(value != null && !value.equals(""))
-            return true;
-        else
-            return false;
+        return value != null && !value.equals("");
     }
 
 
@@ -149,9 +146,9 @@ public class CategoryService {
         List<SingleCategoryDTO> singleCategoryDtoList = new ArrayList<>();
         List<Category> allCategory = categoryRepository.findAll(pageable);
 
-        allCategory.forEach(category -> {
-            singleCategoryDtoList.add(getSingleCategory(category.getId()));
-        });
+        allCategory.forEach(category ->
+            singleCategoryDtoList.add(getSingleCategory(category.getId()))
+        );
         return singleCategoryDtoList;
     }
 
@@ -231,8 +228,7 @@ public class CategoryService {
             Set<String> valueSet = SetStringConverter.convertToSet(value);
             Set<String> intersectionSet = findIntersection(fieldValues, valueSet);
             if (intersectionSet.isEmpty()){
-                String updatedValue = value + "," + SetStringConverter.convertToString(fieldValues);
-                return updatedValue;
+                return value + "," + SetStringConverter.convertToString(fieldValues);
             }
             else {
                 throw new CategoryException("Field Already Exists: " + SetStringConverter.convertToString(intersectionSet));

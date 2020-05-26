@@ -37,33 +37,26 @@ public class EmailNotResetIn30DaysJob extends QuartzJobBean  {
 //        String subject = jobDataMap.getString("subject");
 //        String body = jobDataMap.getString("body");
 //        String recipientEmail = jobDataMap.getString("email");
-
 //        List<User> userList = userRepository.findAll();
-//
 //        for (User user: userList) {
 //            if (user != null) {
 //                Date passwordLastModified = user.getPasswordLastModified();
-//
 //                try{
 //                    logger.info("Before conversion");
 //                    LocalDateTime passwordLastModifiedInDateTime = passwordLastModified.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 //                    logger.info("After Conversion");
 //                    LocalDateTime after30Days = passwordLastModifiedInDateTime.plusMinutes(1);   // change it to .plusMonths
 //                    LocalDateTime today = LocalDateTime.now();
-//
 //                    if (today.compareTo(after30Days) >= 0) {
 //                        String subject = "Please Change your Password";
 //                        String body = "You haven't changed your password in 30 days. Please change it for more security";
 //                        String sendTo = user.getEmail();
-//
 //                        sendMail(mailProperties.getUsername(), sendTo, subject, body);
 //                    }
 //                }
 //                catch (Exception e){
 //                    logger.error("Inside Catch");
 //                }
-//
-//
 //            }
 //            else {
 //                throw new EmailException("User Null");

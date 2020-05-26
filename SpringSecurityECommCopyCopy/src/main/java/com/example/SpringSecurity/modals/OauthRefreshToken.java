@@ -8,7 +8,7 @@ import javax.persistence.Lob;
 public class OauthRefreshToken {
 
     @Id
-    private String token_id;
+    private String tokenId;
 
     @Lob
     private byte[] token;
@@ -16,12 +16,12 @@ public class OauthRefreshToken {
     @Lob
     private byte[] authentication;
 
-    public String getToken_id() {
-        return token_id;
+    public String getTokenId() {
+        return tokenId;
     }
 
-    public void setToken_id(String token_id) {
-        this.token_id = token_id;
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
     }
 
     public byte[] getToken() {

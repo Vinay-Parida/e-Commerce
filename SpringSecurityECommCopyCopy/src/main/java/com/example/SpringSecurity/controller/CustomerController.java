@@ -43,7 +43,6 @@ public class CustomerController {
     public SellerProfileDTO viewProfile(HttpServletRequest httpServletRequest){
 //        SimpleFilterProvider filterProvider = new SimpleFilterProvider().addFilter("customerFilter",
 //                SimpleBeanPropertyFilter.filterOutAllExcept("id", "firstName", "lastName", "isActive", "image"));
-//
 //        ObjectMapper objectMapper = new ObjectMapper();
 //        objectMapper.setFilterProvider(filterProvider);
 //        objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);

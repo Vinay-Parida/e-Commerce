@@ -33,11 +33,6 @@ public class AppController {
         return name + " is Logged out successfully";
     }
 
-//    @GetMapping("/login")
-//    public String index(ModelMap modelMap){
-//        return "login";
-//    }
-
     @GetMapping("/admin/home")
     public String adminHome(){
         return "Admin Home";

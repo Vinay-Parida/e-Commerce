@@ -9,8 +9,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,8 +32,6 @@ public class RegistrationController {
 
     @Autowired
     MongoTemplate mongoTemplate;
-
-    private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
 
     @ApiOperation(value = "Customer can register oneself")
     @ApiResponses(value = {

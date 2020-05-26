@@ -1,11 +1,10 @@
 package com.example.SpringSecurity.filters;
 
+import com.example.SpringSecurity.entity.users.User;
+import com.example.SpringSecurity.exceptions.UserNotFoundException;
 import com.example.SpringSecurity.repository.UserAttemptsRepository;
 import com.example.SpringSecurity.repository.UserRepository;
 import com.example.SpringSecurity.service.UserAttemptsService;
-import com.example.SpringSecurity.entity.users.User;
-import com.example.SpringSecurity.exceptions.UserNotFoundException;
-import com.example.SpringSecurity.modals.UserAttempts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.SimpleMailMessage;
@@ -41,20 +40,8 @@ public class CustomerFilter extends DaoAuthenticationProvider {
             User user = userRepository.findByEmail(email);
 
             if (user != null) {
-                UserAttempts userAttempts = userAttemptsService.getUserAttempts(email);
-                if(userAttemptsService.checkIsActive(email) == false){
-
-//                    String receiverEmail = user.getEmail();
-//                    String messageSubject = "Invalid login";
-//                    String messageText = "You are tying to login without activating your account";
-//
-//                    SimpleMailMessage mailMessage = new SimpleMailMessage();
-//                    mailMessage.setTo(receiverEmail);
-//                    mailMessage.setSubject(messageSubject);
-//                    mailMessage.setText(messageText);
-//                    javaMailSender.send(mailMessage);
-
-                    throw new UserNotFoundException("Login without activating account");             //HTDL: Make a custom exception
+                if(!userAttemptsService.checkIsActive(email)){
+                    throw new UserNotFoundException("Login without activating account");
                 }
                 else if (userAttemptsService.checkLock(email) && userAttemptsService.checkIsActive(email)) {
                     userAttemptsService.updateAttemptsToNull(email);
@@ -74,14 +61,13 @@ public class CustomerFilter extends DaoAuthenticationProvider {
                     mailMessage.setText(messageText);
                     javaMailSender.send(mailMessage);
 
-                    throw new UserNotFoundException("User is locked");     //HTDL: Make a custom exception
+                    throw new UserNotFoundException("User is locked");
                 }
             }
         } catch (Exception e) {
             String email = authentication.getName();
             userAttemptsService.getUserAttempts(email);
             userAttemptsService.updateAttempts(email);
-//            e.printStackTrace();
             throw e;
         }
         return null;

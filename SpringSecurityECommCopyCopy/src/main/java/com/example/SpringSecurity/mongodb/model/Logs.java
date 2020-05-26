@@ -14,7 +14,7 @@ public class Logs {
     private static Logger logger = null;
 
 
-    public void init(Class<?> c){
+    public static void init(Class<?> c){
         logger = LoggerFactory.getLogger(c);
     }
 

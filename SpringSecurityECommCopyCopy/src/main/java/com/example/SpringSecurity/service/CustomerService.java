@@ -12,6 +12,8 @@ import com.example.SpringSecurity.repository.AddressRepository;
 import com.example.SpringSecurity.repository.CustomerRepository;
 import com.example.SpringSecurity.repository.UserRepository;
 import com.example.SpringSecurity.repository.VerificationTokenRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.MessageSource;
@@ -51,6 +53,7 @@ public class CustomerService {
     @Autowired
     private MessageSource messageSource;
 
+    private static Logger logger = LoggerFactory.getLogger(CustomerService.class);
 
 
     public String registerCustomer(CustomerRegisterDTO customerDto, WebRequest webRequest) {
@@ -64,9 +67,9 @@ public class CustomerService {
                 Customer user1 = new Customer();
                 user1.setEmail(customerDto.getEmail());
                 Name name = new Name();
-                name.setFirstName(customerDto.getFirst_name());
-                name.setMiddleName(customerDto.getMiddle_name());
-                name.setLastName(customerDto.getLast_name());
+                name.setFirstName(customerDto.getFirstName());
+                name.setMiddleName(customerDto.getMiddleName());
+                name.setLastName(customerDto.getLastName());
                 user1.setName(name);
                 user1.setIsActive(false);
                 user1.setPassword(passwordEncoder.encode(customerDto.getPassword()));
@@ -78,7 +81,7 @@ public class CustomerService {
                 customerRepository.save(user1);
 
                 String token = UUID.randomUUID().toString();
-                VerificationToken verificationToken = new VerificationToken(token, user1, new VerificationToken().calculateExpiryDate(new VerificationToken().getEXPIRATION()));
+                VerificationToken verificationToken = new VerificationToken(token, user1, new VerificationToken().calculateExpiryDate(VerificationToken.getEXPIRATION()));
                 verificationTokenRepository.save(verificationToken);
 
                 String receiverEmail = user1.getEmail();
@@ -92,8 +95,7 @@ public class CustomerService {
                 email.setText(message + "http://localhost:8080" + confirmationUrl);
                 javaMailSender.send(email);
 
-                String messageSuccessful = messageSource.getMessage("customer.registration.successful", null, locale);
-                return messageSuccessful;
+                return messageSource.getMessage("customer.registration.successful", null, locale);
             }
             else {
                 return messageSource.getMessage("exception.password.confirmpassword.dont.match", null, locale);
@@ -107,7 +109,6 @@ public class CustomerService {
 
 //        SimpleFilterProvider filterProvider = new SimpleFilterProvider().addFilter("customerFilter",
 //                SimpleBeanPropertyFilter.filterOutAllExcept("id", "firstName", "lastName", "isActive", "image"));
-//
 //        ObjectMapper objectMapper = new ObjectMapper();
 //        objectMapper.setFilterProvider(filterProvider);
 
@@ -138,11 +139,11 @@ public class CustomerService {
         Customer customer = customerRepository.findById(id);
 
         Address address = new Address();
-        address.setAddressLine(addressDto.getAddress_line());
+        address.setAddressLine(addressDto.getAddressLine());
         address.setCity(addressDto.getCity());
         address.setState(addressDto.getState());
         address.setCountry(addressDto.getCountry());
-        address.setZipCode(addressDto.getZip_code());
+        address.setZipCode(addressDto.getZipCode());
         address.setLabel(addressDto.getLabel());
 
         address.setUser(customer);
@@ -173,20 +174,20 @@ public class CustomerService {
 
         Name name = customer.getName();
 
-        String first_name = (String) customerDetails.get("first_name");
-        String middle_name = (String) customerDetails.get("middle_name");
-        String last_name = (String) customerDetails.get("last_name");
+        String firstName = (String) customerDetails.get("first_name");
+        String middleName = (String) customerDetails.get("middle_name");
+        String lastName = (String) customerDetails.get("last_name");
         String contact = (String) customerDetails.get("contact");
 
 
-        if (checkNotNull(first_name)) {
-            name.setFirstName(first_name);
+        if (checkNotNull(firstName)) {
+            name.setFirstName(firstName);
         }
-        if (checkNotNull(middle_name)) {
-            name.setMiddleName(middle_name);
+        if (checkNotNull(middleName)) {
+            name.setMiddleName(middleName);
         }
-        if (checkNotNull(last_name)) {
-            name.setLastName(last_name);
+        if (checkNotNull(lastName)) {
+            name.setLastName(lastName);
         }
         if (checkNotNull(contact)) {
             if (!isContactValid(contact)) {
@@ -210,10 +211,7 @@ public class CustomerService {
     }
 
     private Boolean checkNotNull(String value) {
-        if (value != null && !value.equals(""))
-            return true;
-        else
-            return false;
+        return  (value != null && !value.equals(""));
     }
 
 
@@ -227,9 +225,9 @@ public class CustomerService {
         String email = httpServletRequest.getUserPrincipal().getName();
         User user = userRepository.findByEmail(email);
 
-        if (isValidPassword == false) {
+        if (!isValidPassword) {
             return "Password is not valid";
-        } else if (password.equals(confirmPassword) == false) {
+        } else if (!password.equals(confirmPassword)) {
             return "Password and Confirm Password Does not matches";
         } else {
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -261,14 +259,14 @@ public class CustomerService {
 
         try {
             if (address != null) {
-                String address_line = (String) addressDetails.get("address_line");
+                String addressLine = (String) addressDetails.get("address_line");
                 String city = (String) addressDetails.get("city");
                 String state = (String) addressDetails.get("state");
                 String country = (String) addressDetails.get("country");
-                String zip_code = (String) addressDetails.get("zip_code");
+                String zipCode = (String) addressDetails.get("zip_code");
 
-                if (checkNotNull(address_line)) {
-                    address.setAddressLine(address_line);
+                if (checkNotNull(addressLine)) {
+                    address.setAddressLine(addressLine);
                 }
                 if (checkNotNull(city)) {
                     address.setCity(city);
@@ -279,8 +277,8 @@ public class CustomerService {
                 if (checkNotNull(country)) {
                     address.setCountry(country);
                 }
-                if (zip_code != null) {
-                    address.setZipCode(zip_code);
+                if (zipCode != null) {
+                    address.setZipCode(zipCode);
                 }
 
                 addressRepository.save(address);
@@ -289,13 +287,10 @@ public class CustomerService {
                 throw new UserNotFoundException("Address Not found");
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            // TODO: Remove this exception
-            throw new Exception(e);
+            logger.error("Error thrown: " + e);
+            return "Error thrown: " + e;
         }
 
 
     }
-
-
 }

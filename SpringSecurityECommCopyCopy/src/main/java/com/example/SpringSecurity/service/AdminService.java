@@ -88,7 +88,7 @@ public class AdminService {
 
         User user = userRepository.getUserById(customerId);
 
-        if (user.isActive() == true) {
+        if (user.isActive()) {
             return messageSource.getMessage("customer.already.active", null, locale);
         } else {
             user.setIsActive(true);
@@ -97,15 +97,10 @@ public class AdminService {
             String messageSubject = messageSource.getMessage("customer.activated", null, locale);
             String messageText = messageSource.getMessage("customer.activated.by.admin", null, locale);
 
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setTo(receiverEmail);
-            mailMessage.setSubject(messageSubject);
-            mailMessage.setText(messageText);
-            javaMailSender.send(mailMessage);
+            sendMail(receiverEmail, messageText, messageSubject);
 
             userRepository.save(user);
-            String messageUserCustomerActivated = messageSource.getMessage("customer.activated.successfully", null, locale);
-            return messageUserCustomerActivated;
+            return messageSource.getMessage("customer.activated.successfully", null, locale);
         }
     }
 
@@ -123,7 +118,7 @@ public class AdminService {
 
         User user = userRepository.getUserById(customerId);
 
-        if (user.isActive() == false) {
+        if (!user.isActive()) {
             return messageSource.getMessage("customer.already.deactivate", null, locale);
         } else {
             user.setIsActive(false);
@@ -132,15 +127,10 @@ public class AdminService {
             String messageSubject = messageSource.getMessage("customer.deactivated", null, locale);
             String messageText = messageSource.getMessage("customer.deactivated.by.admin", null, locale);
 
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setTo(receiverEmail);
-            mailMessage.setSubject(messageSubject);
-            mailMessage.setText(messageText);
-            javaMailSender.send(mailMessage);
+            sendMail(receiverEmail, messageText, messageSubject);
 
             userRepository.save(user);
-            String messageUserCustomerActivated = messageSource.getMessage("customer.deactivated.successfully", null, locale);
-            return messageUserCustomerActivated;
+            return messageSource.getMessage("customer.deactivated.successfully", null, locale);
         }
     }
 
@@ -159,7 +149,7 @@ public class AdminService {
 
         User user = userRepository.getUserById(id);
 
-        if (user.isActive() == true) {
+        if (user.isActive()) {
             return messageSource.getMessage("seller.already.active", null, locale);
         } else {
             user.setIsActive(true);
@@ -168,15 +158,10 @@ public class AdminService {
             String messageSubject = messageSource.getMessage("seller.activated", null, locale);
             String messageText = messageSource.getMessage("seller.activated.by.admin", null, locale);
 
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setTo(receiverEmail);
-            mailMessage.setSubject(messageSubject);
-            mailMessage.setText(messageText);
-            javaMailSender.send(mailMessage);
+            sendMail(receiverEmail, messageText, messageSubject);
 
             userRepository.save(user);
-            String messageUserSellerActivated = messageSource.getMessage("seller.activated.successfully", null, locale);
-            return messageUserSellerActivated;
+            return messageSource.getMessage("seller.activated.successfully", null, locale);
         }
     }
 
@@ -194,7 +179,7 @@ public class AdminService {
 
         User user = userRepository.getUserById(id);
 
-        if (user.isActive() == false) {
+        if (!user.isActive()) {
             return messageSource.getMessage("seller.already.deactivate", null, locale);
         } else {
             user.setIsActive(false);
@@ -203,16 +188,19 @@ public class AdminService {
             String messageSubject = messageSource.getMessage("seller.deactivated", null, locale);
             String messageText = messageSource.getMessage("seller.deactivated.by.admin", null, locale);
 
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setTo(receiverEmail);
-            mailMessage.setSubject(messageSubject);
-            mailMessage.setText(messageText);
-            javaMailSender.send(mailMessage);
+            sendMail(receiverEmail, messageText, messageSubject);
 
             userRepository.save(user);
-            String messageUserSellerActivated = messageSource.getMessage("seller.deactivated.successfully", null, locale);
-            return messageUserSellerActivated;
+            return messageSource.getMessage("seller.deactivated.successfully", null, locale);
         }
+    }
+
+    private void sendMail(String emailRecipient, String message, String subject) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setTo(emailRecipient);
+        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setText(message);
+        javaMailSender.send(simpleMailMessage);
     }
 
 }

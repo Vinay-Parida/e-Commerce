@@ -28,7 +28,7 @@ public class NotActiveUserScheduler {
 
         for (String email: userEmails) {
 
-            logger.info("Sending mail for " + email);
+            logger.info("Sending mail for {}", email);
 
             String subject = "Account not active.";
             String text = "Your Email " + email + " is not active. \n Please active it or contact admin for info";
@@ -39,7 +39,7 @@ public class NotActiveUserScheduler {
             simpleMailMessage.setText(text);
             javaMailSender.send(simpleMailMessage);
 
-            logger.info("Email sent to " + email);
+            logger.info("Email sent to {}", email);
         }
     }
 }

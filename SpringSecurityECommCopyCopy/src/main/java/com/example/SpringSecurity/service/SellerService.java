@@ -58,25 +58,24 @@ public class SellerService {
             throw new GstException(messageGstAlreadyExists);
         }
         else if(!sellerDto.getPassword().equals(sellerDto.getConfirmPassword())){
-            String messagePasswordAndConfirmPassDontMatch = messageSource.getMessage("exception.password.confirmpassword.dont.match", null, locale);
-            return messagePasswordAndConfirmPassDontMatch;
+            return messageSource.getMessage("exception.password.confirmpassword.dont.match", null, locale);
         }
         else {
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             Seller user1 = new Seller();
             user1.setEmail(sellerDto.getEmail());
             Name name = new Name();
-            name.setFirstName(sellerDto.getFirst_name());
-            name.setMiddleName(sellerDto.getMiddle_name());
-            name.setLastName(sellerDto.getLast_name());
+            name.setFirstName(sellerDto.getFirstName());
+            name.setMiddleName(sellerDto.getMiddleName());
+            name.setLastName(sellerDto.getLastName());
             user1.setName(name);
 
             Address address = new Address();
-            address.setAddressLine(sellerDto.getAddress_line());
+            address.setAddressLine(sellerDto.getAddressLine());
             address.setCity(sellerDto.getCity());
             address.setState(sellerDto.getState());
             address.setCountry(sellerDto.getCountry());
-            address.setZipCode(sellerDto.getZip_code());
+            address.setZipCode(sellerDto.getZipCode());
             address.setLabel(sellerDto.getLabel());
 
             user1.addAddresses(address);
@@ -84,8 +83,8 @@ public class SellerService {
             user1.setIsActive(false);
             user1.setPassword(passwordEncoder.encode(sellerDto.getPassword()));
             user1.setRoles(Arrays.asList(new Role("ROLE_SELLER")));
-            user1.setCompanyContact(sellerDto.getCompany_contact());
-            user1.setCompanyName(sellerDto.getCompany_name());
+            user1.setCompanyContact(sellerDto.getCompanyContact());
+            user1.setCompanyName(sellerDto.getCompanyName());
             user1.setGst(sellerDto.getGst());
 
             user1.setPasswordLastModified(new Date());
@@ -93,7 +92,7 @@ public class SellerService {
             sellerRepository.save(user1);
 
             String token = UUID.randomUUID().toString();
-            VerificationToken verificationToken = new VerificationToken(token,user1, new VerificationToken().calculateExpiryDate(new VerificationToken().getEXPIRATION()));
+            VerificationToken verificationToken = new VerificationToken(token,user1, new VerificationToken().calculateExpiryDate(VerificationToken.getEXPIRATION()));
             verificationTokenRepository.save(verificationToken);
 
             String receiverEmail = user1.getEmail();
@@ -106,8 +105,7 @@ public class SellerService {
             email.setText(message);
             javaMailSender.send(email);
 
-            String messageSuccessful = messageSource.getMessage("seller.registration.successful", null, locale);
-            return messageSuccessful;
+            return messageSource.getMessage("seller.registration.successful", null, locale);
         }
     }
 
@@ -133,14 +131,14 @@ public class SellerService {
         Address address = addressRepository.getAddressByUserId(id);
 
         if (address != null) {
-            String address_line = (String) addressDetails.get("address_line");
+            String addressLine = (String) addressDetails.get("address_Line");
             String city = (String) addressDetails.get("city");
             String state = (String) addressDetails.get("state");
             String country = (String) addressDetails.get("country");
-            String zip_code = (String) addressDetails.get("zip_code");
+            String zipCode = (String) addressDetails.get("zip_code");
 
-            if (checkNotNull(address_line)) {
-                address.setAddressLine(address_line);
+            if (checkNotNull(addressLine)) {
+                address.setAddressLine(addressLine);
             }
             if (checkNotNull(city)) {
                 address.setCity(city);
@@ -151,8 +149,8 @@ public class SellerService {
             if (checkNotNull(country)) {
                 address.setCountry(country);
             }
-            if (zip_code != null) {
-                address.setZipCode(zip_code);
+            if (zipCode != null) {
+                address.setZipCode(zipCode);
             }
 
             addressRepository.save(address);
@@ -162,10 +160,7 @@ public class SellerService {
         }
     }
     private Boolean checkNotNull(String value) {
-        if (value != null && !value.equals(""))
-            return true;
-        else
-            return false;
+        return (value != null && !value.equals(""));
     }
 
     public String updateProfile(HashMap<String, Object> customerDetails, HttpServletRequest httpServletRequest){
@@ -175,26 +170,26 @@ public class SellerService {
 
         Name name = seller.getName();
 
-        String first_name = (String) customerDetails.get("first_name");
-        String middle_name = (String) customerDetails.get("middle_name");
-        String last_name = (String) customerDetails.get("last_name");
-        String company_contact = (String) customerDetails.get("company_contact");
+        String firstName = (String) customerDetails.get("first_name");
+        String middleName = (String) customerDetails.get("middle_name");
+        String lastName = (String) customerDetails.get("last_name");
+        String companyContact = (String) customerDetails.get("company_contact");
 
-        if (checkNotNull(first_name)){
-            name.setFirstName(first_name);
+        if (checkNotNull(firstName)){
+            name.setFirstName(firstName);
         }
-        if (checkNotNull(middle_name)){
-            name.setMiddleName(middle_name);
+        if (checkNotNull(middleName)){
+            name.setMiddleName(middleName);
         }
-        if (checkNotNull(last_name)){
-            name.setLastName(last_name);
+        if (checkNotNull(lastName)){
+            name.setLastName(lastName);
         }
-        if (checkNotNull(company_contact)){
-            if (!isContactValid(company_contact)) {
+        if (checkNotNull(companyContact)){
+            if (!isContactValid(companyContact)) {
                 return "Not a Valid Phone number";
             }
             else {
-                seller.setCompanyContact(company_contact);
+                seller.setCompanyContact(companyContact);
             }
         }
         else {

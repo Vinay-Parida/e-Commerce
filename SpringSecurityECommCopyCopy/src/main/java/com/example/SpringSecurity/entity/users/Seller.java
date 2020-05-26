@@ -40,7 +40,7 @@ public class Seller extends User {
         return companyName;
     }
 
-    public void setCompanyName(String comapany_name) {
-        this.companyName = comapany_name;
+    public void setCompanyName(String comapanyName) {
+        this.companyName = comapanyName;
     }
 }

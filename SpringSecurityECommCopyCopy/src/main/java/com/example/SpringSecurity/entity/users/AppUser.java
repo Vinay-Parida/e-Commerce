@@ -12,7 +12,7 @@ public class AppUser implements UserDetails {
     private String username;
     private String password;
     private Boolean isAccountLocked;
-    List<GrantAuthorityImpl> grantAuthorities;
+    private List<GrantAuthorityImpl> grantAuthorities;
 
     public AppUser(String username, String password, Boolean isAccountLocked, List<GrantAuthorityImpl> grantAuthorities) {
         this.username = username;

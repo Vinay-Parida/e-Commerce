@@ -7,25 +7,24 @@ public class FindAllSellerDTO {
     private String fullName;
     private String email;
     private String companyName;
-//    private String companyAddress;
-    private String address_line;
+    private String addressLine;
     private String city;
     private String state;
     private String country;
-    private String zip_code;
+    private String zipCode;
     private String companyContact;
     private Boolean isActive;
 
-    public FindAllSellerDTO(BigInteger id, String fullName, String email, Boolean isActive, String companyName, String address_line, String city, String state, String country, String companyContact, String zip_code) {
+    public FindAllSellerDTO(BigInteger id, String fullName, String email, Boolean isActive, String companyName, String addressLine, String city, String state, String country, String companyContact, String zipCode) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.companyName = companyName;
-        this.address_line = address_line;
+        this.addressLine = addressLine;
         this.city = city;
         this.state = state;
         this.country = country;
-        this.zip_code = zip_code;
+        this.zipCode = zipCode;
         this.companyContact = companyContact;
         this.isActive = isActive;
     }
@@ -78,12 +77,12 @@ public class FindAllSellerDTO {
         isActive = active;
     }
 
-    public String getAddress_line() {
-        return address_line;
+    public String getAddressLine() {
+        return addressLine;
     }
 
-    public void setAddress_line(String address_line) {
-        this.address_line = address_line;
+    public void setAddressLine(String addressLine) {
+        this.addressLine = addressLine;
     }
 
     public String getCity() {
@@ -110,12 +109,12 @@ public class FindAllSellerDTO {
         this.country = country;
     }
 
-    public String getZip_code() {
-        return zip_code;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setZip_code(String zip_code) {
-        this.zip_code = zip_code;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     //Without getter setters the data is not shown while getting list in postman

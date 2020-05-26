@@ -1,11 +1,11 @@
 package com.example.SpringSecurity.service;
 
-import com.example.SpringSecurity.repository.UserRepository;
-import com.example.SpringSecurity.repository.VerificationTokenRepository;
 import com.example.SpringSecurity.entity.users.User;
 import com.example.SpringSecurity.exceptions.EmailException;
 import com.example.SpringSecurity.exceptions.TokenInvalidException;
 import com.example.SpringSecurity.modals.VerificationToken;
+import com.example.SpringSecurity.repository.UserRepository;
+import com.example.SpringSecurity.repository.VerificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.SimpleMailMessage;
@@ -46,17 +46,16 @@ public class ActivationService {
         User user = verificationToken.getUser();
 
         Calendar calendar = Calendar.getInstance();
-        if((verificationToken.getExpiry_date().getTime() - calendar.getTime().getTime()) <= 0){
+        if((verificationToken.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0){
             String messageTokenExpired = messageSource.getMessage("exception.token.expired", null, locale);
             verificationTokenRepository.deleteToken(token);
-            throw  new TokenInvalidException(messageTokenExpired + " " + verificationToken.getExpiry_date().getTime() + " "+ calendar.getTime().getTime());
+            throw  new TokenInvalidException(messageTokenExpired + " " + verificationToken.getExpiryDate().getTime() + " "+ calendar.getTime().getTime());
         }
 
         user.setIsActive(true);
         userRepository.save(user);
         verificationTokenRepository.deleteToken(token);
-        String messageActivationUserSuccessful = messageSource.getMessage("activation.user.successful", null, locale);
-        return messageActivationUserSuccessful;
+        return messageSource.getMessage("activation.user.successful", null, locale);
     }
 
 
@@ -70,7 +69,7 @@ public class ActivationService {
             String messageEmailDoesNotExists = messageSource.getMessage("exception.email.does.not.exists", null, locale);
             throw new EmailException(messageEmailDoesNotExists);
         }
-        else if(user.isActive() == true){
+        else if(user.isActive()){
             String messageAccountAlreadyActive = messageSource.getMessage("exception.account.already.active", null, locale);
             throw new EmailException(messageAccountAlreadyActive);
         }
@@ -78,25 +77,24 @@ public class ActivationService {
         Long id = user.getId();
 
         String token = UUID.randomUUID().toString();
-        Date newExpiryDate = new VerificationToken().calculateExpiryDate(new VerificationToken().getEXPIRATION());
+        Date newExpiryDate = new VerificationToken().calculateExpiryDate(VerificationToken.getEXPIRATION());
 
         verificationTokenRepository.updateToken(token, newExpiryDate, id);
 
-        String receiverEmail = email;
         String subject = "Reactivation User";
         String confirmationUrl = webRequest.getContextPath() + "/registrationConfirm?token=" + token;
         String message = "Reactivation Link\n Click here to re activate user \n ";
 
+        sendMail(email, confirmationUrl, message, subject);
+
+        return messageSource.getMessage("reactivation.user.successful", null, locale);
+    }
+
+    private void sendMail(String emailRecipient, String confirmationUrl, String message, String subject) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setTo(receiverEmail);
+        simpleMailMessage.setTo(emailRecipient);
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(message + "\r\n" + "http://localhost:8080" + confirmationUrl);
-
         javaMailSender.send(simpleMailMessage);
-
-        String messageSuccessful = messageSource.getMessage("reactivation.user.successful", null, locale);
-
-        return messageSuccessful;
-
     }
 }

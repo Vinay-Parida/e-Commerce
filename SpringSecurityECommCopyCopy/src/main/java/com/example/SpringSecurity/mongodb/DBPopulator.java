@@ -1,4 +1,4 @@
-package com.example.SpringSecurity.mongodb.service;
+package com.example.SpringSecurity.mongodb;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -17,13 +17,6 @@ public class DBPopulator implements ApplicationRunner {
 
         //This is done to populate the database because without it the collection will not show up in database
 
-//        Logs logs = new Logs();
-//        logs.setLogger("Logger");
-//        logs.setDate(new Date());
-//        logs.setMessage("Test message");
-//        logs.setLevel("INFO");
-
-        //        mongoTemplate.save(logs);
 
 
     }

@@ -50,7 +50,6 @@ public class UserAttemptsService {
     }
 
     public void updateAttemptsToNull(String email){
-        UserAttempts userAttempts = userAttemptsRepository.findByEmail(email);
         userAttemptsRepository.updateAttempts(0, email);
     }
 
@@ -60,12 +59,7 @@ public class UserAttemptsService {
 
     public Boolean checkLock(String email){
         Integer attempts = getAttempt(email);
-        if(attempts > 3){
-            return false;
-        }
-        else {
-            return true;
-        }
+        return attempts <= 3;
     }
 
     public Boolean checkIsActive(String email){

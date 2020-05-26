@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 
-    Customer findById(Long Id);
+    Customer findById(Long id);
 
     @Query(value = "select u.id, u.first_name, u.last_name, u.is_active, c.contact, u.image from user u inner join customer c on u.id = c.id where email =:Email",nativeQuery = true)
     public List<Object[]> getCustomerDetails(@Param("Email") String email);

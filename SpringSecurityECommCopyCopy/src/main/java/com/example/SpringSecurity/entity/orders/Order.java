@@ -18,14 +18,96 @@ public class Order {
 
     private double amountPaid;
     private Date dateCreated;
-    private final String paymentMethod = "Cash";
+    private static final String paymentMethod = "Cash";
 
-    private String customer_address_city;
-    private String customer_address_state;
-    private String customer_address_country;
-    private String customer_address_address_line;
-    private Integer customer_address_zip_code;
-    private String customer_address_label;
+    private String customerAddressCity;
+    private String customerAddressState;
+    private String customerAddressCountry;
+    private String customerAddressLine;
+    private Integer customerAddressZipCode;
+    private String customerAddressLabel;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public double getAmountPaid() {
+        return amountPaid;
+    }
+
+    public void setAmountPaid(double amountPaid) {
+        this.amountPaid = amountPaid;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public String getCustomerAddressCity() {
+        return customerAddressCity;
+    }
+
+    public void setCustomerAddressCity(String customerAddressCity) {
+        this.customerAddressCity = customerAddressCity;
+    }
+
+    public String getCustomerAddressState() {
+        return customerAddressState;
+    }
+
+    public void setCustomerAddressState(String customerAddressState) {
+        this.customerAddressState = customerAddressState;
+    }
+
+    public String getCustomerAddressCountry() {
+        return customerAddressCountry;
+    }
+
+    public void setCustomerAddressCountry(String customerAddressCountry) {
+        this.customerAddressCountry = customerAddressCountry;
+    }
+
+    public String getCustomerAddressLine() {
+        return customerAddressLine;
+    }
+
+    public void setCustomerAddressLine(String customerAddressLine) {
+        this.customerAddressLine = customerAddressLine;
+    }
+
+    public Integer getCustomerAddressZipCode() {
+        return customerAddressZipCode;
+    }
+
+    public void setCustomerAddressZipCode(Integer customerAddressZipCode) {
+        this.customerAddressZipCode = customerAddressZipCode;
+    }
+
+    public String getCustomerAddressLabel() {
+        return customerAddressLabel;
+    }
+
+    public void setCustomerAddressLabel(String customerAddressLabel) {
+        this.customerAddressLabel = customerAddressLabel;
+    }
 }

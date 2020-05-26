@@ -21,12 +21,7 @@ public class CustomLoggerService {
         logs.setMessage(msg);
 
         logs.info(msg);
-        try{
-            mongoTemplate.insert(logs);
-        }
-        catch (Exception e){
-            System.out.println("This exception: " + e);
-        }
+        mongoTemplate.insert(logs);
     }
 
 

@@ -12,14 +12,6 @@ public class Name {
     @NotNull
     private String lastName;
 
-//    public Name(){}
-//
-//    public Name(@NotNull String firstName, String middleName, @NotNull String lastName) {
-//        this.firstName = firstName;
-//        this.middleName = middleName;
-//        this.lastName = lastName;
-//    }
-
     public String getFirstName() {
         return firstName;
     }

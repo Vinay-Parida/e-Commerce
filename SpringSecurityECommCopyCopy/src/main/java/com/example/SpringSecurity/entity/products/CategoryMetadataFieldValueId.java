@@ -6,6 +6,7 @@ import java.io.Serializable;
 @Embeddable
 public class CategoryMetadataFieldValueId implements Serializable {
 
+    //Variable don't follow naming convention because it maps variable from database they both should be same
     private Long category_id;
     private Long category_metadata_field_id;
 

@@ -52,12 +52,6 @@ public class EmailJob extends QuartzJobBean {
 
         mongoTemplate.insert(logs);
 
-
-//        JobDataMap jobDataMap = jobExecutionContext.getMergedJobDataMap();
-//        String subject = jobDataMap.getString("subject");
-//        String body = jobDataMap.getString("body");
-//        String recipientEmail = jobDataMap.getString("email");
-
         List<Object[]> sellerDetails = variationRepository.getDetailedProductAndEmailWithProductVariationNone();
 
         for (Object[] objects: sellerDetails) {
