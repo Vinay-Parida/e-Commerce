@@ -1,0 +1,11 @@
+a:link, a:visited {
+	border-radius: 5px;
+  background-color: #1f5c4d;
+  color: white;
+  padding: 8px 17px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: arial, sans-serif;
+  width: 15%
+}

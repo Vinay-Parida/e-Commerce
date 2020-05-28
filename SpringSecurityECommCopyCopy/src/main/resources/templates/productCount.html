@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product</title>
+    <link rel="stylesheet" th:href="@{/css/productCount.css}" />
+</head>
+
+<body>
+
+<h3>Product Count</h3>
+<hr>
+
+<table style="float:left;">
+    <thead>
+    <tr>
+        <th>Category</th>
+        <th>Product Count</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="tempVariable: ${productCount}">
+        <td th:text="${tempVariable.categoryName}" />
+        <td th:text="${tempVariable.productCount}" />
+
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+
+</html>
