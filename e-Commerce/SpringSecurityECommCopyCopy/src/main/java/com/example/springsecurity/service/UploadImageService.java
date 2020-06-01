@@ -38,10 +38,10 @@ public class UploadImageService {
             User user = getUser(httpServletRequest);
             String fileName = renameFile(image.getOriginalFilename(), user.getId());
 
-            Path path = Paths.get("/home/vinay/images/" + fileName);
+            Path path = Paths.get("/home/ttn/images/" + fileName);
             Files.write(path, bytes);
 
-            saveFilePath("/home/vinay/images/" + fileName, user);
+            saveFilePath("/home/ttn/images/" + fileName, user);
             return "Photo successfully uploaded";
 
         } catch (IOException e) {
@@ -77,9 +77,9 @@ public class UploadImageService {
         
         byte[] bytes = image.getBytes();
         String fileName = renameFile(image.getOriginalFilename(), id);
-        Path path = Paths.get("/home/vinay/images/productVariation/primaryImage" + fileName);
+        Path path = Paths.get("/home/ttn/images/productVariation/primaryImage" + fileName);
         Files.write(path, bytes);
-        return "/home/vinay/images/productVariation/primaryImage" + fileName;
+        return "/home/ttn/images/productVariation/primaryImage" + fileName;
     }
 
     public Set<String> uploadSecondaryImage(List<MultipartFile> images , WebRequest webRequest, Long productId) throws IOException {
@@ -88,7 +88,7 @@ public class UploadImageService {
         Set<String> pathNames=new HashSet<>();
         for (MultipartFile image:images) {
             count++;
-            String folder = "/home/vinay/images/productVariation/secondaryImage";
+            String folder = "/home/ttn/images/productVariation/secondaryImage";
             byte[] bytes = image.getBytes();
             String fileName=getSecondaryFileName(image.getOriginalFilename(),productId,count);
             Path path = Paths.get(folder + fileName);

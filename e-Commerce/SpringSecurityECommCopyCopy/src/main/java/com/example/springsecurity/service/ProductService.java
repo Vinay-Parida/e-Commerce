@@ -399,6 +399,7 @@ public class ProductService {
             throw new EmailException("Product doesn't belong to seller");
 
         product.setDeleted(true);
+        productRepository.save(product);
         return "Product deleted successfully";
     }
 

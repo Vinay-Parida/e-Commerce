@@ -1,5 +1,7 @@
 package com.example.springsecurity.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.validation.constraints.NotNull;
 
 public class UpdateProductDTO {
@@ -7,7 +9,9 @@ public class UpdateProductDTO {
     private Long productId;
     private String name;
     private String description;
+    @JsonIgnore
     private Boolean isCancellable;
+    @JsonIgnore
     private Boolean isReturnable;
 
     public Long getProductId() {

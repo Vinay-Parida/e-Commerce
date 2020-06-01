@@ -7,12 +7,6 @@ public class CategoryMetadataFieldValueDTO {
     private Long fieldId;
     private Set<String> fieldValues;
 
-    public CategoryMetadataFieldValueDTO(Long categoryId, Long fieldId, Set<String> fieldValues) {
-        this.categoryId = categoryId;
-        this.fieldId = fieldId;
-        this.fieldValues = fieldValues;
-    }
-
     public Long getCategoryId() {
         return categoryId;
     }

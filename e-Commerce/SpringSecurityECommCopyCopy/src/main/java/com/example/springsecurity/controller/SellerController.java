@@ -126,7 +126,7 @@ public class SellerController {
             @ApiImplicitParam(name = "Authorization", value = "Authorization token",
                     required = true, dataType = "string", paramType = "header") })
     @PostMapping("/addProduct")
-    public String addProduct(@RequestBody AddProductDTO addProductDto, HttpServletRequest httpServletRequest, WebRequest webRequest) {
+    public String addProduct(@Valid @RequestBody AddProductDTO addProductDto, HttpServletRequest httpServletRequest, WebRequest webRequest) {
         return productService.addProduct(addProductDto, httpServletRequest, webRequest);
     }
 
