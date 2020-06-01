@@ -73,7 +73,7 @@ public class UploadImageService {
 
     public String uploadPrimaryImage(MultipartFile image, Long id, WebRequest webRequest) throws IOException {
         if (image.isEmpty())
-            return "No file Selected";
+            throw new ProductException("Primary Image is not present");
         
         byte[] bytes = image.getBytes();
         String fileName = renameFile(image.getOriginalFilename(), id);

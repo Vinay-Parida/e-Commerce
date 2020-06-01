@@ -98,7 +98,7 @@ public class ProductService {
         List<User> userAdmin = userRepository.getUserAdmin();
         String confirmationUrl = webRequest.getContextPath() + "/admin/activateProduct?id=" + productId;
         userAdmin.forEach(user ->
-            sendMailToAdmin(user.getEmail(), confirmationUrl, product)
+                sendMailToAdmin(user.getEmail(), confirmationUrl, product)
         );
 
         return "Product Saved Successfully";
@@ -126,7 +126,7 @@ public class ProductService {
 
     private Boolean isProductUnique(String name, Long categoryId, Long sellerId, String brand) {
         Product product = productRepository.getUniqueProduct(brand, categoryId, sellerId, name);
-        return  (product == null);
+        return (product == null);
     }
 
 
@@ -153,8 +153,7 @@ public class ProductService {
 
             productVariationRepository.save(productVariation);
             return "Product variation Saved successfully";
-        }
-        else {
+        } else {
             throw new ProductException("This Product doesn't exists");
         }
     }
@@ -168,10 +167,10 @@ public class ProductService {
         if (!product.getSeller().getEmail().equalsIgnoreCase(sellerEmail))
             throw new EmailException("This is not product of the seller");
         if (addProductVariationDto.getQuantityAvailable() != null && addProductVariationDto.getQuantityAvailable() < 0) {
-                throw new EmailException("Quantity can't be negative");
+            throw new EmailException("Quantity can't be negative");
         }
         if (addProductVariationDto.getPrice() != null && addProductVariationDto.getPrice() < 0) {
-                throw new EmailException("Price can't be negative");
+            throw new EmailException("Price can't be negative");
         }
         if (!product.getActive())
             throw new EmailException("Product is not active");
@@ -187,7 +186,7 @@ public class ProductService {
         List<String> actualFields = new ArrayList<>();
         List<Object> metadataFieldName = categoryMetadataFieldValueRepository.getMetadataFieldName(categoryId);
         metadataFieldName.forEach(e ->
-            actualFields.add((String) e)
+                actualFields.add((String) e)
         );
 
         if (receivedFields.size() < actualFields.size())
@@ -422,9 +421,10 @@ public class ProductService {
             if (productByName != null)
                 throw new EmailException("Product already exist with this name");
         }
-        product.setName(updateProductDto.getName());
+        if (!updateProductDto.getName().equals(""))
+            product.setName(updateProductDto.getName());
 
-        if (updateProductDto.getDescription() != null) {
+        if (updateProductDto.getDescription() != null && !updateProductDto.getDescription().equals("")) {
             product.setDescription(updateProductDto.getDescription());
         }
         //Cancellable and returnable are taking null: CHECK LATER
@@ -439,15 +439,15 @@ public class ProductService {
         return "Product updated successfully";
     }
 
-    public String updateProductVariation(MultipartFile primaryImage, List<MultipartFile> secondaryImages,HttpServletRequest request, UpdateProductVariationDTO updateProductVariationDto,WebRequest webRequest) throws IOException {
-        Locale locale=webRequest.getLocale();
+    public String updateProductVariation(MultipartFile primaryImage, List<MultipartFile> secondaryImages, HttpServletRequest request, UpdateProductVariationDTO updateProductVariationDto, WebRequest webRequest) throws IOException {
+        Locale locale = webRequest.getLocale();
         Optional<ProductVariation> variationOptional = productVariationRepository.findById(updateProductVariationDto.getProductVariationId());
         String sellerEmail = request.getUserPrincipal().getName();
         String validateData = validateUpdateData(updateProductVariationDto, sellerEmail, webRequest);
-        if(!validateData.equalsIgnoreCase("success")){
-            throw  new ProductException("Validation failed");
+        if (!validateData.equalsIgnoreCase("success")) {
+            throw new ProductException("Validation failed");
         }
-        ProductVariation productVariation= variationOptional.orElse(null);
+        ProductVariation productVariation = variationOptional.orElse(null);
         if (productVariation != null) {
             if (updateProductVariationDto.getPrice() != null) {
                 productVariation.setPrice(updateProductVariationDto.getPrice());
@@ -468,49 +468,48 @@ public class ProductService {
             productVariationRepository.save(productVariation);
 
             return "Product variation Updated";
-        }
-        else {
+        } else {
             throw new ProductException("Product Variation doesn't exists");
         }
     }
 
     //Same problem with IsActive. CHECK LATER
-    private String validateUpdateData(UpdateProductVariationDTO updateProductVariationDto,String sellerEmail,WebRequest webRequest){
+    private String validateUpdateData(UpdateProductVariationDTO updateProductVariationDto, String sellerEmail, WebRequest webRequest) {
 
         Optional<ProductVariation> variationOptional = productVariationRepository.findById(updateProductVariationDto.getProductVariationId());
 
-        if(!variationOptional.isPresent())
+        if (!variationOptional.isPresent())
             throw new ProductException("Product Variation is not valid");
 
         ProductVariation productVariation = variationOptional.get();
-        Product product =productVariation.getProduct();
+        Product product = productVariation.getProduct();
 
-        if(!product.getActive())
+        if (!product.getActive())
             throw new ProductException("Product is not active");
 
-        if(!product.getSeller().getEmail().equalsIgnoreCase(sellerEmail))
+        if (!product.getSeller().getEmail().equalsIgnoreCase(sellerEmail))
             throw new ProductException("Product doesn't belong to seller");
 
-        if(updateProductVariationDto.getQuantityAvailable()!=null && updateProductVariationDto.getQuantityAvailable()<0 ){
-                throw new ProductException("Quantity can't be negative");
+        if (updateProductVariationDto.getQuantityAvailable() != null && updateProductVariationDto.getQuantityAvailable() < 0) {
+            throw new ProductException("Quantity can't be negative");
         }
-        if(updateProductVariationDto.getPrice()!=null && updateProductVariationDto.getPrice() < 0) {
-                throw new ProductException("Price can't be negative");
+        if (updateProductVariationDto.getPrice() != null && updateProductVariationDto.getPrice() < 0) {
+            throw new ProductException("Price can't be negative");
         }
-        if(product.getDeleted())
+        if (product.getDeleted())
             throw new ProductException(PRODUCTDELETED);
 
 
-        Category category=product.getCategory();
+        Category category = product.getCategory();
         Long categoryId = category.getId();
-        if(updateProductVariationDto.getMetadata()!=null) {
+        if (updateProductVariationDto.getMetadata() != null) {
             Map<String, String> metadata = updateProductVariationDto.getMetadata();
 
             List<String> receivedFields = new ArrayList<>(metadata.keySet());
             List<String> actualFields = new ArrayList<>();
             List<Object> metadataFieldName = categoryMetadataFieldValueRepository.getMetadataFieldName(categoryId);
             metadataFieldName.forEach(e ->
-                actualFields.add((String) e)
+                    actualFields.add((String) e)
             );
 
 
@@ -544,26 +543,26 @@ public class ProductService {
         return "Success";
     }
 
-    public ViewCustomerProductDTO viewCustomerProduct(Long productId,WebRequest webRequest){
+    public ViewCustomerProductDTO viewCustomerProduct(Long productId, WebRequest webRequest) {
 
         Optional<Product> productOptional = productRepository.findById(productId);
-        if(!productOptional.isPresent()){
+        if (!productOptional.isPresent()) {
             throw new EmailException("ProductId is invalid");
         }
         Product product = productOptional.get();
-        if(product.getDeleted()){
+        if (product.getDeleted()) {
             throw new EmailException(PRODUCTDELETED);
         }
-        if(!product.getActive()){
+        if (!product.getActive()) {
             throw new EmailException("Product is inactive");
         }
         Category category = product.getCategory();
         List<ProductVariation> variationList = productVariationRepository.findByProductId(productId);
-        if(variationList.isEmpty()){
-            throw  new EmailException("This product have no variations available");
+        if (variationList.isEmpty()) {
+            throw new EmailException("This product have no variations available");
         }
 
-        ViewCustomerProductDTO viewCustomerProductDTO =new ViewCustomerProductDTO();
+        ViewCustomerProductDTO viewCustomerProductDTO = new ViewCustomerProductDTO();
         viewCustomerProductDTO.setProductName(product.getName());
         viewCustomerProductDTO.setBrand(product.getBrand());
         viewCustomerProductDTO.setDescription(product.getDescription());
@@ -572,9 +571,9 @@ public class ProductService {
         viewCustomerProductDTO.setCategoryId(category.getId());
         viewCustomerProductDTO.setCategoryName(category.getName());
 
-        List<ProductVariationDTO> variationDtoList=new ArrayList<>();
-        for (ProductVariation productVariation:variationList) {
-            ProductVariationDTO variationDto=new ProductVariationDTO();
+        List<ProductVariationDTO> variationDtoList = new ArrayList<>();
+        for (ProductVariation productVariation : variationList) {
+            ProductVariationDTO variationDto = new ProductVariationDTO();
             variationDto.setQuantityAvailable(productVariation.getQuantityAvailable());
             variationDto.setPrice(productVariation.getPrice());
             variationDto.setMetadata(productVariation.getMetadata());
@@ -589,27 +588,28 @@ public class ProductService {
     }
 
 
-    public List<ViewCustomerAllProductDTO> viewCustomerAllProduct(Long categoryId,String offset,WebRequest webRequest, String max,  String field, String order) {
+    public List<ViewCustomerAllProductDTO> viewCustomerAllProduct(Long categoryId, String offset, WebRequest webRequest, String max, String field, String order) {
 
         Integer offSetPage = Integer.parseInt(offset);
         Integer sizeOfPage = Integer.parseInt(max);
         Pageable pageable;
-        if(order.equalsIgnoreCase(ASCENDING)) {
+        if (order.equalsIgnoreCase(ASCENDING)) {
             pageable = PageRequest.of(offSetPage, sizeOfPage, Sort.Direction.ASC, field);
-        }else{
+        } else {
             pageable = PageRequest.of(offSetPage, sizeOfPage, Sort.Direction.DESC, field);
         }
         List<Category> categoryList = categoryRepository.findByParentId(categoryId);
-        if(categoryList.isEmpty()){
-            return getProductDetails(categoryId,pageable);
-        }else{
+        if (categoryList.isEmpty()) {
+            return getProductDetails(categoryId, pageable);
+        } else {
             throw new ValueNotFoundException("Category is not leaf node");
         }
     }
-    private List<ViewCustomerAllProductDTO> getProductDetails(Long categoryId, Pageable pageable){
-        List<ViewCustomerAllProductDTO> viewCustomerAllProductDtos=new ArrayList<>();
+
+    private List<ViewCustomerAllProductDTO> getProductDetails(Long categoryId, Pageable pageable) {
+        List<ViewCustomerAllProductDTO> viewCustomerAllProductDtos = new ArrayList<>();
         List<Product> productList = productRepository.findByCategoryId(categoryId, pageable);
-        for (Product product:productList) {
+        for (Product product : productList) {
             if (!product.getDeleted() && product.getActive()) {
                 ViewCustomerAllProductDTO viewCustomerAllProductDto = setProductData(product);
                 viewCustomerAllProductDtos.add(viewCustomerAllProductDto);
@@ -617,7 +617,8 @@ public class ProductService {
         }
         return viewCustomerAllProductDtos;
     }
-    private ViewCustomerAllProductDTO setProductData(Product product){
+
+    private ViewCustomerAllProductDTO setProductData(Product product) {
         ViewCustomerAllProductDTO viewCustomerAllProductDto = new ViewCustomerAllProductDTO();
         viewCustomerAllProductDto.setProductId(product.getId());
         viewCustomerAllProductDto.setProductName(product.getName());
@@ -637,29 +638,29 @@ public class ProductService {
         return viewCustomerAllProductDto;
     }
 
-    public List<ViewCustomerAllProductDTO> viewSimilarProduct(Long productId,WebRequest webRequest,String offset,  String max,  String field, String order){
-        Locale locale=webRequest.getLocale();
+    public List<ViewCustomerAllProductDTO> viewSimilarProduct(Long productId, WebRequest webRequest, String offset, String max, String field, String order) {
+        Locale locale = webRequest.getLocale();
         Optional<Product> productOptional = productRepository.findById(productId);
-        if(!productOptional.isPresent()){
+        if (!productOptional.isPresent()) {
             throw new EmailException("Invalid ProductId");
         }
         Long categoryId = productOptional.get().getCategory().getId();
-        return viewCustomerAllProduct(categoryId,offset,webRequest,max,field,order);
+        return viewCustomerAllProduct(categoryId, offset, webRequest, max, field, order);
     }
 
-    public ViewCustomerProductDTO viewAdminProduct(Long productId,WebRequest webRequest){
-        Locale locale=webRequest.getLocale();
+    public ViewCustomerProductDTO viewAdminProduct(Long productId, WebRequest webRequest) {
+        Locale locale = webRequest.getLocale();
         Optional<Product> productOptional = productRepository.findById(productId);
-        if(!productOptional.isPresent()){
+        if (!productOptional.isPresent()) {
             throw new EmailException("ProductId is invalid");
         }
         Product product = productOptional.get();
         Category category = product.getCategory();
         List<ProductVariation> variationList = productVariationRepository.findByProductId(productId);
-        if(variationList.isEmpty()){
-            throw  new EmailException("Variation doesn't exists");
+        if (variationList.isEmpty()) {
+            throw new EmailException("Variation doesn't exists");
         }
-        ViewCustomerProductDTO viewCustomerProductDTO =new ViewCustomerProductDTO();
+        ViewCustomerProductDTO viewCustomerProductDTO = new ViewCustomerProductDTO();
         viewCustomerProductDTO.setProductName(product.getName());
         viewCustomerProductDTO.setBrand(product.getBrand());
         viewCustomerProductDTO.setDescription(product.getDescription());
@@ -668,9 +669,9 @@ public class ProductService {
         viewCustomerProductDTO.setCategoryId(category.getId());
         viewCustomerProductDTO.setCategoryName(category.getName());
 
-        List<ProductVariationDTO> variationDtoList=new ArrayList<>();
-        for (ProductVariation productVariation:variationList) {
-            ProductVariationDTO variationDto=new ProductVariationDTO();
+        List<ProductVariationDTO> variationDtoList = new ArrayList<>();
+        for (ProductVariation productVariation : variationList) {
+            ProductVariationDTO variationDto = new ProductVariationDTO();
             variationDto.setQuantityAvailable(productVariation.getQuantityAvailable());
             variationDto.setPrice(productVariation.getPrice());
             variationDto.setMetadata(productVariation.getMetadata());
@@ -684,17 +685,17 @@ public class ProductService {
         return viewCustomerProductDTO;
     }
 
-    public List<ViewCustomerAllProductDTO> viewAllProduct(String offset,  String max,  String field, String order){
+    public List<ViewCustomerAllProductDTO> viewAllProduct(String offset, String max, String field, String order) {
         Integer offSetPage = Integer.parseInt(offset);
         Integer sizeOfPage = Integer.parseInt(max);
-        if(order.equalsIgnoreCase(ASCENDING)) {
+        if (order.equalsIgnoreCase(ASCENDING)) {
             PageRequest.of(offSetPage, sizeOfPage, Sort.Direction.ASC, field);
-        }else{
+        } else {
             PageRequest.of(offSetPage, sizeOfPage, Sort.Direction.DESC, field);
         }
         List<Product> productList = (List<Product>) productRepository.findAll();
-        List<ViewCustomerAllProductDTO> viewCustomerAllProductDtos=new ArrayList<>();
-        for (Product product:productList) {
+        List<ViewCustomerAllProductDTO> viewCustomerAllProductDtos = new ArrayList<>();
+        for (Product product : productList) {
             if (!product.getDeleted() && product.getActive()) {
                 ViewCustomerAllProductDTO viewCustomerAllProductDto = setProductData(product);
                 viewCustomerAllProductDtos.add(viewCustomerAllProductDto);
@@ -705,7 +706,7 @@ public class ProductService {
 
     public String activateProduct(Long productId, WebRequest webRequest) {
         Product product = productRepository.findById(productId).orElse(null);
-        if(product != null) {
+        if (product != null) {
             product.setActive(true);
             productRepository.save(product);
 
@@ -720,8 +721,7 @@ public class ProductService {
             javaMailSender.send(simpleMailMessage);
 
             return "Product activated successfully";
-        }
-        else{
+        } else {
             throw new ProductException("This product doesn't exists");
         }
     }
@@ -744,9 +744,8 @@ public class ProductService {
             javaMailSender.send(simpleMailMessage);
 
             return "Product deactivated successfully";
-        }
-        else {
-            throw  new ProductException("Product doesn't exist");
+        } else {
+            throw new ProductException("Product doesn't exist");
         }
     }
 

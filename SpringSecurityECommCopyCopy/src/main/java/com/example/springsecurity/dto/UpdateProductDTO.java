@@ -5,31 +5,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class AddProductDTO {
-
+public class UpdateProductDTO {
     @NotNull
-    @NotEmpty(message = "Name can't be empty")
-    private String name;
-    @NotNull
+    private Long productId;
     @NotEmpty
-    private String brand;
-    @NotNull
-    private Long categoryId;
+    private String name;
     private String description;
     @JsonIgnore
     private Boolean isCancellable;
     @JsonIgnore
     private Boolean isReturnable;
 
-    AddProductDTO(){}
+    public Long getProductId() {
+        return productId;
+    }
 
-    public AddProductDTO(String name, String brand, Long categoryId, String description, Boolean isCancellable, Boolean isReturnable) {
-        this.name = name;
-        this.brand = brand;
-        this.categoryId = categoryId;
-        this.description = description;
-        this.isCancellable = isCancellable;
-        this.isReturnable = isReturnable;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public String getName() {
@@ -38,22 +30,6 @@ public class AddProductDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
     }
 
     public String getDescription() {
@@ -79,5 +55,4 @@ public class AddProductDTO {
     public void setReturnable(Boolean returnable) {
         isReturnable = returnable;
     }
-
 }

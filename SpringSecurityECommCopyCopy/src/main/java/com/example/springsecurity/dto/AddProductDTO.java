@@ -2,24 +2,32 @@ package com.example.springsecurity.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class UpdateProductDTO {
+public class AddProductDTO {
+
     @NotNull
-    private Long productId;
+    @NotEmpty(message = "Name can't be empty")
     private String name;
+    @NotNull
+    @NotEmpty
+    private String brand;
+    @NotNull
+    private Long categoryId;
     private String description;
-    @JsonIgnore
     private Boolean isCancellable;
-    @JsonIgnore
     private Boolean isReturnable;
 
-    public Long getProductId() {
-        return productId;
-    }
+    AddProductDTO(){}
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public AddProductDTO(String name, String brand, Long categoryId, String description, Boolean isCancellable, Boolean isReturnable) {
+        this.name = name;
+        this.brand = brand;
+        this.categoryId = categoryId;
+        this.description = description;
+        this.isCancellable = isCancellable;
+        this.isReturnable = isReturnable;
     }
 
     public String getName() {
@@ -28,6 +36,22 @@ public class UpdateProductDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getDescription() {
@@ -53,4 +77,5 @@ public class UpdateProductDTO {
     public void setReturnable(Boolean returnable) {
         isReturnable = returnable;
     }
+
 }

@@ -1,10 +1,15 @@
 package com.example.springsecurity.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 public class AddProductVariationDTO {
 
+    @NotNull
     private Long productId;
+    @NotNull
+    @NotEmpty
     private Map<String,String> metadata;
     private Integer quantityAvailable;
     private Double price;

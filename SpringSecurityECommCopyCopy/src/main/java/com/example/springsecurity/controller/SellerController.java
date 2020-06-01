@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -146,7 +148,7 @@ public class SellerController {
     public String addProductVariation(@RequestPart("primaryImage") MultipartFile primaryimage,
                                       @RequestPart("secondaryImages") List<MultipartFile> secondaryImages,
                                       HttpServletRequest httpServletRequest,
-                                      @RequestPart("productVariation") AddProductVariationDTO addProductVariationDTO,
+                                      @Valid @RequestPart("productVariation") AddProductVariationDTO addProductVariationDTO,
                                       WebRequest webRequest) throws IOException {
         return productService.addProductVariation(primaryimage, secondaryImages, httpServletRequest, addProductVariationDTO, webRequest);
     }
@@ -255,7 +257,7 @@ public class SellerController {
             @ApiImplicitParam(name = "Authorization", value = "Authorization token",
                     required = true, dataType = "string", paramType = "header") })
     @PutMapping("/updateProduct")
-    private String updateProduct(@RequestBody UpdateProductDTO updateProductDto,HttpServletRequest request,WebRequest webRequest){
+    private String updateProduct(@Valid @RequestBody UpdateProductDTO updateProductDto,HttpServletRequest request,WebRequest webRequest){
         return productService.updateProduct(updateProductDto,request,webRequest);
     }
 
