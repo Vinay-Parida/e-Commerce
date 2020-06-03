@@ -166,7 +166,7 @@ public class SellerController {
             @ApiImplicitParam(name = "Authorization", value = "Authorization token",
                     required = true, dataType = "string", paramType = "header") })
     @GetMapping("/viewProduct")
-    private ViewProductDTO viewProduct(@RequestParam("productId") Long productId, WebRequest webRequest, HttpServletRequest request) {
+    private ViewProductDTO viewProduct(@RequestParam("productId") Long productId, @RequestParam(value = "name",required = false) String name, WebRequest webRequest, HttpServletRequest request) {
         return productService.viewProduct(productId, webRequest, request);
     }
 

@@ -11,7 +11,9 @@ public class AddProductVariationDTO {
     @NotNull
     @NotEmpty
     private Map<String,String> metadata;
+    @NotNull
     private Integer quantityAvailable;
+    @NotNull
     private Double price;
 
     public Long getProductId() {

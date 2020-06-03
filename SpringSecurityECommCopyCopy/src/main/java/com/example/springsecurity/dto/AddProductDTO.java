@@ -15,6 +15,7 @@ public class AddProductDTO {
     private String brand;
     @NotNull
     private Long categoryId;
+    @NotEmpty
     private String description;
     private Boolean isCancellable;
     private Boolean isReturnable;
